@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/apache-kafka/kafka-topic-config.json",
+  "title": "Kafka Topic Configuration",
+  "description": "Schema for Apache Kafka topic configuration properties.",
+  "type": "object",
+  "properties": {
+    "topic_name": {
+      "type": "string",
+      "description": "The name of the topic"
+    },
+    "partitions_count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of partitions for the topic"
+    },
+    "replication_factor": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The replication factor for the topic"
+    },
+    "configs": {
+      "type": "object",
+      "description": "Topic-level configuration overrides",
+      "properties": {
+        "cleanup.policy": {
+          "type": "string",
+          "enum": ["delete", "compact", "delete,compact"],
+          "description": "Log cleanup policy"
+        },
+        "retention.ms": {
+          "type": "integer",
+          "description": "Retention time in milliseconds"
+        },
+        "retention.bytes": {
+          "type": "integer",
+          "description": "Maximum size a partition can grow to before old log segments are discarded"
+        },
+        "segment.bytes": {
+          "type": "integer",
+          "description": "Segment file size for the log"
+        },
+        "max.message.bytes": {
+          "type": "integer",
+          "description": "Maximum size of a message that can be appended to the log"
+        },
+        "min.insync.replicas": {
+          "type": "integer",
+          "description": "Minimum number of replicas that must acknowledge a write"
+        },
+        "compression.type": {
+          "type": "string",
+          "enum": ["uncompressed", "zstd", "lz4", "snappy", "gzip", "producer"],
+          "description": "Compression codec for the topic"
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["topic_name"]
+}

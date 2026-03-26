@@ -1,0 +1,124 @@
+asyncapi: 2.6.0
+info:
+  title: Apache Kafka Messaging API
+  version: 3.7.0
+  description: >-
+    Apache Kafka is a distributed event streaming platform capable of handling
+    trillions of events a day. This spec describes the core messaging protocol
+    for producing and consuming records to/from Kafka topics.
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  default:
+    url: localhost:9092
+    protocol: kafka
+    description: Default Kafka bootstrap server
+    protocolVersion: '3.7'
+defaultContentType: application/json
+channels:
+  '{topic}':
+    description: >-
+      A Kafka topic is a category or feed name to which records are published.
+      Topics are partitioned, and each partition is an ordered, immutable
+      sequence of records that is continually appended to.
+    parameters:
+      topic:
+        description: The topic name
+        schema:
+          type: string
+    publish:
+      operationId: produceRecord
+      summary: Produce a record to a Kafka topic
+      description: >-
+        Producers publish records to topics. Each record consists of a key,
+        a value, a timestamp, and optional headers. Records are appended
+        to the partition determined by the partitioner.
+      message:
+        $ref: '#/components/messages/KafkaRecord'
+      bindings:
+        kafka:
+          groupId:
+            type: string
+          clientId:
+            type: string
+    subscribe:
+      operationId: consumeRecord
+      summary: Consume records from a Kafka topic
+      description: >-
+        Consumers read records from topics by subscribing to one or more topics
+        and processing the stream of records produced to them. Consumers belong
+        to consumer groups for parallel processing.
+      message:
+        $ref: '#/components/messages/KafkaRecord'
+      bindings:
+        kafka:
+          groupId:
+            type: string
+          clientId:
+            type: string
+components:
+  messages:
+    KafkaRecord:
+      name: KafkaRecord
+      title: Kafka Record
+      summary: A record (message) in a Kafka topic
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          kafka_offset:
+            type: integer
+            description: The offset of the record in the partition
+          kafka_partition:
+            type: integer
+            description: The partition the record belongs to
+          kafka_timestamp:
+            type: integer
+            description: The timestamp of the record (CreateTime or LogAppendTime)
+          kafka_timestampType:
+            type: string
+            enum: [CREATE_TIME, LOG_APPEND_TIME]
+        additionalProperties:
+          type: string
+          description: Custom headers as key-value string pairs
+      payload:
+        type: object
+        properties:
+          key:
+            description: The record key used for partitioning
+          value:
+            description: The record value (the message payload)
+          timestamp:
+            type: integer
+            description: Unix timestamp in milliseconds
+          headers:
+            type: object
+            additionalProperties:
+              type: string
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: Record key for partitioning
+  schemas:
+    KafkaRecordKey:
+      type: object
+      description: A generic Kafka record key
+    KafkaRecordValue:
+      type: object
+      description: A generic Kafka record value
+    ConsumerGroupMetadata:
+      type: object
+      properties:
+        groupId:
+          type: string
+        generationId:
+          type: integer
+        memberId:
+          type: string
+        groupInstanceId:
+          type: string

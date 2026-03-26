@@ -1,0 +1,584 @@
+openapi: 3.1.0
+info:
+  title: Confluent Kafka REST Proxy API
+  description: >-
+    The Kafka REST Proxy provides a RESTful interface to an Apache Kafka cluster,
+    making it easy to produce and consume messages, view the state of the cluster,
+    and perform administrative actions without using the native Kafka protocol or clients.
+  version: 3.0.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://localhost:8082
+    description: Default Kafka REST Proxy
+paths:
+  /clusters:
+    get:
+      summary: List clusters
+      operationId: listClusters
+      tags:
+        - Cluster
+      responses:
+        '200':
+          description: List of Kafka clusters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  metadata:
+                    type: object
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cluster'
+  /clusters/{cluster_id}:
+    get:
+      summary: Get cluster
+      operationId: getCluster
+      tags:
+        - Cluster
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+  /clusters/{cluster_id}/topics:
+    get:
+      summary: List topics
+      operationId: listTopics
+      tags:
+        - Topic
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of topics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  metadata:
+                    type: object
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topic'
+    post:
+      summary: Create topic
+      operationId: createTopic
+      tags:
+        - Topic
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTopicRequest'
+      responses:
+        '201':
+          description: Topic created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+  /clusters/{cluster_id}/topics/{topic_name}:
+    get:
+      summary: Get topic
+      operationId: getTopic
+      tags:
+        - Topic
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Topic details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+    delete:
+      summary: Delete topic
+      operationId: deleteTopic
+      tags:
+        - Topic
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Topic deleted
+  /clusters/{cluster_id}/topics/{topic_name}/partitions:
+    get:
+      summary: List partitions
+      operationId: listPartitions
+      tags:
+        - Partition
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of partitions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Partition'
+  /clusters/{cluster_id}/consumer-groups:
+    get:
+      summary: List consumer groups
+      operationId: listConsumerGroups
+      tags:
+        - Consumer Group
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of consumer groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConsumerGroup'
+  /clusters/{cluster_id}/consumer-groups/{consumer_group_id}:
+    get:
+      summary: Get consumer group
+      operationId: getConsumerGroup
+      tags:
+        - Consumer Group
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: consumer_group_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Consumer group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerGroup'
+  /clusters/{cluster_id}/brokers:
+    get:
+      summary: List brokers
+      operationId: listBrokers
+      tags:
+        - Broker
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of brokers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Broker'
+  /clusters/{cluster_id}/acls:
+    get:
+      summary: Search ACLs
+      operationId: searchAcls
+      tags:
+        - ACL
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: resource_type
+          in: query
+          schema:
+            type: string
+            enum: [UNKNOWN, ANY, TOPIC, GROUP, CLUSTER, TRANSACTIONAL_ID, DELEGATION_TOKEN]
+        - name: pattern_type
+          in: query
+          schema:
+            type: string
+            enum: [UNKNOWN, ANY, MATCH, LITERAL, PREFIXED]
+      responses:
+        '200':
+          description: List of ACLs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Acl'
+    post:
+      summary: Create ACLs
+      operationId: createAcls
+      tags:
+        - ACL
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAclRequest'
+      responses:
+        '201':
+          description: ACL created
+    delete:
+      summary: Delete ACLs
+      operationId: deleteAcls
+      tags:
+        - ACL
+      parameters:
+        - name: cluster_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ACLs deleted
+  /topics/{topic_name}/records:
+    post:
+      summary: Produce records to a topic
+      operationId: produceRecords
+      tags:
+        - Records
+      parameters:
+        - name: topic_name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProduceRequest'
+      responses:
+        '200':
+          description: Records produced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProduceResponse'
+components:
+  schemas:
+    Cluster:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+          properties:
+            self:
+              type: string
+            resource_name:
+              type: string
+        cluster_id:
+          type: string
+        controller:
+          type: object
+          properties:
+            related:
+              type: string
+        brokers:
+          type: object
+          properties:
+            related:
+              type: string
+        topics:
+          type: object
+          properties:
+            related:
+              type: string
+    Topic:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        topic_name:
+          type: string
+        is_internal:
+          type: boolean
+        replication_factor:
+          type: integer
+        partitions_count:
+          type: integer
+        partitions:
+          type: object
+          properties:
+            related:
+              type: string
+        configs:
+          type: object
+          properties:
+            related:
+              type: string
+    CreateTopicRequest:
+      type: object
+      required:
+        - topic_name
+      properties:
+        topic_name:
+          type: string
+        partitions_count:
+          type: integer
+        replication_factor:
+          type: integer
+        configs:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    Partition:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        topic_name:
+          type: string
+        partition_id:
+          type: integer
+        leader:
+          type: object
+        replicas:
+          type: array
+          items:
+            type: object
+    ConsumerGroup:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        consumer_group_id:
+          type: string
+        is_simple:
+          type: boolean
+        partition_assignor:
+          type: string
+        state:
+          type: string
+          enum: [UNKNOWN, PREPARING_REBALANCE, COMPLETING_REBALANCE, STABLE, DEAD, EMPTY]
+        coordinator:
+          type: object
+        consumers:
+          type: object
+        lag_summary:
+          type: object
+    Broker:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        broker_id:
+          type: integer
+        host:
+          type: string
+        port:
+          type: integer
+    Acl:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        pattern_type:
+          type: string
+        principal:
+          type: string
+        host:
+          type: string
+        operation:
+          type: string
+        permission:
+          type: string
+    CreateAclRequest:
+      type: object
+      required:
+        - resource_type
+        - resource_name
+        - pattern_type
+        - principal
+        - host
+        - operation
+        - permission
+      properties:
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        pattern_type:
+          type: string
+        principal:
+          type: string
+        host:
+          type: string
+        operation:
+          type: string
+        permission:
+          type: string
+    ProduceRequest:
+      type: object
+      properties:
+        partition_id:
+          type: integer
+        headers:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+        key:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [BINARY, JSON, AVRO, PROTOBUF, JSONSCHEMA]
+            data: {}
+        value:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [BINARY, JSON, AVRO, PROTOBUF, JSONSCHEMA]
+            data: {}
+    ProduceResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+        cluster_id:
+          type: string
+        topic_name:
+          type: string
+        partition_id:
+          type: integer
+        offset:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time

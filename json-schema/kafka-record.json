@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/apache-kafka/kafka-record.json",
+  "title": "Kafka Record",
+  "description": "Schema for an Apache Kafka record (message) including key, value, headers, and metadata.",
+  "type": "object",
+  "properties": {
+    "topic": {
+      "type": "string",
+      "description": "The topic the record belongs to"
+    },
+    "partition": {
+      "type": "integer",
+      "description": "The partition within the topic"
+    },
+    "offset": {
+      "type": "integer",
+      "description": "The offset of the record within the partition"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "The timestamp of the record in milliseconds since epoch"
+    },
+    "timestampType": {
+      "type": "string",
+      "enum": ["CREATE_TIME", "LOG_APPEND_TIME", "NO_TIMESTAMP_TYPE"],
+      "description": "The type of timestamp"
+    },
+    "key": {
+      "description": "The record key, used for partitioning. Can be any type."
+    },
+    "value": {
+      "description": "The record value (message payload). Can be any type."
+    },
+    "headers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs of record headers"
+    }
+  },
+  "required": ["topic"]
+}
