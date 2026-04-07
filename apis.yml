@@ -9,10 +9,10 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - Distributed Systems
   - Event Streaming
   - Messaging
   - Pub-Sub
-  - Distributed Systems
 created: '2025-06-05'
 modified: '2026-03-26'
 url: >-
@@ -28,10 +28,10 @@ apis:
     humanURL: https://docs.confluent.io/platform/current/kafka-rest/
     baseURL: http://localhost:8082
     tags:
-      - REST
-      - Proxy
-      - Topics
       - Consumer Groups
+      - Proxy
+      - REST
+      - Topics
     properties:
       - type: Documentation
         url: https://docs.confluent.io/platform/current/kafka-rest/api.html
@@ -61,8 +61,8 @@ apis:
     humanURL: https://kafka.apache.org/documentation/#producerapi
     tags:
       - Messaging
-      - Streaming
       - Pub-Sub
+      - Streaming
     properties:
       - type: Documentation
         url: https://kafka.apache.org/documentation/
