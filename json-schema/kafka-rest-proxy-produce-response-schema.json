@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-rest-proxy-produce-response-schema.json",
+  "title": "ProduceResponse",
+  "description": "ProduceResponse schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "error_code": {
+      "type": "integer"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "topic_name": {
+      "type": "string"
+    },
+    "partition_id": {
+      "type": "integer"
+    },
+    "offset": {
+      "type": "integer"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

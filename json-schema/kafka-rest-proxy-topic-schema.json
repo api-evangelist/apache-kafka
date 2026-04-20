@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-rest-proxy-topic-schema.json",
+  "title": "Topic",
+  "description": "Topic schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "topic_name": {
+      "type": "string"
+    },
+    "is_internal": {
+      "type": "boolean"
+    },
+    "replication_factor": {
+      "type": "integer"
+    },
+    "partitions_count": {
+      "type": "integer"
+    },
+    "partitions": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      }
+    },
+    "configs": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

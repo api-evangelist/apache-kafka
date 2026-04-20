@@ -1,0 +1,17 @@
+{
+  "kind": "example-value",
+  "metadata": {
+    "self": "example-value",
+    "resource_name": "example-name"
+  },
+  "cluster_id": "item-2557",
+  "controller": {
+    "related": "example-value"
+  },
+  "brokers": {
+    "related": "example-value"
+  },
+  "topics": {
+    "related": "example-value"
+  }
+}

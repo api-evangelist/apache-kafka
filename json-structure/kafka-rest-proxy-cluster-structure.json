@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-rest-proxy-cluster-structure.json",
+  "name": "Cluster",
+  "description": "Cluster schema from Apache kafka",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        },
+        "resource_name": {
+          "type": "string"
+        }
+      }
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "controller": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      }
+    },
+    "brokers": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      }
+    },
+    "topics": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

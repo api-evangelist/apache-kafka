@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-rest-proxy-broker-schema.json",
+  "title": "Broker",
+  "description": "Broker schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "broker_id": {
+      "type": "integer"
+    },
+    "host": {
+      "type": "string"
+    },
+    "port": {
+      "type": "integer"
+    }
+  }
+}

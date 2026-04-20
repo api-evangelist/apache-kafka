@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-rest-proxy-produce-request-structure.json",
+  "name": "ProduceRequest",
+  "description": "ProduceRequest schema from Apache kafka",
+  "properties": {
+    "partition_id": {
+      "type": "integer"
+    },
+    "headers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "key": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "BINARY",
+            "JSON",
+            "AVRO",
+            "PROTOBUF",
+            "JSONSCHEMA"
+          ]
+        },
+        "data": {}
+      }
+    },
+    "value": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "BINARY",
+            "JSON",
+            "AVRO",
+            "PROTOBUF",
+            "JSONSCHEMA"
+          ]
+        },
+        "data": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-connect-task-info-schema.json",
+  "title": "TaskInfo",
+  "description": "TaskInfo schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "object",
+      "properties": {
+        "connector": {
+          "type": "string"
+        },
+        "task": {
+          "type": "integer"
+        }
+      }
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

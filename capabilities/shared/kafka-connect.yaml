@@ -1,0 +1,80 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Kafka Connect REST API"
+  description: "Shared per-API capability for Kafka Connect covering connector management, task management, and offset management."
+  tags:
+    - Apache Kafka
+    - Kafka Connect
+    - Data Integration
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      KAFKA_CONNECT_URL: KAFKA_CONNECT_URL
+
+capability:
+  consumes:
+    - type: http
+      namespace: kafka-connect
+      baseUri: http://localhost:8083
+      description: "Kafka Connect REST API"
+      resources:
+        - name: connectors
+          path: /connectors
+          description: Connector management
+          operations:
+            - name: list-connectors
+              method: GET
+              description: List all connectors
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-connector
+              method: POST
+              description: Create a connector
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: kafka-connect-exposed
+      resources:
+        - path: /v1/connectors
+          operations:
+            - method: GET
+              name: list-connectors
+              call: "kafka-connect.list-connectors"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: kafka-connect-mcp
+      transport: http
+      tools:
+        - name: list-connectors
+          description: List all Kafka Connect connectors
+          hints:
+            readOnly: true
+          call: "kafka-connect.list-connectors"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-connector
+          description: Create a new Kafka Connect connector
+          hints:
+            readOnly: false
+          call: "kafka-connect.create-connector"
+          outputParameters:
+            - type: object
+              mapping: "$."

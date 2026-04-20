@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-connect-connector-status-structure.json",
+  "name": "ConnectorStatus",
+  "description": "ConnectorStatus schema from Apache kafka",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "connector": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "UNASSIGNED",
+            "RUNNING",
+            "PAUSED",
+            "FAILED",
+            "STOPPED"
+          ]
+        },
+        "worker_id": {
+          "type": "string"
+        }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TaskStatus"
+      }
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

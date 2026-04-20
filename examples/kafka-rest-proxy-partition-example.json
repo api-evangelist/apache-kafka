@@ -1,0 +1,11 @@
+{
+  "kind": "example-value",
+  "metadata": {},
+  "cluster_id": "item-7582",
+  "topic_name": "example-name",
+  "partition_id": 955,
+  "leader": {},
+  "replicas": [
+    {}
+  ]
+}

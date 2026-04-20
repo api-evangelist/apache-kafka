@@ -1,0 +1,25 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "kafka": "https://apache-kafka.apache.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ConfigValidationResult": "kafka:ConfigValidationResult",
+    "name": "schema:name",
+    "errorCount": {
+      "@id": "kafka:error_count",
+      "@type": "xsd:integer"
+    },
+    "groups": {
+      "@id": "kafka:groups",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "configs": {
+      "@id": "kafka:configs",
+      "@container": "@set",
+      "@type": "@id"
+    }
+  }
+}

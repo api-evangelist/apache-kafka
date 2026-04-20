@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-connect-connector-plugin-schema.json",
+  "title": "ConnectorPlugin",
+  "description": "ConnectorPlugin schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "class": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}

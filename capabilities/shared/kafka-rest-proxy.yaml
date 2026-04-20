@@ -1,0 +1,86 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Kafka REST Proxy API"
+  description: "Shared per-API capability for the Kafka REST Proxy covering topic management, message production, and consumer group management."
+  tags:
+    - Apache Kafka
+    - Event Streaming
+    - REST Proxy
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      KAFKA_REST_URL: KAFKA_REST_URL
+
+capability:
+  consumes:
+    - type: http
+      namespace: kafka-rest-proxy
+      baseUri: http://localhost:8082
+      description: "Kafka REST Proxy API"
+      resources:
+        - name: topics
+          path: /topics
+          description: Topic management
+          operations:
+            - name: list-topics
+              method: GET
+              description: List all topics
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: produce-message
+              method: POST
+              description: Produce messages to a topic
+              inputParameters:
+                - name: topic_name
+                  in: path
+                  type: string
+                  required: true
+                  description: Topic name
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: kafka-rest-proxy-exposed
+      resources:
+        - path: /v1/topics
+          operations:
+            - method: GET
+              name: list-topics
+              call: "kafka-rest-proxy.list-topics"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: kafka-rest-proxy-mcp
+      transport: http
+      tools:
+        - name: list-topics
+          description: List all Kafka topics
+          hints:
+            readOnly: true
+          call: "kafka-rest-proxy.list-topics"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: produce-message
+          description: Produce a message to a Kafka topic
+          hints:
+            readOnly: false
+          call: "kafka-rest-proxy.produce-message"
+          outputParameters:
+            - type: object
+              mapping: "$."

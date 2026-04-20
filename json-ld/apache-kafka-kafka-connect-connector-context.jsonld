@@ -1,0 +1,43 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "kafka": "https://apache-kafka.apache.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ConnectorStatus": "kafka:ConnectorStatus",
+    "ConnectorPlugin": "kafka:ConnectorPlugin",
+    "ConnectorInfo": "kafka:ConnectorInfo",
+    "name": "schema:name",
+    "connector": {
+      "@id": "kafka:connector",
+      "@type": "@id"
+    },
+    "state": {
+      "@id": "kafka:state",
+      "@type": "xsd:string"
+    },
+    "workerId": {
+      "@id": "kafka:worker_id",
+      "@type": "xsd:string"
+    },
+    "tasks": {
+      "@id": "kafka:tasks",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "kafka:type",
+      "@type": "xsd:string"
+    },
+    "class": {
+      "@id": "kafka:class",
+      "@type": "xsd:string"
+    },
+    "version": "schema:version",
+    "config": {
+      "@id": "kafka:config",
+      "@type": "@id"
+    }
+  }
+}

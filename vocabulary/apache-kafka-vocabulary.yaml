@@ -1,0 +1,112 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Apache Kafka"
+  description: "Vocabulary for Apache Kafka event streaming REST Proxy and Connect APIs."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: kafka-rest-proxy
+      name: Kafka REST Proxy API
+      version: "7.x"
+      baseUrl: http://localhost:8082
+      status: active
+    - namespace: kafka-connect
+      name: Kafka Connect REST API
+      version: "3.x"
+      baseUrl: http://localhost:8083
+      status: active
+
+  resources:
+    - name: topics
+      description: Kafka topics for message partitioning and retention
+      apis: [kafka-rest-proxy]
+      actions: [list, get, produce, consume]
+    - name: consumer-groups
+      description: Consumer groups for coordinated message consumption
+      apis: [kafka-rest-proxy]
+      actions: [create, list, consume, commit, delete]
+    - name: connectors
+      description: Kafka Connect connectors for source and sink integration
+      apis: [kafka-connect]
+      actions: [list, create, get, delete, restart]
+    - name: tasks
+      description: Connector task instances
+      apis: [kafka-connect]
+      actions: [list, get, restart]
+    - name: offsets
+      description: Consumer partition offsets
+      apis: [kafka-connect, kafka-rest-proxy]
+      actions: [get, reset]
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: produce
+      httpMethod: POST
+      pattern: write
+    - name: consume
+      httpMethod: GET
+      pattern: read
+    - name: commit
+      httpMethod: POST
+      pattern: write
+    - name: create
+      httpMethod: POST
+      pattern: write
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+    - name: restart
+      httpMethod: POST
+      pattern: write
+    - name: reset
+      httpMethod: DELETE
+      pattern: destructive
+
+capability:
+  workflows:
+    - name: Event Streaming
+      file: capabilities/event-streaming.yaml
+      toolCount: 6
+      personas:
+        - Data Engineer
+        - Platform Architect
+
+  personas:
+    - id: data-engineer
+      name: Data Engineer
+      description: Engineers who build data pipelines using Kafka topics and connectors
+      workflows: [Event Streaming]
+    - id: platform-architect
+      name: Platform Architect
+      description: Architects who design and manage Kafka cluster topology and connectivity
+      workflows: [Event Streaming]
+
+  namespaces:
+    - name: kafka-rest-proxy
+      type: consumed
+    - name: kafka-connect
+      type: consumed
+    - name: kafka-event-streaming-api
+      type: rest-exposed
+      port: 8080
+    - name: kafka-event-streaming-mcp
+      type: mcp-exposed
+      port: 9090
+
+crossReference:
+  - resource: topics
+    operations: [listTopics, produceMessage]
+    workflows: [Event Streaming]
+    personas: [Data Engineer]
+  - resource: connectors
+    operations: [listConnectors, createConnector, getConnectorStatus, restartConnector]
+    workflows: [Event Streaming]
+    personas: [Data Engineer, Platform Architect]

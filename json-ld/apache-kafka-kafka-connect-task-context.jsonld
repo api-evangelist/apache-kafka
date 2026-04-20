@@ -1,0 +1,39 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "kafka": "https://apache-kafka.apache.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "TaskInfo": "kafka:TaskInfo",
+    "TaskStatus": "kafka:TaskStatus",
+    "id": {
+      "@id": "kafka:id",
+      "@type": "@id"
+    },
+    "connector": {
+      "@id": "kafka:connector",
+      "@type": "xsd:string"
+    },
+    "task": {
+      "@id": "kafka:task",
+      "@type": "xsd:integer"
+    },
+    "config": {
+      "@id": "kafka:config",
+      "@type": "@id"
+    },
+    "state": {
+      "@id": "kafka:state",
+      "@type": "xsd:string"
+    },
+    "workerId": {
+      "@id": "kafka:worker_id",
+      "@type": "xsd:string"
+    },
+    "trace": {
+      "@id": "kafka:trace",
+      "@type": "xsd:string"
+    }
+  }
+}

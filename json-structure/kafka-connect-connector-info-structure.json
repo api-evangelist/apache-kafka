@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-connect-connector-info-structure.json",
+  "name": "ConnectorInfo",
+  "description": "ConnectorInfo schema from Apache kafka",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "connector": {
+            "type": "string"
+          },
+          "task": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "source",
+        "sink"
+      ]
+    }
+  }
+}

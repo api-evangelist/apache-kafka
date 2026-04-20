@@ -1,0 +1,12 @@
+{
+  "kind": "example-value",
+  "metadata": {},
+  "cluster_id": "item-5721",
+  "consumer_group_id": "item-3388",
+  "is_simple": false,
+  "partition_assignor": "example-value",
+  "state": "UNKNOWN",
+  "coordinator": {},
+  "consumers": {},
+  "lag_summary": {}
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-rest-proxy-consumer-group-schema.json",
+  "title": "ConsumerGroup",
+  "description": "ConsumerGroup schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "consumer_group_id": {
+      "type": "string"
+    },
+    "is_simple": {
+      "type": "boolean"
+    },
+    "partition_assignor": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "PREPARING_REBALANCE",
+        "COMPLETING_REBALANCE",
+        "STABLE",
+        "DEAD",
+        "EMPTY"
+      ]
+    },
+    "coordinator": {
+      "type": "object"
+    },
+    "consumers": {
+      "type": "object"
+    },
+    "lag_summary": {
+      "type": "object"
+    }
+  }
+}

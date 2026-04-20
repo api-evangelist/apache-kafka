@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-connect-task-status-structure.json",
+  "name": "TaskStatus",
+  "description": "TaskStatus schema from Apache kafka",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "UNASSIGNED",
+        "RUNNING",
+        "PAUSED",
+        "FAILED"
+      ]
+    },
+    "worker_id": {
+      "type": "string"
+    },
+    "trace": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-connect-connector-plugin-structure.json",
+  "name": "ConnectorPlugin",
+  "description": "ConnectorPlugin schema from Apache kafka",
+  "properties": {
+    "class": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-connect-config-validation-result-structure.json",
+  "name": "ConfigValidationResult",
+  "description": "ConfigValidationResult schema from Apache kafka",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "error_count": {
+      "type": "integer"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "configs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

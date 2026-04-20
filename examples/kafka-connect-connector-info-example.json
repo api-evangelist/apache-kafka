@@ -1,0 +1,11 @@
+{
+  "name": "example-name",
+  "config": {},
+  "tasks": [
+    {
+      "connector": "example-value",
+      "task": 779
+    }
+  ],
+  "type": "sink"
+}

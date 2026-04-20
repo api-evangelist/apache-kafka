@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-rest-proxy-create-acl-request-schema.json",
+  "title": "CreateAclRequest",
+  "description": "CreateAclRequest schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "resource_type": {
+      "type": "string"
+    },
+    "resource_name": {
+      "type": "string"
+    },
+    "pattern_type": {
+      "type": "string"
+    },
+    "principal": {
+      "type": "string"
+    },
+    "host": {
+      "type": "string"
+    },
+    "operation": {
+      "type": "string"
+    },
+    "permission": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "resource_type",
+    "resource_name",
+    "pattern_type",
+    "principal",
+    "host",
+    "operation",
+    "permission"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-rest-proxy-topic-structure.json",
+  "name": "Topic",
+  "description": "Topic schema from Apache kafka",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "topic_name": {
+      "type": "string"
+    },
+    "is_internal": {
+      "type": "boolean"
+    },
+    "replication_factor": {
+      "type": "integer"
+    },
+    "partitions_count": {
+      "type": "integer"
+    },
+    "partitions": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      }
+    },
+    "configs": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

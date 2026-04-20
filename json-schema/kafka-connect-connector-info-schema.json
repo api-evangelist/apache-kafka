@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-connect-connector-info-schema.json",
+  "title": "ConnectorInfo",
+  "description": "ConnectorInfo schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "connector": {
+            "type": "string"
+          },
+          "task": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "source",
+        "sink"
+      ]
+    }
+  }
+}

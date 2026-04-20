@@ -1,0 +1,17 @@
+{
+  "partition_id": 302,
+  "headers": [
+    {
+      "name": "example-name",
+      "value": "example-value"
+    }
+  ],
+  "key": {
+    "type": "JSON",
+    "data": "example-value"
+  },
+  "value": {
+    "type": "JSON",
+    "data": "example-value"
+  }
+}

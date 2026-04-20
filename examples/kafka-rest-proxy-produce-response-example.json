@@ -1,0 +1,8 @@
+{
+  "error_code": 583,
+  "cluster_id": "item-8172",
+  "topic_name": "example-name",
+  "partition_id": 47,
+  "offset": 860,
+  "timestamp": "2025-03-15T14:30:00Z"
+}

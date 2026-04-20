@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-connect-create-connector-request-structure.json",
+  "name": "CreateConnectorRequest",
+  "description": "CreateConnectorRequest schema from Apache kafka",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "config"
+  ]
+}

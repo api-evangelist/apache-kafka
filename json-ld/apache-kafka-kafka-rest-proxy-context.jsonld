@@ -1,0 +1,186 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "kafka": "https://apache-kafka.apache.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Partition": "kafka:Partition",
+    "ProduceRequest": "kafka:ProduceRequest",
+    "CreateTopicRequest": "kafka:CreateTopicRequest",
+    "ProduceResponse": "kafka:ProduceResponse",
+    "Acl": "kafka:Acl",
+    "Topic": "kafka:Topic",
+    "Broker": "kafka:Broker",
+    "CreateAclRequest": "kafka:CreateAclRequest",
+    "ConsumerGroup": "kafka:ConsumerGroup",
+    "Cluster": "kafka:Cluster",
+    "kind": {
+      "@id": "kafka:kind",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "kafka:metadata",
+      "@type": "@id"
+    },
+    "clusterId": {
+      "@id": "kafka:cluster_id",
+      "@type": "xsd:string"
+    },
+    "topicName": {
+      "@id": "kafka:topic_name",
+      "@type": "xsd:string"
+    },
+    "partitionId": {
+      "@id": "kafka:partition_id",
+      "@type": "xsd:integer"
+    },
+    "leader": {
+      "@id": "kafka:leader",
+      "@type": "@id"
+    },
+    "replicas": {
+      "@id": "kafka:replicas",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "headers": {
+      "@id": "kafka:headers",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "key": {
+      "@id": "kafka:key",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "kafka:type",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "kafka:data",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "kafka:value",
+      "@type": "@id"
+    },
+    "partitionsCount": {
+      "@id": "kafka:partitions_count",
+      "@type": "xsd:integer"
+    },
+    "replicationFactor": {
+      "@id": "kafka:replication_factor",
+      "@type": "xsd:integer"
+    },
+    "configs": {
+      "@id": "kafka:configs",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "errorCode": {
+      "@id": "kafka:error_code",
+      "@type": "xsd:integer"
+    },
+    "offset": {
+      "@id": "kafka:offset",
+      "@type": "xsd:integer"
+    },
+    "timestamp": {
+      "@id": "kafka:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "resourceType": {
+      "@id": "kafka:resource_type",
+      "@type": "xsd:string"
+    },
+    "resourceName": {
+      "@id": "kafka:resource_name",
+      "@type": "xsd:string"
+    },
+    "patternType": {
+      "@id": "kafka:pattern_type",
+      "@type": "xsd:string"
+    },
+    "principal": {
+      "@id": "kafka:principal",
+      "@type": "xsd:string"
+    },
+    "host": {
+      "@id": "kafka:host",
+      "@type": "xsd:string"
+    },
+    "operation": {
+      "@id": "kafka:operation",
+      "@type": "xsd:string"
+    },
+    "permission": {
+      "@id": "kafka:permission",
+      "@type": "xsd:string"
+    },
+    "isInternal": {
+      "@id": "kafka:is_internal",
+      "@type": "xsd:boolean"
+    },
+    "partitions": {
+      "@id": "kafka:partitions",
+      "@type": "@id"
+    },
+    "related": {
+      "@id": "kafka:related",
+      "@type": "xsd:string"
+    },
+    "brokerId": {
+      "@id": "kafka:broker_id",
+      "@type": "xsd:integer"
+    },
+    "port": {
+      "@id": "kafka:port",
+      "@type": "xsd:integer"
+    },
+    "consumerGroupId": {
+      "@id": "kafka:consumer_group_id",
+      "@type": "xsd:string"
+    },
+    "isSimple": {
+      "@id": "kafka:is_simple",
+      "@type": "xsd:boolean"
+    },
+    "partitionAssignor": {
+      "@id": "kafka:partition_assignor",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "kafka:state",
+      "@type": "xsd:string"
+    },
+    "coordinator": {
+      "@id": "kafka:coordinator",
+      "@type": "@id"
+    },
+    "consumers": {
+      "@id": "kafka:consumers",
+      "@type": "@id"
+    },
+    "lagSummary": {
+      "@id": "kafka:lag_summary",
+      "@type": "@id"
+    },
+    "self": {
+      "@id": "kafka:self",
+      "@type": "xsd:string"
+    },
+    "controller": {
+      "@id": "kafka:controller",
+      "@type": "@id"
+    },
+    "brokers": {
+      "@id": "kafka:brokers",
+      "@type": "@id"
+    },
+    "topics": {
+      "@id": "kafka:topics",
+      "@type": "@id"
+    }
+  }
+}

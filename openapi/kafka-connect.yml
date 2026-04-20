@@ -14,15 +14,15 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-  - url: http://localhost:8083
-    description: Default Kafka Connect worker
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
 paths:
   /:
     get:
-      summary: Get Connect worker info
+      summary: Apache kafka Get Connect Worker Info
       operationId: getWorkerInfo
       tags:
-        - Cluster
+      - Cluster
       responses:
         '200':
           description: Connect worker information
@@ -37,18 +37,30 @@ paths:
                     type: string
                   kafka_cluster_id:
                     type: string
+              examples:
+                getWorkerInfo200Example:
+                  summary: Default getWorkerInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    version: example-value
+                    commit: example-value
+                    kafka_cluster_id: item-9558
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors:
     get:
-      summary: List connectors
+      summary: Apache kafka List Connectors
       operationId: listConnectors
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: expand
-          in: query
-          schema:
-            type: string
-            enum: [status, info]
+      - name: expand
+        in: query
+        schema:
+          type: string
+          enum: [status, info]
+        example: status
       responses:
         '200':
           description: List of active connectors
@@ -58,17 +70,32 @@ paths:
                 type: array
                 items:
                   type: string
+              examples:
+                listConnectors200Example:
+                  summary: Default listConnectors 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create connector
+      summary: Apache kafka Create Connector
       operationId: createConnector
       tags:
-        - Connectors
+      - Connectors
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateConnectorRequest'
+            examples:
+              createConnectorRequestExample:
+                summary: Default createConnector request
+                x-microcks-default: true
+                value:
+                  name: example-name
+                  config: {}
       responses:
         '201':
           description: Connector created
@@ -76,20 +103,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConnectorInfo'
+              examples:
+                createConnector201Example:
+                  summary: Default createConnector 201 response
+                  x-microcks-default: true
+                  value:
+                    name: example-name
+                    config: {}
+                    tasks: []
+                    type: source
         '409':
           description: Connector already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}:
     get:
-      summary: Get connector info
+      summary: Apache kafka Get Connector Info
       operationId: getConnector
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '200':
           description: Connector information
@@ -97,36 +137,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConnectorInfo'
+              examples:
+                getConnector200Example:
+                  summary: Default getConnector 200 response
+                  x-microcks-default: true
+                  value:
+                    name: example-name
+                    config: {}
+                    tasks: []
+                    type: source
         '404':
           description: Connector not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete connector
+      summary: Apache kafka Delete Connector
       operationId: deleteConnector
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '204':
           description: Connector deleted
         '404':
           description: Connector not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/config:
     get:
-      summary: Get connector config
+      summary: Apache kafka Get Connector Config
       operationId: getConnectorConfig
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '200':
           description: Connector configuration
@@ -136,17 +193,26 @@ paths:
                 type: object
                 additionalProperties:
                   type: string
+              examples:
+                getConnectorConfig200Example:
+                  summary: Default getConnectorConfig 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
-      summary: Create or update connector config
+      summary: Apache kafka Create or Update Connector Config
       operationId: putConnectorConfig
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       requestBody:
         required: true
         content:
@@ -155,6 +221,11 @@ paths:
               type: object
               additionalProperties:
                 type: string
+            examples:
+              putConnectorConfigRequestExample:
+                summary: Default putConnectorConfig request
+                x-microcks-default: true
+                value: {}
       responses:
         '200':
           description: Connector config updated
@@ -162,24 +233,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConnectorInfo'
+              examples:
+                putConnectorConfig200Example:
+                  summary: Default putConnectorConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    name: example-name
+                    config: {}
+                    tasks: []
+                    type: source
         '201':
           description: Connector created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConnectorInfo'
+              examples:
+                putConnectorConfig201Example:
+                  summary: Default putConnectorConfig 201 response
+                  x-microcks-default: true
+                  value:
+                    name: example-name
+                    config: {}
+                    tasks: []
+                    type: source
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/status:
     get:
-      summary: Get connector status
+      summary: Apache kafka Get Connector Status
       operationId: getConnectorStatus
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '200':
           description: Connector status
@@ -187,90 +280,121 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConnectorStatus'
+              examples:
+                getConnectorStatus200Example:
+                  summary: Default getConnectorStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    name: example-name
+                    connector: {}
+                    tasks: []
+                    type: example-value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/restart:
     post:
-      summary: Restart connector
+      summary: Apache kafka Restart Connector
       operationId: restartConnector
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: includeTasks
-          in: query
-          schema:
-            type: boolean
-            default: false
-        - name: onlyFailed
-          in: query
-          schema:
-            type: boolean
-            default: false
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      - name: includeTasks
+        in: query
+        schema:
+          type: boolean
+          default: false
+        example: true
+      - name: onlyFailed
+        in: query
+        schema:
+          type: boolean
+          default: false
+        example: true
       responses:
         '200':
           description: Connector restarted
         '204':
           description: Connector restarted (no body)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/pause:
     put:
-      summary: Pause connector
+      summary: Apache kafka Pause Connector
       operationId: pauseConnector
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '202':
           description: Connector paused
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/resume:
     put:
-      summary: Resume connector
+      summary: Apache kafka Resume Connector
       operationId: resumeConnector
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '202':
           description: Connector resumed
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/stop:
     put:
-      summary: Stop connector
+      summary: Apache kafka Stop Connector
       operationId: stopConnector
       tags:
-        - Connectors
+      - Connectors
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '204':
           description: Connector stopped
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/tasks:
     get:
-      summary: List connector tasks
+      summary: Apache kafka List Connector Tasks
       operationId: listConnectorTasks
       tags:
-        - Tasks
+      - Tasks
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '200':
           description: List of tasks
@@ -280,23 +404,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TaskInfo'
+              examples:
+                listConnectorTasks200Example:
+                  summary: Default listConnectorTasks 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/tasks/{task}/status:
     get:
-      summary: Get task status
+      summary: Apache kafka Get Task Status
       operationId: getTaskStatus
       tags:
-        - Tasks
+      - Tasks
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: task
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      - name: task
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 56
       responses:
         '200':
           description: Task status
@@ -304,38 +438,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskStatus'
+              examples:
+                getTaskStatus200Example:
+                  summary: Default getTaskStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 69
+                    state: UNASSIGNED
+                    worker_id: item-6436
+                    trace: example-value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/tasks/{task}/restart:
     post:
-      summary: Restart task
+      summary: Apache kafka Restart Task
       operationId: restartTask
       tags:
-        - Tasks
+      - Tasks
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: task
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      - name: task
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 18
       responses:
         '204':
           description: Task restarted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connectors/{connector}/offsets:
     get:
-      summary: Get connector offsets
+      summary: Apache kafka Get Connector Offsets
       operationId: getConnectorOffsets
       tags:
-        - Offsets
+      - Offsets
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '200':
           description: Connector offsets
@@ -348,17 +500,27 @@ paths:
                     type: array
                     items:
                       type: object
+              examples:
+                getConnectorOffsets200Example:
+                  summary: Default getConnectorOffsets 200 response
+                  x-microcks-default: true
+                  value:
+                    offsets: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Alter connector offsets
+      summary: Apache kafka Alter Connector Offsets
       operationId: alterConnectorOffsets
       tags:
-        - Offsets
+      - Offsets
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       requestBody:
         required: true
         content:
@@ -370,35 +532,49 @@ paths:
                   type: array
                   items:
                     type: object
+            examples:
+              alterConnectorOffsetsRequestExample:
+                summary: Default alterConnectorOffsets request
+                x-microcks-default: true
+                value:
+                  offsets: []
       responses:
         '200':
           description: Offsets altered
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Reset connector offsets
+      summary: Apache kafka Reset Connector Offsets
       operationId: resetConnectorOffsets
       tags:
-        - Offsets
+      - Offsets
       parameters:
-        - name: connector
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       responses:
         '200':
           description: Offsets reset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connector-plugins:
     get:
-      summary: List connector plugins
+      summary: Apache kafka List Connector Plugins
       operationId: listConnectorPlugins
       tags:
-        - Plugins
+      - Plugins
       parameters:
-        - name: connectorsOnly
-          in: query
-          schema:
-            type: boolean
-            default: true
+      - name: connectorsOnly
+        in: query
+        schema:
+          type: boolean
+          default: true
+        example: true
       responses:
         '200':
           description: List of connector plugins
@@ -408,18 +584,27 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ConnectorPlugin'
+              examples:
+                listConnectorPlugins200Example:
+                  summary: Default listConnectorPlugins 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /connector-plugins/{plugin}/config/validate:
     put:
-      summary: Validate connector config
+      summary: Apache kafka Validate Connector Config
       operationId: validateConnectorConfig
       tags:
-        - Plugins
+      - Plugins
       parameters:
-        - name: plugin
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: plugin
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
       requestBody:
         required: true
         content:
@@ -428,6 +613,11 @@ paths:
               type: object
               additionalProperties:
                 type: string
+            examples:
+              validateConnectorConfigRequestExample:
+                summary: Default validateConnectorConfig request
+                x-microcks-default: true
+                value: {}
       responses:
         '200':
           description: Validation result
@@ -435,13 +625,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConfigValidationResult'
+              examples:
+                validateConnectorConfig200Example:
+                  summary: Default validateConnectorConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    name: example-name
+                    error_count: 89
+                    groups: []
+                    configs: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   schemas:
     CreateConnectorRequest:
       type: object
       required:
-        - name
-        - config
+      - name
+      - config
       properties:
         name:
           type: string

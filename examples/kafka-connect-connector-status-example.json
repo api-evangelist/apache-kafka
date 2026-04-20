@@ -1,0 +1,11 @@
+{
+  "name": "example-name",
+  "connector": {
+    "state": "PAUSED",
+    "worker_id": "item-2106"
+  },
+  "tasks": [
+    "example-value"
+  ],
+  "type": "standard"
+}

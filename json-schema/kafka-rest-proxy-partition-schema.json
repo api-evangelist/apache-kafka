@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-schema/kafka-rest-proxy-partition-schema.json",
+  "title": "Partition",
+  "description": "Partition schema from Apache kafka",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "topic_name": {
+      "type": "string"
+    },
+    "partition_id": {
+      "type": "integer"
+    },
+    "leader": {
+      "type": "object"
+    },
+    "replicas": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

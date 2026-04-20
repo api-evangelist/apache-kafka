@@ -13,15 +13,15 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-  - url: http://localhost:8082
-    description: Default Kafka REST Proxy
+- url: http://localhost:8082
+  description: Default Kafka REST Proxy
 paths:
   /clusters:
     get:
-      summary: List clusters
+      summary: Apache kafka List Clusters
       operationId: listClusters
       tags:
-        - Cluster
+      - Cluster
       responses:
         '200':
           description: List of Kafka clusters
@@ -38,18 +38,30 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Cluster'
+              examples:
+                listClusters200Example:
+                  summary: Default listClusters 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}:
     get:
-      summary: Get cluster
+      summary: Apache kafka Get Cluster
       operationId: getCluster
       tags:
-        - Cluster
+      - Cluster
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-6938
       responses:
         '200':
           description: Cluster details
@@ -57,18 +69,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cluster'
+              examples:
+                getCluster200Example:
+                  summary: Default getCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-9562
+                    controller: {}
+                    brokers: {}
+                    topics: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}/topics:
     get:
-      summary: List topics
+      summary: Apache kafka List Topics
       operationId: listTopics
       tags:
-        - Topic
+      - Topic
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-8966
       responses:
         '200':
           description: List of topics
@@ -85,23 +112,44 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Topic'
+              examples:
+                listTopics200Example:
+                  summary: Default listTopics 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create topic
+      summary: Apache kafka Create Topic
       operationId: createTopic
       tags:
-        - Topic
+      - Topic
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-1233
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateTopicRequest'
+            examples:
+              createTopicRequestExample:
+                summary: Default createTopic request
+                x-microcks-default: true
+                value:
+                  topic_name: example-name
+                  partitions_count: 41
+                  replication_factor: 98
+                  configs: []
       responses:
         '201':
           description: Topic created
@@ -109,23 +157,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                createTopic201Example:
+                  summary: Default createTopic 201 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-7996
+                    topic_name: example-name
+                    is_internal: true
+                    replication_factor: 37
+                    partitions_count: 24
+                    partitions: {}
+                    configs: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}/topics/{topic_name}:
     get:
-      summary: Get topic
+      summary: Apache kafka Get Topic
       operationId: getTopic
       tags:
-        - Topic
+      - Topic
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: topic_name
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-8264
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
       responses:
         '200':
           description: Topic details
@@ -133,42 +200,66 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                getTopic200Example:
+                  summary: Default getTopic 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-5190
+                    topic_name: example-name
+                    is_internal: true
+                    replication_factor: 52
+                    partitions_count: 28
+                    partitions: {}
+                    configs: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete topic
+      summary: Apache kafka Delete Topic
       operationId: deleteTopic
       tags:
-        - Topic
+      - Topic
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: topic_name
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-9796
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
       responses:
         '204':
           description: Topic deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}/topics/{topic_name}/partitions:
     get:
-      summary: List partitions
+      summary: Apache kafka List Partitions
       operationId: listPartitions
       tags:
-        - Partition
+      - Partition
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: topic_name
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-7679
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
       responses:
         '200':
           description: List of partitions
@@ -183,18 +274,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Partition'
+              examples:
+                listPartitions200Example:
+                  summary: Default listPartitions 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}/consumer-groups:
     get:
-      summary: List consumer groups
+      summary: Apache kafka List Consumer Groups
       operationId: listConsumerGroups
       tags:
-        - Consumer Group
+      - Consumer Group
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-6701
       responses:
         '200':
           description: List of consumer groups
@@ -209,23 +311,35 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ConsumerGroup'
+              examples:
+                listConsumerGroups200Example:
+                  summary: Default listConsumerGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}/consumer-groups/{consumer_group_id}:
     get:
-      summary: Get consumer group
+      summary: Apache kafka Get Consumer Group
       operationId: getConsumerGroup
       tags:
-        - Consumer Group
+      - Consumer Group
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: consumer_group_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-8506
+      - name: consumer_group_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-4788
       responses:
         '200':
           description: Consumer group details
@@ -233,18 +347,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConsumerGroup'
+              examples:
+                getConsumerGroup200Example:
+                  summary: Default getConsumerGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-8575
+                    consumer_group_id: item-7715
+                    is_simple: true
+                    partition_assignor: example-value
+                    state: UNKNOWN
+                    coordinator: {}
+                    consumers: {}
+                    lag_summary: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}/brokers:
     get:
-      summary: List brokers
+      summary: Apache kafka List Brokers
       operationId: listBrokers
       tags:
-        - Broker
+      - Broker
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-2365
       responses:
         '200':
           description: List of brokers
@@ -259,28 +392,41 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Broker'
+              examples:
+                listBrokers200Example:
+                  summary: Default listBrokers 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{cluster_id}/acls:
     get:
-      summary: Search ACLs
+      summary: Apache kafka Search ACLs
       operationId: searchAcls
       tags:
-        - ACL
+      - ACL
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: resource_type
-          in: query
-          schema:
-            type: string
-            enum: [UNKNOWN, ANY, TOPIC, GROUP, CLUSTER, TRANSACTIONAL_ID, DELEGATION_TOKEN]
-        - name: pattern_type
-          in: query
-          schema:
-            type: string
-            enum: [UNKNOWN, ANY, MATCH, LITERAL, PREFIXED]
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-5726
+      - name: resource_type
+        in: query
+        schema:
+          type: string
+          enum: [UNKNOWN, ANY, TOPIC, GROUP, CLUSTER, TRANSACTIONAL_ID, DELEGATION_TOKEN]
+        example: UNKNOWN
+      - name: pattern_type
+        in: query
+        schema:
+          type: string
+          enum: [UNKNOWN, ANY, MATCH, LITERAL, PREFIXED]
+        example: UNKNOWN
       responses:
         '200':
           description: List of ACLs
@@ -295,58 +441,98 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Acl'
+              examples:
+                searchAcls200Example:
+                  summary: Default searchAcls 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create ACLs
+      summary: Apache kafka Create ACLs
       operationId: createAcls
       tags:
-        - ACL
+      - ACL
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-7456
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAclRequest'
+            examples:
+              createAclsRequestExample:
+                summary: Default createAcls request
+                x-microcks-default: true
+                value:
+                  resource_type: example-value
+                  resource_name: example-name
+                  pattern_type: example-value
+                  principal: example-value
+                  host: example-value
+                  operation: example-value
+                  permission: example-value
       responses:
         '201':
           description: ACL created
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete ACLs
+      summary: Apache kafka Delete ACLs
       operationId: deleteAcls
       tags:
-        - ACL
+      - ACL
       parameters:
-        - name: cluster_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-2190
       responses:
         '200':
           description: ACLs deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /topics/{topic_name}/records:
     post:
-      summary: Produce records to a topic
+      summary: Apache kafka Produce Records to a Topic
       operationId: produceRecords
       tags:
-        - Records
+      - Records
       parameters:
-        - name: topic_name
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ProduceRequest'
+            examples:
+              produceRecordsRequestExample:
+                summary: Default produceRecords request
+                x-microcks-default: true
+                value:
+                  partition_id: 46
+                  headers: []
+                  key: {}
+                  value: {}
       responses:
         '200':
           description: Records produced
@@ -354,6 +540,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProduceResponse'
+              examples:
+                produceRecords200Example:
+                  summary: Default produceRecords 200 response
+                  x-microcks-default: true
+                  value:
+                    error_code: 17
+                    cluster_id: item-5744
+                    topic_name: example-name
+                    partition_id: 25
+                    offset: 62
+                    timestamp: '2025-03-15T14:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   schemas:
     Cluster:
@@ -415,7 +615,7 @@ components:
     CreateTopicRequest:
       type: object
       required:
-        - topic_name
+      - topic_name
       properties:
         topic_name:
           type: string
@@ -516,13 +716,13 @@ components:
     CreateAclRequest:
       type: object
       required:
-        - resource_type
-        - resource_name
-        - pattern_type
-        - principal
-        - host
-        - operation
-        - permission
+      - resource_type
+      - resource_name
+      - pattern_type
+      - principal
+      - host
+      - operation
+      - permission
       properties:
         resource_type:
           type: string

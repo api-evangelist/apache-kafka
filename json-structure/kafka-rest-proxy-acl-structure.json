@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/json-structure/kafka-rest-proxy-acl-structure.json",
+  "name": "Acl",
+  "description": "Acl schema from Apache kafka",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "resource_type": {
+      "type": "string"
+    },
+    "resource_name": {
+      "type": "string"
+    },
+    "pattern_type": {
+      "type": "string"
+    },
+    "principal": {
+      "type": "string"
+    },
+    "host": {
+      "type": "string"
+    },
+    "operation": {
+      "type": "string"
+    },
+    "permission": {
+      "type": "string"
+    }
+  }
+}

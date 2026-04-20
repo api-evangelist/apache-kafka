@@ -1,0 +1,15 @@
+{
+  "kind": "example-value",
+  "metadata": {},
+  "cluster_id": "item-2457",
+  "topic_name": "example-name",
+  "is_internal": true,
+  "replication_factor": 101,
+  "partitions_count": 687,
+  "partitions": {
+    "related": "example-value"
+  },
+  "configs": {
+    "related": "example-value"
+  }
+}

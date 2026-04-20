@@ -1,0 +1,11 @@
+{
+  "topic_name": "example-name",
+  "partitions_count": 889,
+  "replication_factor": 450,
+  "configs": [
+    {
+      "name": "example-name",
+      "value": "example-value"
+    }
+  ]
+}

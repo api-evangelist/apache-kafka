@@ -1,0 +1,9 @@
+{
+  "resource_type": "standard",
+  "resource_name": "example-name",
+  "pattern_type": "standard",
+  "principal": "example-value",
+  "host": "example-value",
+  "operation": "example-value",
+  "permission": "example-value"
+}
