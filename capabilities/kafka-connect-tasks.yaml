@@ -1,0 +1,170 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kafka Connect REST API — Tasks
+  description: 'Kafka Connect REST API — Tasks. 3 operations. Lead operation: Apache kafka List Connector Tasks. Self-contained
+    Naftiko capability covering one Apache Kafka business surface.'
+  tags:
+  - Apache Kafka
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_KAFKA_API_KEY: APACHE_KAFKA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: kafka-connect-tasks
+    baseUri: http://localhost:8083
+    description: Kafka Connect REST API — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: connectors-connector-tasks
+      path: /connectors/{connector}/tasks
+      operations:
+      - name: listconnectortasks
+        method: GET
+        description: Apache kafka List Connector Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+    - name: connectors-connector-tasks-task-restart
+      path: /connectors/{connector}/tasks/{task}/restart
+      operations:
+      - name: restarttask
+        method: POST
+        description: Apache kafka Restart Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+        - name: task
+          in: path
+          type: integer
+          required: true
+    - name: connectors-connector-tasks-task-status
+      path: /connectors/{connector}/tasks/{task}/status
+      operations:
+      - name: gettaskstatus
+        method: GET
+        description: Apache kafka Get Task Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+        - name: task
+          in: path
+          type: integer
+          required: true
+  exposes:
+  - type: rest
+    namespace: kafka-connect-tasks-rest
+    port: 8080
+    description: REST adapter for Kafka Connect REST API — Tasks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/connectors/{connector}/tasks
+      name: connectors-connector-tasks
+      description: REST surface for connectors-connector-tasks.
+      operations:
+      - method: GET
+        name: listconnectortasks
+        description: Apache kafka List Connector Tasks
+        call: kafka-connect-tasks.listconnectortasks
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/tasks/{task}/restart
+      name: connectors-connector-tasks-task-restart
+      description: REST surface for connectors-connector-tasks-task-restart.
+      operations:
+      - method: POST
+        name: restarttask
+        description: Apache kafka Restart Task
+        call: kafka-connect-tasks.restarttask
+        with:
+          connector: rest.connector
+          task: rest.task
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/tasks/{task}/status
+      name: connectors-connector-tasks-task-status
+      description: REST surface for connectors-connector-tasks-task-status.
+      operations:
+      - method: GET
+        name: gettaskstatus
+        description: Apache kafka Get Task Status
+        call: kafka-connect-tasks.gettaskstatus
+        with:
+          connector: rest.connector
+          task: rest.task
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: kafka-connect-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Kafka Connect REST API — Tasks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: apache-kafka-list-connector-tasks
+      description: Apache kafka List Connector Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kafka-connect-tasks.listconnectortasks
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-restart-task
+      description: Apache kafka Restart Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: kafka-connect-tasks.restarttask
+      with:
+        connector: tools.connector
+        task: tools.task
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-get-task-status
+      description: Apache kafka Get Task Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kafka-connect-tasks.gettaskstatus
+      with:
+        connector: tools.connector
+        task: tools.task
+      outputParameters:
+      - type: object
+        mapping: $.

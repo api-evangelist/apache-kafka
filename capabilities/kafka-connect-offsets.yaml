@@ -1,0 +1,151 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kafka Connect REST API — Offsets
+  description: 'Kafka Connect REST API — Offsets. 3 operations. Lead operation: Apache kafka Get Connector Offsets. Self-contained
+    Naftiko capability covering one Apache Kafka business surface.'
+  tags:
+  - Apache Kafka
+  - Offsets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_KAFKA_API_KEY: APACHE_KAFKA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: kafka-connect-offsets
+    baseUri: http://localhost:8083
+    description: Kafka Connect REST API — Offsets business capability. Self-contained, no shared references.
+    resources:
+    - name: connectors-connector-offsets
+      path: /connectors/{connector}/offsets
+      operations:
+      - name: getconnectoroffsets
+        method: GET
+        description: Apache kafka Get Connector Offsets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+      - name: alterconnectoroffsets
+        method: PATCH
+        description: Apache kafka Alter Connector Offsets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: resetconnectoroffsets
+        method: DELETE
+        description: Apache kafka Reset Connector Offsets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: kafka-connect-offsets-rest
+    port: 8080
+    description: REST adapter for Kafka Connect REST API — Offsets. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/connectors/{connector}/offsets
+      name: connectors-connector-offsets
+      description: REST surface for connectors-connector-offsets.
+      operations:
+      - method: GET
+        name: getconnectoroffsets
+        description: Apache kafka Get Connector Offsets
+        call: kafka-connect-offsets.getconnectoroffsets
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: alterconnectoroffsets
+        description: Apache kafka Alter Connector Offsets
+        call: kafka-connect-offsets.alterconnectoroffsets
+        with:
+          connector: rest.connector
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: resetconnectoroffsets
+        description: Apache kafka Reset Connector Offsets
+        call: kafka-connect-offsets.resetconnectoroffsets
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: kafka-connect-offsets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Kafka Connect REST API — Offsets. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apache-kafka-get-connector-offsets
+      description: Apache kafka Get Connector Offsets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kafka-connect-offsets.getconnectoroffsets
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-alter-connector-offsets
+      description: Apache kafka Alter Connector Offsets
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kafka-connect-offsets.alterconnectoroffsets
+      with:
+        connector: tools.connector
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-reset-connector-offsets
+      description: Apache kafka Reset Connector Offsets
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: kafka-connect-offsets.resetconnectoroffsets
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.

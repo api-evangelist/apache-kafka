@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Confluent Kafka REST Proxy API — Records
+  description: 'Confluent Kafka REST Proxy API — Records. 1 operations. Lead operation: Apache kafka Produce Records to a
+    Topic. Self-contained Naftiko capability covering one Apache Kafka business surface.'
+  tags:
+  - Apache Kafka
+  - Records
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_KAFKA_API_KEY: APACHE_KAFKA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: kafka-rest-proxy-records
+    baseUri: http://localhost:8082
+    description: Confluent Kafka REST Proxy API — Records business capability. Self-contained, no shared references.
+    resources:
+    - name: topics-topic_name-records
+      path: /topics/{topic_name}/records
+      operations:
+      - name: producerecords
+        method: POST
+        description: Apache kafka Produce Records to a Topic
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: topic_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: kafka-rest-proxy-records-rest
+    port: 8080
+    description: REST adapter for Confluent Kafka REST Proxy API — Records. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/topics/{topic-name}/records
+      name: topics-topic-name-records
+      description: REST surface for topics-topic_name-records.
+      operations:
+      - method: POST
+        name: producerecords
+        description: Apache kafka Produce Records to a Topic
+        call: kafka-rest-proxy-records.producerecords
+        with:
+          topic_name: rest.topic_name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: kafka-rest-proxy-records-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Confluent Kafka REST Proxy API — Records. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apache-kafka-produce-records-topic
+      description: Apache kafka Produce Records to a Topic
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: kafka-rest-proxy-records.producerecords
+      with:
+        topic_name: tools.topic_name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

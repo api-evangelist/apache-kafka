@@ -1,0 +1,482 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kafka Connect REST API — Connectors
+  description: 'Kafka Connect REST API — Connectors. 11 operations. Lead operation: Apache kafka List Connectors. Self-contained
+    Naftiko capability covering one Apache Kafka business surface.'
+  tags:
+  - Apache Kafka
+  - Connectors
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_KAFKA_API_KEY: APACHE_KAFKA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: kafka-connect-connectors
+    baseUri: http://localhost:8083
+    description: Kafka Connect REST API — Connectors business capability. Self-contained, no shared references.
+    resources:
+    - name: connectors
+      path: /connectors
+      operations:
+      - name: listconnectors
+        method: GET
+        description: Apache kafka List Connectors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: expand
+          in: query
+          type: string
+      - name: createconnector
+        method: POST
+        description: Apache kafka Create Connector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: connectors-connector
+      path: /connectors/{connector}
+      operations:
+      - name: getconnector
+        method: GET
+        description: Apache kafka Get Connector Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+      - name: deleteconnector
+        method: DELETE
+        description: Apache kafka Delete Connector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+    - name: connectors-connector-config
+      path: /connectors/{connector}/config
+      operations:
+      - name: getconnectorconfig
+        method: GET
+        description: Apache kafka Get Connector Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+      - name: putconnectorconfig
+        method: PUT
+        description: Apache kafka Create or Update Connector Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: connectors-connector-pause
+      path: /connectors/{connector}/pause
+      operations:
+      - name: pauseconnector
+        method: PUT
+        description: Apache kafka Pause Connector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+    - name: connectors-connector-restart
+      path: /connectors/{connector}/restart
+      operations:
+      - name: restartconnector
+        method: POST
+        description: Apache kafka Restart Connector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+        - name: includeTasks
+          in: query
+          type: boolean
+        - name: onlyFailed
+          in: query
+          type: boolean
+    - name: connectors-connector-resume
+      path: /connectors/{connector}/resume
+      operations:
+      - name: resumeconnector
+        method: PUT
+        description: Apache kafka Resume Connector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+    - name: connectors-connector-status
+      path: /connectors/{connector}/status
+      operations:
+      - name: getconnectorstatus
+        method: GET
+        description: Apache kafka Get Connector Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+    - name: connectors-connector-stop
+      path: /connectors/{connector}/stop
+      operations:
+      - name: stopconnector
+        method: PUT
+        description: Apache kafka Stop Connector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connector
+          in: path
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: kafka-connect-connectors-rest
+    port: 8080
+    description: REST adapter for Kafka Connect REST API — Connectors. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/connectors
+      name: connectors
+      description: REST surface for connectors.
+      operations:
+      - method: GET
+        name: listconnectors
+        description: Apache kafka List Connectors
+        call: kafka-connect-connectors.listconnectors
+        with:
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createconnector
+        description: Apache kafka Create Connector
+        call: kafka-connect-connectors.createconnector
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}
+      name: connectors-connector
+      description: REST surface for connectors-connector.
+      operations:
+      - method: GET
+        name: getconnector
+        description: Apache kafka Get Connector Info
+        call: kafka-connect-connectors.getconnector
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteconnector
+        description: Apache kafka Delete Connector
+        call: kafka-connect-connectors.deleteconnector
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/config
+      name: connectors-connector-config
+      description: REST surface for connectors-connector-config.
+      operations:
+      - method: GET
+        name: getconnectorconfig
+        description: Apache kafka Get Connector Config
+        call: kafka-connect-connectors.getconnectorconfig
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putconnectorconfig
+        description: Apache kafka Create or Update Connector Config
+        call: kafka-connect-connectors.putconnectorconfig
+        with:
+          connector: rest.connector
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/pause
+      name: connectors-connector-pause
+      description: REST surface for connectors-connector-pause.
+      operations:
+      - method: PUT
+        name: pauseconnector
+        description: Apache kafka Pause Connector
+        call: kafka-connect-connectors.pauseconnector
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/restart
+      name: connectors-connector-restart
+      description: REST surface for connectors-connector-restart.
+      operations:
+      - method: POST
+        name: restartconnector
+        description: Apache kafka Restart Connector
+        call: kafka-connect-connectors.restartconnector
+        with:
+          connector: rest.connector
+          includeTasks: rest.includeTasks
+          onlyFailed: rest.onlyFailed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/resume
+      name: connectors-connector-resume
+      description: REST surface for connectors-connector-resume.
+      operations:
+      - method: PUT
+        name: resumeconnector
+        description: Apache kafka Resume Connector
+        call: kafka-connect-connectors.resumeconnector
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/status
+      name: connectors-connector-status
+      description: REST surface for connectors-connector-status.
+      operations:
+      - method: GET
+        name: getconnectorstatus
+        description: Apache kafka Get Connector Status
+        call: kafka-connect-connectors.getconnectorstatus
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectors/{connector}/stop
+      name: connectors-connector-stop
+      description: REST surface for connectors-connector-stop.
+      operations:
+      - method: PUT
+        name: stopconnector
+        description: Apache kafka Stop Connector
+        call: kafka-connect-connectors.stopconnector
+        with:
+          connector: rest.connector
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: kafka-connect-connectors-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Kafka Connect REST API — Connectors. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apache-kafka-list-connectors
+      description: Apache kafka List Connectors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.listconnectors
+      with:
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-create-connector
+      description: Apache kafka Create Connector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: kafka-connect-connectors.createconnector
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-get-connector-info
+      description: Apache kafka Get Connector Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.getconnector
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-delete-connector
+      description: Apache kafka Delete Connector
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: kafka-connect-connectors.deleteconnector
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-get-connector-config
+      description: Apache kafka Get Connector Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.getconnectorconfig
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-create-update-connector
+      description: Apache kafka Create or Update Connector Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.putconnectorconfig
+      with:
+        connector: tools.connector
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-pause-connector
+      description: Apache kafka Pause Connector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.pauseconnector
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-restart-connector
+      description: Apache kafka Restart Connector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: kafka-connect-connectors.restartconnector
+      with:
+        connector: tools.connector
+        includeTasks: tools.includeTasks
+        onlyFailed: tools.onlyFailed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-resume-connector
+      description: Apache kafka Resume Connector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.resumeconnector
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-get-connector-status
+      description: Apache kafka Get Connector Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.getconnectorstatus
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-kafka-stop-connector
+      description: Apache kafka Stop Connector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kafka-connect-connectors.stopconnector
+      with:
+        connector: tools.connector
+      outputParameters:
+      - type: object
+        mapping: $.
