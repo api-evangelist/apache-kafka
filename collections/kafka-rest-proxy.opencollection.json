@@ -1,0 +1,353 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Confluent Kafka REST Proxy API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters"
+          },
+          "docs": "Apache kafka List Clusters"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-6938",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Cluster"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Topic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id/topics",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-8966",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Topics"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Create Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8082/clusters/:cluster_id/topics",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-1233",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Create Topic"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id/topics/:topic_name",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-8264",
+                "type": "path"
+              },
+              {
+                "name": "topic_name",
+                "value": "example-name",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Topic"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Delete Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8082/clusters/:cluster_id/topics/:topic_name",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-9796",
+                "type": "path"
+              },
+              {
+                "name": "topic_name",
+                "value": "example-name",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Delete Topic"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Partition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Partitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id/topics/:topic_name/partitions",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-7679",
+                "type": "path"
+              },
+              {
+                "name": "topic_name",
+                "value": "example-name",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Partitions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Consumer Group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Consumer Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id/consumer-groups",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-6701",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Consumer Groups"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id/consumer-groups/:consumer_group_id",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-8506",
+                "type": "path"
+              },
+              {
+                "name": "consumer_group_id",
+                "value": "item-4788",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Consumer Group"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Broker",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Brokers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id/brokers",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-2365",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Brokers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ACL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka Search ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8082/clusters/:cluster_id/acls",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-5726",
+                "type": "path"
+              },
+              {
+                "name": "resource_type",
+                "value": "UNKNOWN",
+                "type": "query"
+              },
+              {
+                "name": "pattern_type",
+                "value": "UNKNOWN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Apache kafka Search ACLs"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Create ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8082/clusters/:cluster_id/acls",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-7456",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Create ACLs"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Delete ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8082/clusters/:cluster_id/acls",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-2190",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Delete ACLs"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka Produce Records to a Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8082/topics/:topic_name/records",
+            "params": [
+              {
+                "name": "topic_name",
+                "value": "example-name",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Produce Records to a Topic"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

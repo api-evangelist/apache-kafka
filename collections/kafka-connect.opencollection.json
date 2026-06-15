@@ -1,0 +1,432 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka Get Connect Worker Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/"
+          },
+          "docs": "Apache kafka Get Connect Worker Info"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Connectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors",
+            "params": [
+              {
+                "name": "expand",
+                "value": "status",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Connectors"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Create Connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8083/connectors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Create Connector"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Connector Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Connector Info"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Delete Connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8083/connectors/:connector",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Delete Connector"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Connector Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/config",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Connector Config"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Create or Update Connector Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8083/connectors/:connector/config",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Create or Update Connector Config"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Connector Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/status",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Connector Status"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Restart Connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8083/connectors/:connector/restart",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              },
+              {
+                "name": "includeTasks",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "onlyFailed",
+                "value": "true",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Apache kafka Restart Connector"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Pause Connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8083/connectors/:connector/pause",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Pause Connector"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Resume Connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8083/connectors/:connector/resume",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Resume Connector"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Stop Connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8083/connectors/:connector/stop",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Stop Connector"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Connector Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/tasks",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Connector Tasks"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Task Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/tasks/:task/status",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              },
+              {
+                "name": "task",
+                "value": "56",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Task Status"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Restart Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8083/connectors/:connector/tasks/:task/restart",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              },
+              {
+                "name": "task",
+                "value": "18",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Restart Task"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offsets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka Get Connector Offsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/offsets",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Connector Offsets"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Alter Connector Offsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:8083/connectors/:connector/offsets",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Alter Connector Offsets"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Reset Connector Offsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8083/connectors/:connector/offsets",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Reset Connector Offsets"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plugins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Connector Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connector-plugins",
+            "params": [
+              {
+                "name": "connectorsOnly",
+                "value": "true",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Connector Plugins"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Validate Connector Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8083/connector-plugins/:plugin/config/validate",
+            "params": [
+              {
+                "name": "plugin",
+                "value": "example-value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Validate Connector Config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
