@@ -68,6 +68,10 @@ apis:
       - type: AsyncAPI
         url: asyncapi/kafka-messaging.yml
 common:
+  - type: VulnerabilityDisclosure
+    url: security/apache-kafka-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/apache-kafka-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/apachekafka
   - type: GitHubOrganization
@@ -128,6 +132,8 @@ common:
         description: Kafka Connect S3 sink for archiving event streams to object storage.
       - name: Apache Hadoop
         description: HDFS sink connector for streaming data into Hadoop data lake.
+  - url: https://www.confluent.io/rss.xml
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
