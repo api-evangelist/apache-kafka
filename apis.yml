@@ -68,6 +68,8 @@ apis:
       - type: AsyncAPI
         url: asyncapi/kafka-messaging.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/apache-kafka-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/apache-kafka-vulnerability-disclosure.yml
   - type: DomainSecurity
