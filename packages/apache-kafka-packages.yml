@@ -1,0 +1,81 @@
+generated: '2026-06-20'
+method: searched
+source: https://central.sonatype.com/artifact/org.apache.kafka/kafka-clients
+notes: >-
+  The Apache Kafka project publishes its official Java/Scala clients and libraries to
+  Maven Central under the org.apache.kafka group. The de-facto official non-JVM clients
+  (Python, Go, .NET, C/C++) are maintained by Confluent on top of librdkafka and are
+  marked official:true with maintainer: confluent.
+packages:
+  - language: java
+    registry: maven-central
+    name: org.apache.kafka:kafka-clients
+    url: https://central.sonatype.com/artifact/org.apache.kafka/kafka-clients
+    install: 'implementation "org.apache.kafka:kafka-clients:4.3.1"'
+    official: true
+    maintainer: apache
+    description: Producer, consumer, and admin client for Apache Kafka.
+  - language: java
+    registry: maven-central
+    name: org.apache.kafka:kafka-streams
+    url: https://central.sonatype.com/artifact/org.apache.kafka/kafka-streams
+    install: 'implementation "org.apache.kafka:kafka-streams:4.3.1"'
+    official: true
+    maintainer: apache
+    description: Kafka Streams stream-processing library.
+  - language: java
+    registry: maven-central
+    name: org.apache.kafka:connect-api
+    url: https://central.sonatype.com/artifact/org.apache.kafka/connect-api
+    install: 'implementation "org.apache.kafka:connect-api:4.3.1"'
+    official: true
+    maintainer: apache
+    description: Kafka Connect API for building source and sink connectors.
+  - language: scala
+    registry: maven-central
+    name: org.apache.kafka:kafka_2.13
+    url: https://central.sonatype.com/artifact/org.apache.kafka/kafka_2.13
+    install: 'libraryDependencies += "org.apache.kafka" %% "kafka" % "4.3.1"'
+    official: true
+    maintainer: apache
+    description: Core Kafka broker/server library (Scala).
+  - language: python
+    registry: pypi
+    name: confluent-kafka
+    url: https://pypi.org/project/confluent-kafka/
+    install: pip install confluent-kafka
+    official: true
+    maintainer: confluent
+    description: Confluent's Python client for Apache Kafka, built on librdkafka.
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/confluentinc/confluent-kafka-go
+    url: https://pkg.go.dev/github.com/confluentinc/confluent-kafka-go/v2
+    install: go get github.com/confluentinc/confluent-kafka-go/v2/kafka
+    official: true
+    maintainer: confluent
+    description: Confluent's Go client for Apache Kafka, built on librdkafka.
+  - language: csharp
+    registry: nuget
+    name: Confluent.Kafka
+    url: https://www.nuget.org/packages/Confluent.Kafka
+    install: dotnet add package Confluent.Kafka
+    official: true
+    maintainer: confluent
+    description: Confluent's .NET client for Apache Kafka, built on librdkafka.
+  - language: c
+    registry: source
+    name: librdkafka
+    url: https://github.com/confluentinc/librdkafka
+    install: 'apt-get install librdkafka-dev  # or: brew install librdkafka'
+    official: true
+    maintainer: confluent
+    description: The C/C++ library for Apache Kafka underpinning the non-JVM clients.
+  - language: javascript
+    registry: npm
+    name: '@confluentinc/kafka-javascript'
+    url: https://www.npmjs.com/package/@confluentinc/kafka-javascript
+    install: npm install @confluentinc/kafka-javascript
+    official: true
+    maintainer: confluent
+    description: Confluent's Node.js client for Apache Kafka, built on librdkafka.

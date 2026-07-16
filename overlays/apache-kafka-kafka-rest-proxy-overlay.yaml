@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Kafka REST Proxy API
+  version: 1.0.0
+extends: openapi/kafka-rest-proxy.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: apache-kafka
+      x-apievangelist-api: kafka-rest-proxy-api
+      x-apievangelist-artifacts:
+        packages: packages/apache-kafka-packages.yml
+        errors: errors/apache-kafka-error-codes.yml
+        conventions: conventions/apache-kafka-conventions.yml
+        data-model: data-model/apache-kafka-data-model.yml
+        lifecycle: lifecycle/apache-kafka-lifecycle.yml
+  - target: $.info
+    update:
+      x-apievangelist-content-type-versioning: application/vnd.kafka.v3+json
+      x-apievangelist-note: >-
+        Servers are localhost by default; deploy the REST Proxy behind a gateway with
+        SASL/mTLS for production. Error responses use the {error_code, message} envelope.

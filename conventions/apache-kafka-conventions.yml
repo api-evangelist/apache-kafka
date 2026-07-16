@@ -1,0 +1,48 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.confluent.io/platform/current/kafka-rest/
+notes: >-
+  Cross-cutting request/response semantics for the REST-accessible surface (Kafka REST
+  Proxy and Kafka Connect REST API). The native Kafka messaging protocol is a binary
+  wire protocol and does not share these HTTP conventions.
+authentication:
+  style: >-
+    None declared in the OpenAPI (servers are localhost). In production the REST Proxy
+    is deployed behind SASL (PLAIN/SCRAM/GSSAPI/OAUTHBEARER) and/or mutual TLS, with
+    Kafka ACLs enforcing authorization. See errors/ for the auth error surface.
+  reference: https://kafka.apache.org/documentation/#security
+content_negotiation:
+  rest_proxy:
+    versioned_media_type: application/vnd.kafka.v3+json
+    legacy: application/vnd.kafka.v2+json
+    embedding_formats: [json, binary, avro, protobuf, jsonschema]
+    note: >-
+      The REST Proxy selects API version and record embedding format via the
+      Content-Type / Accept headers (e.g. application/vnd.kafka.avro.v2+json).
+  connect:
+    media_type: application/json
+idempotency:
+  header: null
+  note: >-
+    No HTTP idempotency-key header. Exactly-once semantics are a property of the Kafka
+    producer/transactional protocol (idempotent producer, transactional.id), not the
+    REST layer. Connect PUT connector config is naturally idempotent by connector name.
+pagination:
+  style: none
+  note: >-
+    List endpoints (topics, connectors, consumer groups, plugins) return full arrays;
+    no cursor/offset pagination on the REST surface.
+error_envelope:
+  shape: '{"error_code": <int>, "message": <string>}'
+  reference: errors/apache-kafka-error-codes.yml
+  note: Connect returns 409 CONFLICT during connector rebalance.
+versioning:
+  scheme: media-type (REST Proxy) + URI path (/v3)
+  reference: lifecycle/apache-kafka-lifecycle.yml
+rate_limiting:
+  signaling: none
+  note: >-
+    No standard rate-limit headers on the Apache surface; throughput is governed by
+    broker quotas (client/user quotas), not HTTP 429 signaling.
+request_tracing:
+  header: null

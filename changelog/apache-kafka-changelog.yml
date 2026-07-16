@@ -1,0 +1,44 @@
+generated: '2026-06-20'
+method: searched
+source: https://kafka.apache.org/blog
+scheme: semver
+current: 4.3.1
+docs: https://kafka.apache.org/downloads
+notes: >-
+  Apache Kafka publishes dated release announcements on its blog and full JIRA-backed
+  release notes per version. Only the recent window is captured here; the live blog and
+  downloads page are the source of truth.
+entries:
+  - version: 4.3.1
+    date: '2026-06'
+    type: patch
+    breaking: false
+    highlights:
+      - Bug-fix release on the 4.3 line.
+  - version: 4.3.0
+    date: '2026-05-22'
+    type: minor
+    breaking: false
+    url: https://kafka.apache.org/blog/2026/05/22/apache-kafka-4.3.0-release-announcement/
+    highlights:
+      - 25 KIPs and 600+ commits since 4.2.0.
+      - KIP-1244 deprecates streams-scala (removal targeted for 5.0).
+      - KIP-1237 deprecates the group.coordinator.rebalance.protocols broker config (removal targeted for 5.0).
+  - version: 4.2.0
+    date: null
+    type: minor
+    breaking: false
+    highlights:
+      - Prior minor release on the 4.x line.
+  - version: 4.1.0
+    date: null
+    type: minor
+    breaking: false
+    highlights:
+      - Prior minor release on the 4.x line.
+  - version: 4.0.0
+    date: null
+    type: major
+    breaking: true
+    highlights:
+      - First KRaft-only release; Apache ZooKeeper removed as a dependency.

@@ -1,0 +1,64 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.confluent.io/platform/current/kafka-rest/api.html
+format: kafka-rest-error-envelope
+envelope:
+  fields:
+    error_code: Machine-readable numeric error code (HTTP status * 100 + subcode)
+    message: Human-readable description
+  example: '{"error_code": 40403, "message": "Consumer instance not found."}'
+notes: >-
+  The Kafka REST Proxy returns errors as a JSON object with error_code and message.
+  error_code encodes the HTTP status times 100 plus a subcode: 404xx map to 404 Not
+  Found, 500xx to 500 Internal Server Error, etc. Generic HTTP status errors (400, 401,
+  403, 404, 405, 406, 500) also apply. The Kafka Connect REST API uses a similar
+  {error_code, message} envelope and returns 409 CONFLICT during connector rebalance.
+error_codes:
+  - code: 40401
+    status: 404
+    meaning: Topic not found.
+  - code: 40402
+    status: 404
+    meaning: Partition not found.
+  - code: 40403
+    status: 404
+    meaning: Consumer instance not found.
+  - code: 40406
+    status: 404
+    meaning: Leader not available.
+  - code: 40901
+    status: 409
+    meaning: Consumer cannot subscribe the specified target because it has already subscribed to a different target.
+  - code: 40902
+    status: 409
+    meaning: Consumer cannot have multiple subscriptions of different types (topics, topic pattern).
+  - code: 42201
+    status: 422
+    meaning: Request includes keys and/or values that are too large.
+  - code: 42202
+    status: 422
+    meaning: Request includes an invalid offset or partition.
+  - code: 42205
+    status: 422
+    meaning: The requested embedding format is not supported by the Content-Type / Accept headers.
+  - code: 50001
+    status: 500
+    meaning: ZooKeeper error.
+  - code: 50002
+    status: 500
+    meaning: Kafka error.
+  - code: 50003
+    status: 500
+    meaning: Retriable Kafka error. Retrying may resolve the problem.
+  - code: 50101
+    status: 501
+    meaning: No SSL support / feature not enabled on the REST Proxy.
+generic_http:
+  - {status: 400, meaning: Bad Request}
+  - {status: 401, meaning: Unauthorized}
+  - {status: 403, meaning: Forbidden}
+  - {status: 404, meaning: Not Found}
+  - {status: 405, meaning: Method Not Allowed}
+  - {status: 406, meaning: Not Acceptable (requested embedding format unavailable)}
+  - {status: 409, meaning: Conflict (e.g. Kafka Connect rebalance in progress)}
+  - {status: 500, meaning: Internal Server Error}

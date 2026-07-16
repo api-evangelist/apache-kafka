@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Kafka Connect REST API
+  version: 1.0.0
+extends: openapi/kafka-connect.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: apache-kafka
+      x-apievangelist-api: kafka-connect-api
+      x-apievangelist-artifacts:
+        errors: errors/apache-kafka-error-codes.yml
+        conventions: conventions/apache-kafka-conventions.yml
+        data-model: data-model/apache-kafka-data-model.yml
+        lifecycle: lifecycle/apache-kafka-lifecycle.yml
+  - target: $.info
+    update:
+      x-apievangelist-note: >-
+        The Connect REST API returns 409 CONFLICT during connector rebalance; retry
+        after the rebalance completes. Errors use the {error_code, message} envelope.

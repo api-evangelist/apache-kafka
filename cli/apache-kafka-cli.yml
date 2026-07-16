@@ -1,0 +1,72 @@
+generated: '2026-06-20'
+method: searched
+source: https://kafka.apache.org/documentation/
+name: Apache Kafka CLI tools
+description: >-
+  Apache Kafka ships a suite of first-party command-line tools as shell scripts in the
+  bin/ directory of the Kafka distribution (bin/windows/*.bat on Windows). They wrap the
+  Java admin, producer, and consumer clients for operating a cluster from the terminal.
+install:
+  - method: download
+    url: https://kafka.apache.org/downloads
+    note: Included in the Kafka release tarball under bin/.
+  - method: homebrew
+    command: brew install kafka
+  - method: docker
+    command: docker run apache/kafka:latest
+command_groups:
+  - group: topics
+    binary: kafka-topics.sh
+    description: Create, list, describe, alter, and delete topics.
+  - group: producer
+    binary: kafka-console-producer.sh
+    description: Produce records to a topic from stdin.
+  - group: consumer
+    binary: kafka-console-consumer.sh
+    description: Consume and print records from a topic.
+  - group: consumer-groups
+    binary: kafka-consumer-groups.sh
+    description: List and describe consumer groups, view lag, reset offsets.
+  - group: acls
+    binary: kafka-acls.sh
+    description: Manage ACLs (authorization) for principals and resources.
+  - group: configs
+    binary: kafka-configs.sh
+    description: Describe and alter broker, topic, and client configurations.
+  - group: cluster
+    binary: kafka-cluster.sh
+    description: Cluster metadata operations (e.g. cluster id).
+  - group: kraft
+    binary: kafka-storage.sh
+    description: Format storage and manage KRaft metadata for the cluster.
+  - group: server
+    binary: kafka-server-start.sh / kafka-server-stop.sh
+    description: Start and stop a Kafka broker.
+  - group: connect
+    binary: connect-standalone.sh / connect-distributed.sh
+    description: Run Kafka Connect in standalone or distributed mode.
+  - group: streams
+    binary: kafka-streams-application-reset.sh
+    description: Reset a Kafka Streams application's internal state and offsets.
+  - group: performance
+    binary: kafka-producer-perf-test.sh / kafka-consumer-perf-test.sh
+    description: Benchmark producer and consumer throughput.
+  - group: reassign
+    binary: kafka-reassign-partitions.sh
+    description: Move partitions between brokers and rebalance replicas.
+  - group: leader-election
+    binary: kafka-leader-election.sh
+    description: Trigger preferred or unclean leader election.
+key_flows:
+  - name: Create a topic
+    command: bin/kafka-topics.sh --create --topic my-topic --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+  - name: Produce messages
+    command: bin/kafka-console-producer.sh --topic my-topic --bootstrap-server localhost:9092
+  - name: Consume messages
+    command: bin/kafka-console-consumer.sh --topic my-topic --from-beginning --bootstrap-server localhost:9092
+  - name: Inspect consumer group lag
+    command: bin/kafka-consumer-groups.sh --describe --group my-group --bootstrap-server localhost:9092
+related:
+  note: >-
+    Confluent additionally ships the `confluent` CLI for Confluent Cloud/Platform; that
+    is a vendor tool distinct from the Apache Kafka distribution scripts above.

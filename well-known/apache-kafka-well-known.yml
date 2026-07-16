@@ -1,0 +1,31 @@
+generated: '2026-06-20'
+method: searched
+source: live probes of apis.yml + OpenAPI hosts
+notes: >-
+  OpenAPI servers[] are localhost (REST Proxy :8082, Connect :8083) and expose no
+  /.well-known surface. Apache Kafka's own site (kafka.apache.org) returns 404 for all
+  probed paths. The Confluent vendor site (confluent.io) publishes a real RFC 9116
+  security.txt. docs.confluent.io returns soft-200 HTML (SPA shell) for /.well-known
+  paths, so those are recorded as not-a-document rather than saved.
+hosts:
+  - host: https://kafka.apache.org
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://www.confluent.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: apache-kafka-security.txt
+  - host: https://docs.confluent.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: soft-200 HTML SPA shell, not a real security.txt
+      - path: /.well-known/api-catalog
+        status: 200
+        note: soft-200 HTML SPA shell, not a real api-catalog

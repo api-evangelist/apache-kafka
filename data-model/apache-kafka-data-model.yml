@@ -1,0 +1,65 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/kafka-rest-proxy.yml, openapi/kafka-connect.yml
+notes: >-
+  Entity graph derived from OpenAPI component schemas and path hierarchy. The REST Proxy
+  models the cluster topology (clusters, topics, partitions, consumer groups, brokers,
+  ACLs); Kafka Connect models the connector runtime (connectors, tasks, plugins).
+entities:
+  - name: Cluster
+    api: kafka-rest-proxy
+    id_field: cluster_id
+    relationships:
+      - has_many: Topic
+      - has_many: Broker
+      - has_many: ConsumerGroup
+      - has_many: Acl
+  - name: Topic
+    api: kafka-rest-proxy
+    id_field: topic_name
+    relationships:
+      - belongs_to: Cluster
+        via: cluster_id
+      - has_many: Partition
+  - name: Partition
+    api: kafka-rest-proxy
+    id_field: partition_id
+    relationships:
+      - belongs_to: Topic
+        via: topic_name
+      - belongs_to: Broker
+        via: leader
+  - name: ConsumerGroup
+    api: kafka-rest-proxy
+    id_field: consumer_group_id
+    relationships:
+      - belongs_to: Cluster
+        via: cluster_id
+  - name: Broker
+    api: kafka-rest-proxy
+    id_field: broker_id
+    relationships:
+      - belongs_to: Cluster
+        via: cluster_id
+  - name: Acl
+    api: kafka-rest-proxy
+    relationships:
+      - belongs_to: Cluster
+        via: cluster_id
+  - name: Connector
+    api: kafka-connect
+    id_field: name
+    relationships:
+      - has_many: Task
+      - has_one: ConnectorStatus
+      - has_one: ConfigValidationResult
+  - name: Task
+    api: kafka-connect
+    id_field: task
+    relationships:
+      - belongs_to: Connector
+        via: connector
+      - has_one: TaskStatus
+  - name: ConnectorPlugin
+    api: kafka-connect
+    relationships: []

@@ -1,0 +1,34 @@
+# Apache Kafka
+
+> Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. This profile covers its REST-accessible surface: the Kafka REST Proxy API, the Kafka Connect REST API, and the native Kafka messaging protocol (AsyncAPI).
+
+## APIs
+
+- [Kafka REST Proxy API](https://docs.confluent.io/platform/current/kafka-rest/): RESTful interface to a Kafka cluster for producing/consuming messages and managing topics, partitions, consumer groups, ACLs, and cluster state.
+- [Kafka Connect REST API](https://kafka.apache.org/documentation/#connect_rest): Manage connectors, configurations, tasks, and offsets for integrating Kafka with external systems.
+- [Apache Kafka Messaging API](https://kafka.apache.org/documentation/#producerapi): Core produce/consume protocol over the native Kafka binary protocol with exactly-once semantics and partitioned log storage.
+
+## Specs
+
+- [Kafka REST Proxy OpenAPI](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/openapi/kafka-rest-proxy.yml)
+- [Kafka Connect OpenAPI](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/openapi/kafka-connect.yml)
+- [Kafka Messaging AsyncAPI](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/asyncapi/kafka-messaging.yml)
+
+## Artifacts
+
+- [Packages / SDKs](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/packages/apache-kafka-packages.yml)
+- [CLI command surface](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/cli/apache-kafka-cli.yml)
+- [MCP server](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/mcp/apache-kafka-mcp.yml)
+- [Error codes](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/errors/apache-kafka-error-codes.yml)
+- [Lifecycle / versioning](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/lifecycle/apache-kafka-lifecycle.yml)
+- [Changelog](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/changelog/apache-kafka-changelog.yml)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/conventions/apache-kafka-conventions.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/data-model/apache-kafka-data-model.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/conformance/apache-kafka-conformance.yml)
+
+## Docs
+
+- [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
+- [Getting Started / Quickstart](https://kafka.apache.org/quickstart)
+- [Downloads](https://kafka.apache.org/downloads)
+- [Confluent Platform Documentation](https://docs.confluent.io/platform/current/)

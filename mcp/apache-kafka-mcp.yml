@@ -1,0 +1,93 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: https://github.com/confluentinc/mcp-confluent
+notes: >-
+  Confluent publishes an open-source MCP server (@confluentinc/mcp-confluent) that
+  connects AI assistants to Confluent Cloud, Confluent Platform, and standalone Apache
+  Kafka deployments with 50+ tools across Kafka, Flink SQL, Schema Registry, Connect,
+  and Tableflow. Apache Kafka itself has an in-progress proposal, KIP-1318 (Model
+  Context Protocol Server for Apache Kafka). The candidate tools[] below are derived
+  from this repo's OpenAPI operations as a governance starting point.
+servers:
+  - name: mcp-confluent
+    maintainer: confluent
+    transport: stdio
+    package: '@confluentinc/mcp-confluent'
+    registry: npm
+    url: https://www.npmjs.com/package/@confluentinc/mcp-confluent
+    repo: https://github.com/confluentinc/mcp-confluent
+    docs: https://docs.confluent.io/cloud/current/ai/ai-tools/open-source-mcp-server.html
+    run: npx @confluentinc/mcp-confluent --config ./config.yaml
+    access: read-write
+    covers: [Kafka, Flink SQL, Schema Registry, Connect, Tableflow]
+  - name: confluent-managed-mcp
+    maintainer: confluent
+    transport: http
+    docs: https://docs.confluent.io/cloud/current/ai/ai-tools/managed-mcp-server.html
+    access: read-only
+    covers: [Confluent Cloud]
+proposals:
+  - id: KIP-1318
+    title: Model Context Protocol (MCP) Server for Apache Kafka
+    url: https://cwiki.apache.org/confluence/display/KAFKA/KIP-1318:+Model+Context+Protocol+(MCP)+Server+for+Apache+Kafka
+    status: proposed
+tools:
+  - name: list_clusters
+    description: List Kafka clusters
+    source_operation: openapi/kafka-rest-proxy.yml#listClusters
+  - name: get_cluster
+    description: Get a Kafka cluster
+    source_operation: openapi/kafka-rest-proxy.yml#getCluster
+  - name: list_topics
+    description: List topics
+    source_operation: openapi/kafka-rest-proxy.yml#listTopics
+  - name: create_topic
+    description: Create a topic
+    source_operation: openapi/kafka-rest-proxy.yml#createTopic
+  - name: get_topic
+    description: Get a topic
+    source_operation: openapi/kafka-rest-proxy.yml#getTopic
+  - name: delete_topic
+    description: Delete a topic
+    source_operation: openapi/kafka-rest-proxy.yml#deleteTopic
+  - name: list_partitions
+    description: List partitions for a topic
+    source_operation: openapi/kafka-rest-proxy.yml#listPartitions
+  - name: list_consumer_groups
+    description: List consumer groups
+    source_operation: openapi/kafka-rest-proxy.yml#listConsumerGroups
+  - name: get_consumer_group
+    description: Get a consumer group
+    source_operation: openapi/kafka-rest-proxy.yml#getConsumerGroup
+  - name: list_brokers
+    description: List brokers
+    source_operation: openapi/kafka-rest-proxy.yml#listBrokers
+  - name: search_acls
+    description: Search ACLs
+    source_operation: openapi/kafka-rest-proxy.yml#searchAcls
+  - name: create_acls
+    description: Create ACLs
+    source_operation: openapi/kafka-rest-proxy.yml#createAcls
+  - name: delete_acls
+    description: Delete ACLs
+    source_operation: openapi/kafka-rest-proxy.yml#deleteAcls
+  - name: produce_records
+    description: Produce records to a topic
+    source_operation: openapi/kafka-rest-proxy.yml#produceRecords
+  - name: list_connectors
+    description: List Kafka Connect connectors
+    source_operation: openapi/kafka-connect.yml#listConnectors
+  - name: create_connector
+    description: Create a connector
+    source_operation: openapi/kafka-connect.yml#createConnector
+  - name: get_connector_status
+    description: Get connector status
+    source_operation: openapi/kafka-connect.yml#getConnectorStatus
+  - name: restart_connector
+    description: Restart a connector
+    source_operation: openapi/kafka-connect.yml#restartConnector
+  - name: list_connector_plugins
+    description: List installed connector plugins
+    source_operation: openapi/kafka-connect.yml#listConnectorPlugins
+tools_source: openapi (candidate derivation)

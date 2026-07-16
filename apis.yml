@@ -15,7 +15,7 @@ tags:
   - Open Source
   - Pub-Sub
 created: '2025-06-05'
-modified: '2026-05-19'
+modified: '2026-06-20'
 url: https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
@@ -36,6 +36,8 @@ apis:
         url: https://docs.confluent.io/platform/current/kafka-rest/api.html
       - type: OpenAPI
         url: openapi/kafka-rest-proxy.yml
+      - type: Overlay
+        url: overlays/apache-kafka-kafka-rest-proxy-overlay.yaml
   - aid: apache-kafka:kafka-connect-api
     name: Kafka Connect REST API
     description: >-
@@ -52,6 +54,8 @@ apis:
         url: https://kafka.apache.org/documentation/#connect_rest
       - type: OpenAPI
         url: openapi/kafka-connect.yml
+      - type: Overlay
+        url: overlays/apache-kafka-kafka-connect-overlay.yaml
   - aid: apache-kafka:kafka-messaging-api
     name: Apache Kafka Messaging API
     description: >-
@@ -70,6 +74,30 @@ apis:
 common:
   - type: AgenticAccess
     url: agentic-access/apache-kafka-agentic-access.yml
+  - type: Packages
+    url: packages/apache-kafka-packages.yml
+  - type: CLI
+    url: cli/apache-kafka-cli.yml
+  - type: MCPServer
+    url: mcp/apache-kafka-mcp.yml
+  - type: LLMsTxt
+    url: llms/apache-kafka-llms.txt
+  - type: WellKnown
+    url: well-known/apache-kafka-well-known.yml
+  - type: SecurityTxt
+    url: well-known/apache-kafka-security.txt
+  - type: ErrorCatalog
+    url: errors/apache-kafka-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/apache-kafka-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/apache-kafka-changelog.yml
+  - type: Conventions
+    url: conventions/apache-kafka-conventions.yml
+  - type: DataModel
+    url: data-model/apache-kafka-data-model.yml
+  - type: Conformance
+    url: conformance/apache-kafka-conformance.yml
   - type: VulnerabilityDisclosure
     url: security/apache-kafka-vulnerability-disclosure.yml
   - type: DomainSecurity

@@ -1,0 +1,38 @@
+generated: '2026-06-20'
+method: searched
+source: https://kafka.apache.org/downloads
+versioning:
+  scheme: semver
+  current: 4.3.1
+  format: MAJOR.MINOR.PATCH
+  process: KIP (Kafka Improvement Proposal)
+  process_url: https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Improvement+Proposals
+  docs: https://kafka.apache.org/downloads
+release_cadence:
+  minor_every: ~4 months
+  supported_minor_releases: 3
+  notes: >-
+    Apache Kafka ships a minor release roughly every four months and typically supports
+    up to three minor releases at a time.
+deprecation:
+  policy: >-
+    Features are deprecated via a KIP for at least one minor release before removal,
+    with the target removal version named in the release notes (e.g. KIP-1244 deprecates
+    streams-scala in 4.3 for removal in 5.0; KIP-1237 deprecates the
+    group.coordinator.rebalance.protocols broker config for removal in 5.0).
+  sunset_header: false
+  compatibility: >-
+    Kafka maintains bidirectional client/broker protocol compatibility; brokers and
+    clients of different versions interoperate within the supported window.
+sla:
+  url: null
+  note: Apache Kafka is open-source software with no vendor SLA; SLAs come from managed vendors (e.g. Confluent Cloud).
+status_page:
+  apache: null
+  confluent_cloud: https://status.confluent.io/
+milestones:
+  - version: '4.0.0'
+    highlight: First KRaft-only release; Apache ZooKeeper removed as a dependency.
+  - version: '3.9.x'
+    highlight: Final release line supporting ZooKeeper mode.
+deprecated_operations: []
