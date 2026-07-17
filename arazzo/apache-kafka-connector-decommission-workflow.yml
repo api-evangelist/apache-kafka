@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Decommission a Connector
+  summary: Capture a connector's config and offsets, stop it cleanly, delete it, and verify it is gone.
+  description: >-
+    Retiring a connector by calling DELETE straight away throws away the two
+    things needed to ever rebuild it: its configuration and its offsets. This
+    workflow captures both, stops the connector so its tasks shut down cleanly
+    and commit their work rather than being killed mid-poll, deletes it, and
+    then lists the connectors to prove the worker no longer holds it. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaConnectApi
+  url: ../openapi/kafka-connect.yml
+  type: openapi
+workflows:
+- workflowId: decommission-connector
+  summary: Archive a connector's state, shut it down cleanly, and remove it.
+  description: >-
+    Captures configuration and offsets for the archive, performs a clean stop,
+    deletes the connector, and confirms its removal from the worker.
+  inputs:
+    type: object
+    required:
+    - connectorName
+    properties:
+      connectorName:
+        type: string
+        description: The name of the connector being decommissioned.
+  steps:
+  - stepId: readConnector
+    description: >-
+      Read the connector to confirm it exists and to capture its type and
+      configuration for the decommission record.
+    operationId: getConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      archivedConfig: $response.body#/config
+      connectorType: $response.body#/type
+  - stepId: archiveOffsets
+    description: >-
+      Capture the connector's final offsets. Without this, a rebuilt connector
+      cannot resume where the retired one stopped and would reprocess from the
+      beginning.
+    operationId: getConnectorOffsets
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalOffsets: $response.body#/offsets
+  - stepId: stopConnector
+    description: >-
+      Stop the connector so its tasks shut down cleanly and commit their
+      offsets, rather than being torn down mid-flight by the delete.
+    operationId: stopConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: deleteConnector
+    description: >-
+      Delete the connector from the worker, removing its configuration and
+      tasks from the Connect cluster.
+    operationId: deleteConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: confirmRemoved
+    description: >-
+      List the remaining connectors so the caller can confirm the decommission
+      actually took effect across the Connect cluster.
+    operationId: listConnectors
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      remainingConnectors: $response.body
+  outputs:
+    archivedConfig: $steps.readConnector.outputs.archivedConfig
+    finalOffsets: $steps.archiveOffsets.outputs.finalOffsets
+    remainingConnectors: $steps.confirmRemoved.outputs.remainingConnectors

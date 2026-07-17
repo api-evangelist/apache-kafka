@@ -1,0 +1,151 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Grant a Principal Access to a Topic
+  summary: Resolve the cluster, confirm the topic, audit existing ACLs, grant read access, and verify the grant.
+  description: >-
+    Onboarding a new consumer onto an existing topic is an authorization change,
+    and it should be made against evidence rather than assumption. This workflow
+    resolves the cluster, confirms the topic actually exists so the ACL is not
+    written against a typo — Kafka will happily create an ACL for a topic name
+    that does not exist — audits the ACLs already bound to the topic, creates
+    the READ grant for the principal, and then re-reads the ACLs to prove the
+    grant landed. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaRestProxyApi
+  url: ../openapi/kafka-rest-proxy.yml
+  type: openapi
+workflows:
+- workflowId: grant-topic-access
+  summary: Create and verify a topic READ ACL for a principal.
+  description: >-
+    Confirms the topic, reviews existing topic ACLs, grants the principal read
+    access, and verifies the resulting ACL set.
+  inputs:
+    type: object
+    required:
+    - topicName
+    - principal
+    properties:
+      topicName:
+        type: string
+        description: The topic the principal is being granted access to.
+      principal:
+        type: string
+        description: >-
+          The Kafka principal receiving the grant, in principal-type:name form
+          (e.g. User:analytics-consumer).
+      host:
+        type: string
+        description: >-
+          The host the grant applies to. An asterisk allows the principal to
+          connect from any host.
+        default: '*'
+      operation:
+        type: string
+        description: The operation being granted (e.g. READ, WRITE, DESCRIBE).
+        default: READ
+      permission:
+        type: string
+        description: Whether the ACL allows or denies the operation.
+        default: ALLOW
+      patternType:
+        type: string
+        description: >-
+          How the resource name is matched. LITERAL binds the ACL to exactly
+          this topic; PREFIXED would bind it to every topic sharing the prefix.
+        default: LITERAL
+  steps:
+  - stepId: resolveCluster
+    description: >-
+      Resolve the cluster id so the ACL is written against the cluster the
+      proxy is actually fronting.
+    operationId: listClusters
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/data/0/cluster_id
+  - stepId: confirmTopic
+    description: >-
+      Confirm the topic exists before writing an ACL against its name. Kafka
+      accepts ACLs for topic names that do not exist, so a typo here would
+      silently produce a grant that never takes effect.
+    operationId: getTopic
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    - name: topic_name
+      in: path
+      value: $inputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topicName: $response.body#/topic_name
+      isInternal: $response.body#/is_internal
+  - stepId: auditExistingAcls
+    description: >-
+      Audit the ACLs already bound to topic resources on this cluster, so the
+      new grant is added with full knowledge of what access exists today.
+    operationId: searchAcls
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    - name: resource_type
+      in: query
+      value: TOPIC
+    - name: pattern_type
+      in: query
+      value: ANY
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      existingAcls: $response.body#/data
+  - stepId: createAcl
+    description: >-
+      Create the ACL binding the principal to the topic for the requested
+      operation.
+    operationId: createAcls
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    requestBody:
+      contentType: application/json
+      payload:
+        resource_type: TOPIC
+        resource_name: $steps.confirmTopic.outputs.topicName
+        pattern_type: $inputs.patternType
+        principal: $inputs.principal
+        host: $inputs.host
+        operation: $inputs.operation
+        permission: $inputs.permission
+    successCriteria:
+    - condition: $statusCode == 201
+  - stepId: verifyAcl
+    description: >-
+      Re-read the topic ACLs and confirm the grant is present, so the
+      authorization change is proven by the cluster rather than assumed from a
+      201.
+    operationId: searchAcls
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    - name: resource_type
+      in: query
+      value: TOPIC
+    - name: pattern_type
+      in: query
+      value: LITERAL
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      resultingAcls: $response.body#/data
+  outputs:
+    clusterId: $steps.resolveCluster.outputs.clusterId
+    topicName: $steps.confirmTopic.outputs.topicName
+    existingAcls: $steps.auditExistingAcls.outputs.existingAcls
+    resultingAcls: $steps.verifyAcl.outputs.resultingAcls

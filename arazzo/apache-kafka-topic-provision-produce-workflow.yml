@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Provision a Topic and Produce a Record
+  summary: Resolve the cluster, create a topic with explicit partitioning, read it back, and produce a first record.
+  description: >-
+    The end-to-end onboarding path for a new event stream over the REST Proxy.
+    The workflow resolves the cluster id rather than making the caller hardcode
+    it, creates the topic with an explicit partition count, replication factor,
+    and retention config, reads the topic back so the broker's own view of the
+    partitioning is confirmed, and then produces a first record to prove the
+    topic is writable end to end. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaRestProxyApi
+  url: ../openapi/kafka-rest-proxy.yml
+  type: openapi
+workflows:
+- workflowId: provision-topic-and-produce
+  summary: Create a Kafka topic and verify it by producing a record to it.
+  description: >-
+    Resolves the cluster, provisions a topic with the requested durability
+    settings, confirms it, and writes a first record.
+  inputs:
+    type: object
+    required:
+    - topicName
+    - recordValue
+    properties:
+      topicName:
+        type: string
+        description: The name of the topic to create.
+      partitionsCount:
+        type: integer
+        description: >-
+          The number of partitions, which sets the ceiling on consumer
+          parallelism for this topic and cannot easily be reduced later.
+        default: 6
+      replicationFactor:
+        type: integer
+        description: >-
+          The replication factor. Production topics should use at least 3 so the
+          topic survives a broker loss.
+        default: 3
+      retentionMs:
+        type: string
+        description: Retention period in milliseconds, as a string config value.
+        default: '604800000'
+      recordKey:
+        type: string
+        description: >-
+          The partitioning key for the first record. Records sharing a key land
+          on the same partition and keep their relative order.
+      recordValue:
+        type: object
+        description: The JSON value of the first record to produce.
+  steps:
+  - stepId: resolveCluster
+    description: >-
+      List the clusters behind the REST Proxy and take the first cluster id, so
+      the rest of the flow does not depend on a hardcoded cluster identifier.
+    operationId: listClusters
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/data/0/cluster_id
+  - stepId: createTopic
+    description: >-
+      Create the topic with an explicit partition count, replication factor, and
+      retention policy rather than relying on broker defaults or on auto-topic
+      creation, which produces single-partition unreplicated topics.
+    operationId: createTopic
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    requestBody:
+      contentType: application/json
+      payload:
+        topic_name: $inputs.topicName
+        partitions_count: $inputs.partitionsCount
+        replication_factor: $inputs.replicationFactor
+        configs:
+        - name: retention.ms
+          value: $inputs.retentionMs
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      topicName: $response.body#/topic_name
+      createdPartitions: $response.body#/partitions_count
+      createdReplication: $response.body#/replication_factor
+  - stepId: confirmTopic
+    description: >-
+      Read the topic back from the broker to confirm the partitioning and
+      replication that was actually applied, and that the topic is not internal.
+    operationId: getTopic
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    - name: topic_name
+      in: path
+      value: $steps.createTopic.outputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedPartitions: $response.body#/partitions_count
+      confirmedReplication: $response.body#/replication_factor
+      isInternal: $response.body#/is_internal
+  - stepId: produceFirstRecord
+    description: >-
+      Produce a first record as a JSON key and value. A zero error_code in the
+      response, together with the assigned partition and offset, proves the
+      topic is writable.
+    operationId: produceRecords
+    parameters:
+    - name: topic_name
+      in: path
+      value: $steps.createTopic.outputs.topicName
+    requestBody:
+      contentType: application/json
+      payload:
+        key:
+          type: JSON
+          data: $inputs.recordKey
+        value:
+          type: JSON
+          data: $inputs.recordValue
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.error_code == 0
+      type: jsonpath
+    outputs:
+      partitionId: $response.body#/partition_id
+      offset: $response.body#/offset
+      timestamp: $response.body#/timestamp
+  outputs:
+    clusterId: $steps.resolveCluster.outputs.clusterId
+    topicName: $steps.createTopic.outputs.topicName
+    confirmedPartitions: $steps.confirmTopic.outputs.confirmedPartitions
+    firstRecordOffset: $steps.produceFirstRecord.outputs.offset

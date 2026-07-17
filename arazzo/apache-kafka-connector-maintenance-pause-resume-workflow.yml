@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Pause and Resume a Connector for Maintenance
+  summary: Pause a connector for a maintenance window, confirm it stopped, then resume it and confirm recovery.
+  description: >-
+    When a downstream database or object store is going into a maintenance
+    window, the connector feeding it should be paused rather than deleted so it
+    keeps its offsets and resumes exactly where it left off. This workflow
+    records the pre-maintenance state, pauses the connector, confirms the worker
+    actually moved it to PAUSED before the window begins, then resumes it and
+    confirms it returned to RUNNING. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaConnectApi
+  url: ../openapi/kafka-connect.yml
+  type: openapi
+workflows:
+- workflowId: pause-and-resume-connector
+  summary: Bracket a maintenance window with a confirmed pause and resume.
+  description: >-
+    Pauses a connector, verifies the paused state, resumes it, and verifies it
+    is running again, preserving offsets throughout.
+  inputs:
+    type: object
+    required:
+    - connectorName
+    properties:
+      connectorName:
+        type: string
+        description: The name of the connector to pause and later resume.
+  steps:
+  - stepId: recordStateBefore
+    description: >-
+      Record the connector state before the maintenance window so the caller
+      knows what "back to normal" looks like on the way out.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stateBefore: $response.body#/connector/state
+      taskStatesBefore: $response.body#/tasks
+  - stepId: pauseConnector
+    description: >-
+      Pause the connector. The pause is asynchronous, so the worker accepts the
+      request and transitions the connector and its tasks in the background.
+    operationId: pauseConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 202
+  - stepId: confirmPaused
+    description: >-
+      Confirm the connector actually reached PAUSED. Because the pause is
+      asynchronous, the maintenance window must not begin until the worker
+      reports the paused state.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.connector.state == 'PAUSED'
+      type: jsonpath
+    outputs:
+      pausedState: $response.body#/connector/state
+  - stepId: resumeConnector
+    description: >-
+      Resume the connector once maintenance is complete. It picks up from its
+      committed offsets, so no records are skipped or reprocessed.
+    operationId: resumeConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 202
+  - stepId: confirmResumed
+    description: >-
+      Confirm the connector returned to RUNNING after the window closed rather
+      than sitting paused or failing on the first post-maintenance poll.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stateAfter: $response.body#/connector/state
+      taskStatesAfter: $response.body#/tasks
+  outputs:
+    stateBefore: $steps.recordStateBefore.outputs.stateBefore
+    pausedState: $steps.confirmPaused.outputs.pausedState
+    stateAfter: $steps.confirmResumed.outputs.stateAfter

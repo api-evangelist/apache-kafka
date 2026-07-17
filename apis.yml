@@ -120,6 +120,42 @@ common:
     url: rules/apache-kafka-spectral-rules.yml
   - type: Vocabulary
     url: vocabulary/apache-kafka-vocabulary.yaml
+  - type: Arazzo
+    url: arazzo/apache-kafka-connector-validate-deploy-workflow.yml
+    name: Apache Kafka Validate and Deploy a Connector
+  - type: Arazzo
+    url: arazzo/apache-kafka-connector-health-triage-workflow.yml
+    name: Apache Kafka Triage a Failed Connector
+  - type: Arazzo
+    url: arazzo/apache-kafka-connector-config-update-workflow.yml
+    name: Apache Kafka Update a Connector Configuration
+  - type: Arazzo
+    url: arazzo/apache-kafka-connector-maintenance-pause-resume-workflow.yml
+    name: Apache Kafka Pause and Resume a Connector for Maintenance
+  - type: Arazzo
+    url: arazzo/apache-kafka-connector-offset-rewind-workflow.yml
+    name: Apache Kafka Rewind Connector Offsets
+  - type: Arazzo
+    url: arazzo/apache-kafka-connector-offset-reset-workflow.yml
+    name: Apache Kafka Reset Connector Offsets
+  - type: Arazzo
+    url: arazzo/apache-kafka-connector-decommission-workflow.yml
+    name: Apache Kafka Decommission a Connector
+  - type: Arazzo
+    url: arazzo/apache-kafka-topic-provision-produce-workflow.yml
+    name: Apache Kafka Provision a Topic and Produce a Record
+  - type: Arazzo
+    url: arazzo/apache-kafka-topic-capacity-review-workflow.yml
+    name: Apache Kafka Review Cluster and Topic Capacity
+  - type: Arazzo
+    url: arazzo/apache-kafka-consumer-group-lag-review-workflow.yml
+    name: Apache Kafka Review Consumer Group Lag
+  - type: Arazzo
+    url: arazzo/apache-kafka-topic-acl-grant-workflow.yml
+    name: Apache Kafka Grant a Principal Access to a Topic
+  - type: Arazzo
+    url: arazzo/apache-kafka-topic-decommission-workflow.yml
+    name: Apache Kafka Decommission a Topic
   - type: Features
     data:
       - name: High Throughput

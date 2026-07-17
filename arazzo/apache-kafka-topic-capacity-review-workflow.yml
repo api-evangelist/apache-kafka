@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Review Cluster and Topic Capacity
+  summary: Walk a cluster from brokers to topics to the partition and replica layout of one topic.
+  description: >-
+    A read-only audit that answers whether a topic's partitioning and
+    replication actually match the cluster it runs on. It reads the cluster and
+    its brokers to establish how many are available, inventories the topics,
+    then drills into one topic and its partitions to see the leader and replica
+    placement per partition. Reviewing replica placement against the broker list
+    is how under-replicated partitions and leader skew get caught before a
+    broker loss turns them into an outage. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaRestProxyApi
+  url: ../openapi/kafka-rest-proxy.yml
+  type: openapi
+workflows:
+- workflowId: review-topic-capacity
+  summary: Audit a topic's partition and replica layout against the cluster's brokers.
+  description: >-
+    Reads cluster, brokers, topic inventory, and per-partition replica placement
+    for a single topic so capacity and durability can be assessed together.
+  inputs:
+    type: object
+    required:
+    - clusterId
+    - topicName
+    properties:
+      clusterId:
+        type: string
+        description: The Kafka cluster id to audit.
+      topicName:
+        type: string
+        description: The topic to drill into for partition and replica detail.
+  steps:
+  - stepId: readCluster
+    description: >-
+      Read the cluster to confirm it exists and to capture the controller
+      reference that anchors the rest of the audit.
+    operationId: getCluster
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/cluster_id
+      controller: $response.body#/controller
+  - stepId: listBrokers
+    description: >-
+      List the brokers in the cluster. The broker count is the hard ceiling on
+      any topic's replication factor and the baseline for judging replica
+      spread.
+    operationId: listBrokers
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.readCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      brokers: $response.body#/data
+  - stepId: listTopics
+    description: >-
+      Inventory the cluster's topics, giving the audit the full picture of what
+      is deployed before narrowing to one topic.
+    operationId: listTopics
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.readCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topics: $response.body#/data
+  - stepId: readTopic
+    description: >-
+      Read the target topic's declared partition count and replication factor,
+      which is what the audit compares against the broker list.
+    operationId: getTopic
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.readCluster.outputs.clusterId
+    - name: topic_name
+      in: path
+      value: $inputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      partitionsCount: $response.body#/partitions_count
+      replicationFactor: $response.body#/replication_factor
+      isInternal: $response.body#/is_internal
+  - stepId: readPartitions
+    description: >-
+      Read the per-partition detail, exposing the leader and replica set for
+      each partition. This is where leader skew and under-replication become
+      visible.
+    operationId: listPartitions
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.readCluster.outputs.clusterId
+    - name: topic_name
+      in: path
+      value: $inputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      partitions: $response.body#/data
+  outputs:
+    brokers: $steps.listBrokers.outputs.brokers
+    topics: $steps.listTopics.outputs.topics
+    partitionsCount: $steps.readTopic.outputs.partitionsCount
+    replicationFactor: $steps.readTopic.outputs.replicationFactor
+    partitions: $steps.readPartitions.outputs.partitions

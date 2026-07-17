@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Reset Connector Offsets
+  summary: Stop a connector, snapshot its offsets, wipe them entirely, and resume from a clean slate.
+  description: >-
+    Distinct from rewinding to a chosen position, a reset deletes the
+    connector's offsets outright so it starts over from its configured initial
+    position — a full re-snapshot for a source connector, or a re-read from the
+    consumer group's reset policy for a sink. Because this is destructive and
+    irreversible from the API's side, the workflow snapshots the existing
+    offsets first, and because Kafka Connect only permits offset changes on a
+    STOPPED connector, it stops the connector before deleting. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaConnectApi
+  url: ../openapi/kafka-connect.yml
+  type: openapi
+workflows:
+- workflowId: reset-connector-offsets
+  summary: Wipe a stopped connector's offsets and restart it from scratch.
+  description: >-
+    Stops the connector, snapshots offsets for the record, deletes them, and
+    resumes the connector so it reprocesses from its initial position.
+  inputs:
+    type: object
+    required:
+    - connectorName
+    properties:
+      connectorName:
+        type: string
+        description: The name of the connector whose offsets are being reset.
+  steps:
+  - stepId: stopConnector
+    description: >-
+      Stop the connector. Kafka Connect will not reset offsets for a connector
+      that is running or paused, only for one that is fully stopped.
+    operationId: stopConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: snapshotOffsets
+    description: >-
+      Snapshot the offsets before they are deleted. The reset itself cannot be
+      undone through the API, so this response is the only record of where the
+      connector had reached.
+    operationId: getConnectorOffsets
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      offsetsBeforeReset: $response.body#/offsets
+  - stepId: resetOffsets
+    description: >-
+      Delete the connector's offsets. On resume the connector behaves as if it
+      had never run, reprocessing from its configured starting position.
+    operationId: resetConnectorOffsets
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmCleared
+    description: >-
+      Read the offsets back while the connector is still stopped to confirm the
+      reset cleared them before any reprocessing begins.
+    operationId: getConnectorOffsets
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      offsetsAfterReset: $response.body#/offsets
+  - stepId: resumeConnector
+    description: >-
+      Resume the connector so it begins reprocessing from a clean slate.
+    operationId: resumeConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 202
+  - stepId: confirmReprocessing
+    description: >-
+      Confirm the connector came back healthy and is reprocessing rather than
+      failing on its first poll after the reset.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectorState: $response.body#/connector/state
+      taskStates: $response.body#/tasks
+  outputs:
+    offsetsBeforeReset: $steps.snapshotOffsets.outputs.offsetsBeforeReset
+    offsetsAfterReset: $steps.confirmCleared.outputs.offsetsAfterReset
+    connectorState: $steps.confirmReprocessing.outputs.connectorState

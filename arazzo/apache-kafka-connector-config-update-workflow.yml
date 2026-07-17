@@ -1,0 +1,144 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Update a Connector Configuration
+  summary: Read the current config, validate the replacement, apply it, restart, and confirm.
+  description: >-
+    Kafka Connect's config endpoint is a full replacement, not a merge, so
+    changing one property means PUTting the entire configuration back. This
+    workflow reads the connector to learn its plugin class, captures the current
+    configuration so the caller has a rollback copy, validates the replacement
+    configuration against the plugin before writing it, applies it, restarts the
+    connector so the change takes effect, and confirms the connector came back
+    running. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaConnectApi
+  url: ../openapi/kafka-connect.yml
+  type: openapi
+workflows:
+- workflowId: update-connector-config
+  summary: Safely replace a connector's configuration and restart it.
+  description: >-
+    Captures the existing configuration for rollback, validates the replacement,
+    writes it, restarts the connector, and verifies the resulting state.
+  inputs:
+    type: object
+    required:
+    - connectorName
+    - pluginClass
+    - newConfig
+    properties:
+      connectorName:
+        type: string
+        description: The name of the connector whose configuration is being replaced.
+      pluginClass:
+        type: string
+        description: >-
+          The connector plugin class used to validate the replacement config.
+          This is the connector.class value from the connector's configuration.
+      newConfig:
+        type: object
+        description: >-
+          The complete replacement configuration as a flat map of string
+          key/value pairs. This fully replaces the existing configuration.
+  steps:
+  - stepId: readConnector
+    description: >-
+      Read the connector to confirm it exists and to capture its current type
+      and task assignment before the configuration is changed.
+    operationId: getConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectorType: $response.body#/type
+      currentTasks: $response.body#/tasks
+  - stepId: captureCurrentConfig
+    description: >-
+      Capture the connector's current configuration verbatim. This is the
+      rollback copy, and it is the only way to restore the prior state after a
+      full-replacement PUT.
+    operationId: getConnectorConfig
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rollbackConfig: $response.body
+  - stepId: validateNewConfig
+    description: >-
+      Validate the replacement configuration against the plugin and refuse to
+      continue unless the plugin reports zero errors.
+    operationId: validateConnectorConfig
+    parameters:
+    - name: plugin
+      in: path
+      value: $inputs.pluginClass
+    requestBody:
+      contentType: application/json
+      payload: $inputs.newConfig
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.error_count == 0
+      type: jsonpath
+    outputs:
+      errorCount: $response.body#/error_count
+  - stepId: applyNewConfig
+    description: >-
+      Write the validated configuration. The worker accepts this as a full
+      replacement and reconfigures the connector's tasks accordingly.
+    operationId: putConnectorConfig
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    requestBody:
+      contentType: application/json
+      payload: $inputs.newConfig
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 201
+    outputs:
+      appliedConfig: $response.body#/config
+      updatedTasks: $response.body#/tasks
+  - stepId: restartAfterUpdate
+    description: >-
+      Restart the connector and its tasks so every task picks up the new
+      configuration rather than running on the version it started with.
+    operationId: restartConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    - name: includeTasks
+      in: query
+      value: true
+    - name: onlyFailed
+      in: query
+      value: false
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 204
+  - stepId: confirmUpdated
+    description: >-
+      Confirm the connector returned to a healthy state after the
+      reconfiguration and restart.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectorState: $response.body#/connector/state
+      taskStates: $response.body#/tasks
+  outputs:
+    rollbackConfig: $steps.captureCurrentConfig.outputs.rollbackConfig
+    appliedConfig: $steps.applyNewConfig.outputs.appliedConfig
+    connectorState: $steps.confirmUpdated.outputs.connectorState

@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Rewind Connector Offsets
+  summary: Stop a connector, capture its offsets, rewind them to a chosen position, and resume.
+  description: >-
+    Replaying a window of data through a connector means moving its offsets
+    backwards, and Kafka Connect will only alter offsets while the connector is
+    STOPPED. This workflow enforces that ordering: it stops the connector,
+    captures the current offsets so the caller can put them back if the rewind
+    is wrong, PATCHes the offsets to the requested position, resumes the
+    connector, and confirms it restarted from the new position. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaConnectApi
+  url: ../openapi/kafka-connect.yml
+  type: openapi
+workflows:
+- workflowId: rewind-connector-offsets
+  summary: Alter a stopped connector's offsets to replay data, then resume it.
+  description: >-
+    Stops the connector, snapshots its offsets for rollback, writes the target
+    offsets, and resumes processing from the rewound position.
+  inputs:
+    type: object
+    required:
+    - connectorName
+    - offsets
+    properties:
+      connectorName:
+        type: string
+        description: The name of the connector whose offsets are being rewound.
+      offsets:
+        type: array
+        description: >-
+          The target offsets to write. Each entry carries the partition and
+          offset objects in the shape the connector's plugin defines, which
+          differs between source and sink connectors.
+        items:
+          type: object
+  steps:
+  - stepId: stopConnector
+    description: >-
+      Stop the connector. This is mandatory: Kafka Connect rejects offset
+      alterations for connectors that are running or merely paused.
+    operationId: stopConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: captureOffsets
+    description: >-
+      Capture the connector's current offsets before altering them. This
+      snapshot is the only rollback path if the rewind target turns out to be
+      wrong.
+    operationId: getConnectorOffsets
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      previousOffsets: $response.body#/offsets
+  - stepId: rewindOffsets
+    description: >-
+      Write the target offsets to the stopped connector so that it will replay
+      from the requested position when it resumes.
+    operationId: alterConnectorOffsets
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    requestBody:
+      contentType: application/json
+      payload:
+        offsets: $inputs.offsets
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: verifyOffsets
+    description: >-
+      Read the offsets back while the connector is still stopped, confirming the
+      rewind landed before any data is reprocessed.
+    operationId: getConnectorOffsets
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rewoundOffsets: $response.body#/offsets
+  - stepId: resumeConnector
+    description: >-
+      Resume the connector so it begins processing from the rewound offsets.
+    operationId: resumeConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 202
+  - stepId: confirmReplaying
+    description: >-
+      Confirm the connector returned to a healthy state and is replaying from
+      the new position.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectorState: $response.body#/connector/state
+      taskStates: $response.body#/tasks
+  outputs:
+    previousOffsets: $steps.captureOffsets.outputs.previousOffsets
+    rewoundOffsets: $steps.verifyOffsets.outputs.rewoundOffsets
+    connectorState: $steps.confirmReplaying.outputs.connectorState

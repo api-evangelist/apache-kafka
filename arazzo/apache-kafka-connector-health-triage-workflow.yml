@@ -1,0 +1,175 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Triage a Failed Connector
+  summary: Find the connector, read its status, drill into the failing task, and restart what is broken.
+  description: >-
+    The on-call path for Kafka Connect. A connector reported as FAILED is
+    usually failing at the task level, so this workflow reads the connector
+    status, branches on the reported state, lists the tasks, pulls the status of
+    a single task to capture its stack trace, and then restarts either the task
+    or the whole connector depending on where the failure sits. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaConnectApi
+  url: ../openapi/kafka-connect.yml
+  type: openapi
+workflows:
+- workflowId: triage-failed-connector
+  summary: Diagnose a connector failure down to the task and restart it.
+  description: >-
+    Reads connector and task status, captures the failure trace, and restarts
+    the failed task, escalating to a full connector restart when the connector
+    itself is the failing component.
+  inputs:
+    type: object
+    required:
+    - connectorName
+    properties:
+      connectorName:
+        type: string
+        description: The name of the connector to triage.
+      taskId:
+        type: integer
+        description: >-
+          The task id to inspect in detail. Defaults to the first task, which is
+          task 0 on a single-task connector.
+        default: 0
+  steps:
+  - stepId: listConnectors
+    description: >-
+      List the connectors on the worker with their status expanded, giving the
+      caller the fleet-wide picture before drilling into one connector.
+    operationId: listConnectors
+    parameters:
+    - name: expand
+      in: query
+      value: status
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectors: $response.body
+  - stepId: readConnectorStatus
+    description: >-
+      Read the status of the target connector. The connector-level state tells
+      the caller whether the connector itself failed or whether it is running
+      with failed tasks underneath it.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectorState: $response.body#/connector/state
+      workerId: $response.body#/connector/worker_id
+      taskStates: $response.body#/tasks
+    onSuccess:
+    - name: connectorItselfFailed
+      type: goto
+      stepId: restartWholeConnector
+      criteria:
+      - context: $response.body
+        condition: $.connector.state == 'FAILED'
+        type: jsonpath
+    - name: inspectTasks
+      type: goto
+      stepId: listTasks
+      criteria:
+      - context: $response.body
+        condition: $.connector.state != 'FAILED'
+        type: jsonpath
+  - stepId: listTasks
+    description: >-
+      List the tasks belonging to the connector along with their per-task
+      configuration, so the caller can see how the work was divided.
+    operationId: listConnectorTasks
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tasks: $response.body
+  - stepId: readTaskStatus
+    description: >-
+      Read the status of the individual task, capturing the state, the worker
+      that owns it, and the stack trace that explains the failure.
+    operationId: getTaskStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    - name: task
+      in: path
+      value: $inputs.taskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskState: $response.body#/state
+      taskWorkerId: $response.body#/worker_id
+      failureTrace: $response.body#/trace
+    onSuccess:
+    - name: taskFailed
+      type: goto
+      stepId: restartFailedTask
+      criteria:
+      - context: $response.body
+        condition: $.state == 'FAILED'
+        type: jsonpath
+  - stepId: restartFailedTask
+    description: >-
+      Restart just the failed task, which is the least disruptive recovery
+      action because the connector's other tasks keep running.
+    operationId: restartTask
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    - name: task
+      in: path
+      value: $inputs.taskId
+    successCriteria:
+    - condition: $statusCode == 204
+    onSuccess:
+    - name: taskRestarted
+      type: goto
+      stepId: confirmRecovery
+  - stepId: restartWholeConnector
+    description: >-
+      Restart the connector and all of its tasks, restarting only the failed
+      ones so healthy tasks are not needlessly interrupted.
+    operationId: restartConnector
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    - name: includeTasks
+      in: query
+      value: true
+    - name: onlyFailed
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 204
+  - stepId: confirmRecovery
+    description: >-
+      Re-read the connector status to confirm the restart actually recovered
+      the connector rather than assuming the restart call was enough.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $inputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recoveredState: $response.body#/connector/state
+      recoveredTaskStates: $response.body#/tasks
+  outputs:
+    connectorState: $steps.readConnectorStatus.outputs.connectorState
+    failureTrace: $steps.readTaskStatus.outputs.failureTrace
+    recoveredState: $steps.confirmRecovery.outputs.recoveredState

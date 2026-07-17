@@ -1,0 +1,139 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Decommission a Topic
+  summary: Confirm the topic, check for active consumer groups and bound ACLs, then delete it.
+  description: >-
+    Deleting a Kafka topic is irreversible and takes its data with it, so this
+    workflow makes the caller look before it deletes. It confirms the topic and
+    captures its shape for the decommission record, lists the consumer groups on
+    the cluster so an active consumer can be spotted before its stream vanishes,
+    surfaces the ACLs bound to topic resources so the leftover grants are known,
+    and only then deletes the topic and confirms it is gone from the inventory.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaRestProxyApi
+  url: ../openapi/kafka-rest-proxy.yml
+  type: openapi
+workflows:
+- workflowId: decommission-topic
+  summary: Pre-flight a topic deletion against consumers and ACLs, then delete it.
+  description: >-
+    Records the topic's shape, checks for active consumer groups and bound
+    ACLs, deletes the topic, and verifies its removal from the cluster.
+  inputs:
+    type: object
+    required:
+    - clusterId
+    - topicName
+    properties:
+      clusterId:
+        type: string
+        description: The Kafka cluster id holding the topic.
+      topicName:
+        type: string
+        description: The topic to decommission.
+  steps:
+  - stepId: confirmTopic
+    description: >-
+      Confirm the topic exists and record its partitioning and replication for
+      the decommission record. An internal topic showing up here is a signal to
+      stop, because deleting one breaks the cluster itself.
+    operationId: getTopic
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $inputs.clusterId
+    - name: topic_name
+      in: path
+      value: $inputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.is_internal == false
+      type: jsonpath
+    outputs:
+      topicName: $response.body#/topic_name
+      partitionsCount: $response.body#/partitions_count
+      replicationFactor: $response.body#/replication_factor
+  - stepId: recordPartitions
+    description: >-
+      Record the partition and replica layout before deletion, since it is the
+      only detailed description of the topic that will survive it.
+    operationId: listPartitions
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $inputs.clusterId
+    - name: topic_name
+      in: path
+      value: $inputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      partitions: $response.body#/data
+  - stepId: checkConsumerGroups
+    description: >-
+      List the consumer groups on the cluster so an active consumer of this
+      topic can be found before its stream disappears underneath it.
+    operationId: listConsumerGroups
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      consumerGroups: $response.body#/data
+  - stepId: checkBoundAcls
+    description: >-
+      Surface the ACLs bound to topic resources on the cluster so the grants
+      left behind by this topic are known and can be cleaned up deliberately.
+    operationId: searchAcls
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $inputs.clusterId
+    - name: resource_type
+      in: query
+      value: TOPIC
+    - name: pattern_type
+      in: query
+      value: ANY
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      boundAcls: $response.body#/data
+  - stepId: deleteTopic
+    description: >-
+      Delete the topic. This destroys every record it holds across all
+      partitions and cannot be undone.
+    operationId: deleteTopic
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $inputs.clusterId
+    - name: topic_name
+      in: path
+      value: $steps.confirmTopic.outputs.topicName
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: confirmRemoved
+    description: >-
+      List the cluster's topics to confirm the deletion took effect rather than
+      assuming it from the 204.
+    operationId: listTopics
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      remainingTopics: $response.body#/data
+  outputs:
+    topicName: $steps.confirmTopic.outputs.topicName
+    partitions: $steps.recordPartitions.outputs.partitions
+    boundAcls: $steps.checkBoundAcls.outputs.boundAcls
+    remainingTopics: $steps.confirmRemoved.outputs.remainingTopics

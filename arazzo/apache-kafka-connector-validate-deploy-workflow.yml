@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Validate and Deploy a Connector
+  summary: Check the worker, confirm the plugin is installed, validate the config, then create the connector.
+  description: >-
+    The safe deployment path for Kafka Connect. Rather than POSTing a connector
+    config and discovering the failure in the task status, this workflow reads
+    the worker to confirm which Connect cluster is being targeted, lists the
+    installed plugins to prove the connector class is actually on the worker's
+    plugin path, runs the config through the validation endpoint and refuses to
+    continue unless the error count is zero, and only then creates the connector
+    and reads its status back. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaConnectApi
+  url: ../openapi/kafka-connect.yml
+  type: openapi
+workflows:
+- workflowId: validate-and-deploy-connector
+  summary: Validate a connector configuration against its plugin, then deploy it.
+  description: >-
+    Confirms the target Connect worker and plugin, validates the supplied
+    configuration, creates the connector, and reads back its running state.
+  inputs:
+    type: object
+    required:
+    - pluginClass
+    - connectorName
+    - connectorConfig
+    properties:
+      pluginClass:
+        type: string
+        description: >-
+          The fully qualified connector plugin class to validate against
+          (e.g. org.apache.kafka.connect.file.FileStreamSourceConnector).
+      connectorName:
+        type: string
+        description: The name to register the connector under on the worker.
+      connectorConfig:
+        type: object
+        description: >-
+          The connector configuration as a flat map of string key/value pairs,
+          including connector.class, tasks.max, and any plugin-specific keys.
+  steps:
+  - stepId: checkWorker
+    description: >-
+      Read the Connect worker root to confirm the worker version and which
+      Kafka cluster it is attached to before deploying anything to it.
+    operationId: getWorkerInfo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectVersion: $response.body#/version
+      kafkaClusterId: $response.body#/kafka_cluster_id
+  - stepId: listPlugins
+    description: >-
+      List the connector plugins installed on the worker so the caller can
+      confirm the requested plugin class is on the plugin path.
+    operationId: listConnectorPlugins
+    parameters:
+    - name: connectorsOnly
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      installedPlugins: $response.body
+  - stepId: validateConfig
+    description: >-
+      Run the supplied configuration through the plugin's validation endpoint.
+      The step only succeeds when the plugin reports zero configuration errors,
+      which stops a bad config from ever reaching the cluster.
+    operationId: validateConnectorConfig
+    parameters:
+    - name: plugin
+      in: path
+      value: $inputs.pluginClass
+    requestBody:
+      contentType: application/json
+      payload: $inputs.connectorConfig
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.error_count == 0
+      type: jsonpath
+    outputs:
+      errorCount: $response.body#/error_count
+      validatedConfigs: $response.body#/configs
+  - stepId: createConnector
+    description: >-
+      Create the connector on the worker using the configuration that has just
+      passed validation.
+    operationId: createConnector
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.connectorName
+        config: $inputs.connectorConfig
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      connectorName: $response.body#/name
+      connectorType: $response.body#/type
+      assignedTasks: $response.body#/tasks
+  - stepId: confirmRunning
+    description: >-
+      Read the connector status back so the deployment is confirmed by the
+      worker rather than assumed from the create response.
+    operationId: getConnectorStatus
+    parameters:
+    - name: connector
+      in: path
+      value: $steps.createConnector.outputs.connectorName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectorState: $response.body#/connector/state
+      workerId: $response.body#/connector/worker_id
+      taskStates: $response.body#/tasks
+  outputs:
+    connectorName: $steps.createConnector.outputs.connectorName
+    connectorType: $steps.createConnector.outputs.connectorType
+    connectorState: $steps.confirmRunning.outputs.connectorState
+    kafkaClusterId: $steps.checkWorker.outputs.kafkaClusterId

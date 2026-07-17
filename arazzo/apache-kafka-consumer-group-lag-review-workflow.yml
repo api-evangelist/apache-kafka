@@ -1,0 +1,82 @@
+arazzo: 1.0.1
+info:
+  title: Apache Kafka Review Consumer Group Lag
+  summary: Resolve the cluster, list the consumer groups, and pull the lag summary and assignment for one group.
+  description: >-
+    Consumer lag is the primary health signal for a Kafka deployment: a group
+    whose lag is growing is falling behind its producers. This workflow resolves
+    the cluster, lists the consumer groups so the caller can see the whole
+    consuming estate, then reads one group in detail for its state, partition
+    assignor, coordinator, member list, and lag summary. Reading the group state
+    alongside the lag matters, because a group stuck rebalancing shows lag for a
+    completely different reason than one that is simply under-provisioned. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kafkaRestProxyApi
+  url: ../openapi/kafka-rest-proxy.yml
+  type: openapi
+workflows:
+- workflowId: review-consumer-group-lag
+  summary: Inspect a consumer group's state, membership, and lag summary.
+  description: >-
+    Lists the consumer groups on a cluster and reads one group's coordinator,
+    members, state, and lag so a lag alert can be attributed to a cause.
+  inputs:
+    type: object
+    required:
+    - consumerGroupId
+    properties:
+      consumerGroupId:
+        type: string
+        description: The consumer group id to inspect in detail.
+  steps:
+  - stepId: resolveCluster
+    description: >-
+      Resolve the cluster id from the REST Proxy so the review does not depend
+      on a hardcoded cluster identifier.
+    operationId: listClusters
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/data/0/cluster_id
+  - stepId: listGroups
+    description: >-
+      List every consumer group on the cluster, giving the reviewer the full
+      consuming estate before narrowing to the group under investigation.
+    operationId: listConsumerGroups
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      consumerGroups: $response.body#/data
+  - stepId: readGroup
+    description: >-
+      Read the target group in detail. The state distinguishes a healthy STABLE
+      group from one stuck in a rebalance, while the lag summary and member list
+      show whether the group has enough consumers for its partitions.
+    operationId: getConsumerGroup
+    parameters:
+    - name: cluster_id
+      in: path
+      value: $steps.resolveCluster.outputs.clusterId
+    - name: consumer_group_id
+      in: path
+      value: $inputs.consumerGroupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      groupState: $response.body#/state
+      partitionAssignor: $response.body#/partition_assignor
+      coordinator: $response.body#/coordinator
+      consumers: $response.body#/consumers
+      lagSummary: $response.body#/lag_summary
+  outputs:
+    clusterId: $steps.resolveCluster.outputs.clusterId
+    consumerGroups: $steps.listGroups.outputs.consumerGroups
+    groupState: $steps.readGroup.outputs.groupState
+    lagSummary: $steps.readGroup.outputs.lagSummary
