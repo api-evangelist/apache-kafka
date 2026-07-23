@@ -1,0 +1,81 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Partition API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Partition
+paths:
+  /clusters/{cluster_id}/topics/{topic_name}/partitions:
+    get:
+      summary: Apache kafka List Partitions
+      operationId: listPartitions
+      tags:
+      - Partition
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-7679
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
+      responses:
+        '200':
+          description: List of partitions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Partition'
+              examples:
+                listPartitions200Example:
+                  summary: Default listPartitions 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Partition:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        topic_name:
+          type: string
+        partition_id:
+          type: integer
+        leader:
+          type: object
+        replicas:
+          type: array
+          items:
+            type: object

@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Broker API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Broker
+paths:
+  /clusters/{cluster_id}/brokers:
+    get:
+      summary: Apache kafka List Brokers
+      operationId: listBrokers
+      tags:
+      - Broker
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-2365
+      responses:
+        '200':
+          description: List of brokers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Broker'
+              examples:
+                listBrokers200Example:
+                  summary: Default listBrokers 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Broker:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        broker_id:
+          type: integer
+        host:
+          type: string
+        port:
+          type: integer

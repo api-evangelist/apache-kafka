@@ -1,0 +1,130 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Consumer Group API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Consumer Group
+paths:
+  /clusters/{cluster_id}/consumer-groups:
+    get:
+      summary: Apache kafka List Consumer Groups
+      operationId: listConsumerGroups
+      tags:
+      - Consumer Group
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-6701
+      responses:
+        '200':
+          description: List of consumer groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConsumerGroup'
+              examples:
+                listConsumerGroups200Example:
+                  summary: Default listConsumerGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{cluster_id}/consumer-groups/{consumer_group_id}:
+    get:
+      summary: Apache kafka Get Consumer Group
+      operationId: getConsumerGroup
+      tags:
+      - Consumer Group
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-8506
+      - name: consumer_group_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-4788
+      responses:
+        '200':
+          description: Consumer group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerGroup'
+              examples:
+                getConsumerGroup200Example:
+                  summary: Default getConsumerGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-8575
+                    consumer_group_id: item-7715
+                    is_simple: true
+                    partition_assignor: example-value
+                    state: UNKNOWN
+                    coordinator: {}
+                    consumers: {}
+                    lag_summary: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ConsumerGroup:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        consumer_group_id:
+          type: string
+        is_simple:
+          type: boolean
+        partition_assignor:
+          type: string
+        state:
+          type: string
+          enum:
+          - UNKNOWN
+          - PREPARING_REBALANCE
+          - COMPLETING_REBALANCE
+          - STABLE
+          - DEAD
+          - EMPTY
+        coordinator:
+          type: object
+        consumers:
+          type: object
+        lag_summary:
+          type: object

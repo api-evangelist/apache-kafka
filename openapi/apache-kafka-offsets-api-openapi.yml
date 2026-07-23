@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Offsets API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Offsets
+paths:
+  /connectors/{connector}/offsets:
+    get:
+      summary: Apache kafka Get Connector Offsets
+      operationId: getConnectorOffsets
+      tags:
+      - Offsets
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      responses:
+        '200':
+          description: Connector offsets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offsets:
+                    type: array
+                    items:
+                      type: object
+              examples:
+                getConnectorOffsets200Example:
+                  summary: Default getConnectorOffsets 200 response
+                  x-microcks-default: true
+                  value:
+                    offsets: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      summary: Apache kafka Alter Connector Offsets
+      operationId: alterConnectorOffsets
+      tags:
+      - Offsets
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offsets:
+                  type: array
+                  items:
+                    type: object
+            examples:
+              alterConnectorOffsetsRequestExample:
+                summary: Default alterConnectorOffsets request
+                x-microcks-default: true
+                value:
+                  offsets: []
+      responses:
+        '200':
+          description: Offsets altered
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: Apache kafka Reset Connector Offsets
+      operationId: resetConnectorOffsets
+      tags:
+      - Offsets
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      responses:
+        '200':
+          description: Offsets reset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK

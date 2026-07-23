@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Tasks API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Tasks
+paths:
+  /connectors/{connector}/tasks:
+    get:
+      summary: Apache kafka List Connector Tasks
+      operationId: listConnectorTasks
+      tags:
+      - Tasks
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      responses:
+        '200':
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskInfo'
+              examples:
+                listConnectorTasks200Example:
+                  summary: Default listConnectorTasks 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /connectors/{connector}/tasks/{task}/status:
+    get:
+      summary: Apache kafka Get Task Status
+      operationId: getTaskStatus
+      tags:
+      - Tasks
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      - name: task
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 56
+      responses:
+        '200':
+          description: Task status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStatus'
+              examples:
+                getTaskStatus200Example:
+                  summary: Default getTaskStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 69
+                    state: UNASSIGNED
+                    worker_id: item-6436
+                    trace: example-value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /connectors/{connector}/tasks/{task}/restart:
+    post:
+      summary: Apache kafka Restart Task
+      operationId: restartTask
+      tags:
+      - Tasks
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      - name: task
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 18
+      responses:
+        '204':
+          description: Task restarted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TaskInfo:
+      type: object
+      properties:
+        id:
+          type: object
+          properties:
+            connector:
+              type: string
+            task:
+              type: integer
+        config:
+          type: object
+          additionalProperties:
+            type: string
+    TaskStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+        state:
+          type: string
+          enum:
+          - UNASSIGNED
+          - RUNNING
+          - PAUSED
+          - FAILED
+        worker_id:
+          type: string
+        trace:
+          type: string

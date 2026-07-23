@@ -1,0 +1,182 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: ACL
+paths:
+  /clusters/{cluster_id}/acls:
+    get:
+      summary: Apache kafka Search ACLs
+      operationId: searchAcls
+      tags:
+      - ACL
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-5726
+      - name: resource_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - UNKNOWN
+          - ANY
+          - TOPIC
+          - GROUP
+          - CLUSTER
+          - TRANSACTIONAL_ID
+          - DELEGATION_TOKEN
+        example: UNKNOWN
+      - name: pattern_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - UNKNOWN
+          - ANY
+          - MATCH
+          - LITERAL
+          - PREFIXED
+        example: UNKNOWN
+      responses:
+        '200':
+          description: List of ACLs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Acl'
+              examples:
+                searchAcls200Example:
+                  summary: Default searchAcls 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Apache kafka Create ACLs
+      operationId: createAcls
+      tags:
+      - ACL
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-7456
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAclRequest'
+            examples:
+              createAclsRequestExample:
+                summary: Default createAcls request
+                x-microcks-default: true
+                value:
+                  resource_type: example-value
+                  resource_name: example-name
+                  pattern_type: example-value
+                  principal: example-value
+                  host: example-value
+                  operation: example-value
+                  permission: example-value
+      responses:
+        '201':
+          description: ACL created
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: Apache kafka Delete ACLs
+      operationId: deleteAcls
+      tags:
+      - ACL
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-2190
+      responses:
+        '200':
+          description: ACLs deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateAclRequest:
+      type: object
+      required:
+      - resource_type
+      - resource_name
+      - pattern_type
+      - principal
+      - host
+      - operation
+      - permission
+      properties:
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        pattern_type:
+          type: string
+        principal:
+          type: string
+        host:
+          type: string
+        operation:
+          type: string
+        permission:
+          type: string
+    Acl:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        pattern_type:
+          type: string
+        principal:
+          type: string
+        host:
+          type: string
+        operation:
+          type: string
+        permission:
+          type: string

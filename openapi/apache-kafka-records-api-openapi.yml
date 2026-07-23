@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Records API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Records
+paths:
+  /topics/{topic_name}/records:
+    post:
+      summary: Apache kafka Produce Records to a Topic
+      operationId: produceRecords
+      tags:
+      - Records
+      parameters:
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProduceRequest'
+            examples:
+              produceRecordsRequestExample:
+                summary: Default produceRecords request
+                x-microcks-default: true
+                value:
+                  partition_id: 46
+                  headers: []
+                  key: {}
+                  value: {}
+      responses:
+        '200':
+          description: Records produced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProduceResponse'
+              examples:
+                produceRecords200Example:
+                  summary: Default produceRecords 200 response
+                  x-microcks-default: true
+                  value:
+                    error_code: 17
+                    cluster_id: item-5744
+                    topic_name: example-name
+                    partition_id: 25
+                    offset: 62
+                    timestamp: '2025-03-15T14:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ProduceRequest:
+      type: object
+      properties:
+        partition_id:
+          type: integer
+        headers:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+        key:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - BINARY
+              - JSON
+              - AVRO
+              - PROTOBUF
+              - JSONSCHEMA
+            data: {}
+        value:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - BINARY
+              - JSON
+              - AVRO
+              - PROTOBUF
+              - JSONSCHEMA
+            data: {}
+    ProduceResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+        cluster_id:
+          type: string
+        topic_name:
+          type: string
+        partition_id:
+          type: integer
+        offset:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time

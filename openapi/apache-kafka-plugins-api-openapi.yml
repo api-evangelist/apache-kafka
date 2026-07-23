@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Plugins API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Plugins
+paths:
+  /connector-plugins:
+    get:
+      summary: Apache kafka List Connector Plugins
+      operationId: listConnectorPlugins
+      tags:
+      - Plugins
+      parameters:
+      - name: connectorsOnly
+        in: query
+        schema:
+          type: boolean
+          default: true
+        example: true
+      responses:
+        '200':
+          description: List of connector plugins
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectorPlugin'
+              examples:
+                listConnectorPlugins200Example:
+                  summary: Default listConnectorPlugins 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /connector-plugins/{plugin}/config/validate:
+    put:
+      summary: Apache kafka Validate Connector Config
+      operationId: validateConnectorConfig
+      tags:
+      - Plugins
+      parameters:
+      - name: plugin
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+            examples:
+              validateConnectorConfigRequestExample:
+                summary: Default validateConnectorConfig request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigValidationResult'
+              examples:
+                validateConnectorConfig200Example:
+                  summary: Default validateConnectorConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    name: example-name
+                    error_count: 89
+                    groups: []
+                    configs: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ConnectorPlugin:
+      type: object
+      properties:
+        class:
+          type: string
+        type:
+          type: string
+        version:
+          type: string
+    ConfigValidationResult:
+      type: object
+      properties:
+        name:
+          type: string
+        error_count:
+          type: integer
+        groups:
+          type: array
+          items:
+            type: string
+        configs:
+          type: array
+          items:
+            type: object

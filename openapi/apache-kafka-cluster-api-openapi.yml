@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Cluster API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Cluster
+paths:
+  /:
+    get:
+      summary: Apache kafka Get Connect Worker Info
+      operationId: getWorkerInfo
+      tags:
+      - Cluster
+      responses:
+        '200':
+          description: Connect worker information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                  commit:
+                    type: string
+                  kafka_cluster_id:
+                    type: string
+              examples:
+                getWorkerInfo200Example:
+                  summary: Default getWorkerInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    version: example-value
+                    commit: example-value
+                    kafka_cluster_id: item-9558
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters:
+    get:
+      summary: Apache kafka List Clusters
+      operationId: listClusters
+      tags:
+      - Cluster
+      responses:
+        '200':
+          description: List of Kafka clusters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  metadata:
+                    type: object
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cluster'
+              examples:
+                listClusters200Example:
+                  summary: Default listClusters 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{cluster_id}:
+    get:
+      summary: Apache kafka Get Cluster
+      operationId: getCluster
+      tags:
+      - Cluster
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-6938
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+              examples:
+                getCluster200Example:
+                  summary: Default getCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-9562
+                    controller: {}
+                    brokers: {}
+                    topics: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Cluster:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+          properties:
+            self:
+              type: string
+            resource_name:
+              type: string
+        cluster_id:
+          type: string
+        controller:
+          type: object
+          properties:
+            related:
+              type: string
+        brokers:
+          type: object
+          properties:
+            related:
+              type: string
+        topics:
+          type: object
+          properties:
+            related:
+              type: string

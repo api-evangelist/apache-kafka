@@ -1,0 +1,224 @@
+openapi: 3.1.0
+info:
+  title: Kafka Connect REST ACL Topic API
+  description: The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.
+  version: 3.7.0
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8083
+  description: Default Kafka Connect worker
+tags:
+- name: Topic
+paths:
+  /clusters/{cluster_id}/topics:
+    get:
+      summary: Apache kafka List Topics
+      operationId: listTopics
+      tags:
+      - Topic
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-8966
+      responses:
+        '200':
+          description: List of topics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  metadata:
+                    type: object
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topic'
+              examples:
+                listTopics200Example:
+                  summary: Default listTopics 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    data: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Apache kafka Create Topic
+      operationId: createTopic
+      tags:
+      - Topic
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-1233
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTopicRequest'
+            examples:
+              createTopicRequestExample:
+                summary: Default createTopic request
+                x-microcks-default: true
+                value:
+                  topic_name: example-name
+                  partitions_count: 41
+                  replication_factor: 98
+                  configs: []
+      responses:
+        '201':
+          description: Topic created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+              examples:
+                createTopic201Example:
+                  summary: Default createTopic 201 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-7996
+                    topic_name: example-name
+                    is_internal: true
+                    replication_factor: 37
+                    partitions_count: 24
+                    partitions: {}
+                    configs: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{cluster_id}/topics/{topic_name}:
+    get:
+      summary: Apache kafka Get Topic
+      operationId: getTopic
+      tags:
+      - Topic
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-8264
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
+      responses:
+        '200':
+          description: Topic details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+              examples:
+                getTopic200Example:
+                  summary: Default getTopic 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example-value
+                    metadata: {}
+                    cluster_id: item-5190
+                    topic_name: example-name
+                    is_internal: true
+                    replication_factor: 52
+                    partitions_count: 28
+                    partitions: {}
+                    configs: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: Apache kafka Delete Topic
+      operationId: deleteTopic
+      tags:
+      - Topic
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: item-9796
+      - name: topic_name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example-name
+      responses:
+        '204':
+          description: Topic deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateTopicRequest:
+      type: object
+      required:
+      - topic_name
+      properties:
+        topic_name:
+          type: string
+        partitions_count:
+          type: integer
+        replication_factor:
+          type: integer
+        configs:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    Topic:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
+        topic_name:
+          type: string
+        is_internal:
+          type: boolean
+        replication_factor:
+          type: integer
+        partitions_count:
+          type: integer
+        partitions:
+          type: object
+          properties:
+            related:
+              type: string
+        configs:
+          type: object
+          properties:
+            related:
+              type: string
