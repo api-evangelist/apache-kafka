@@ -5,9 +5,21 @@ description: >-
   high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. It provides
   a REST Proxy API, Kafka Connect REST API, and AsyncAPI for event streaming.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apache-kafka.png
 tags:
   - Distributed Systems
   - Event Streaming
@@ -19,58 +31,175 @@ modified: '2026-06-20'
 url: https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: apache-kafka:kafka-rest-proxy-api
-    name: Kafka REST Proxy API
-    description: >-
-      The Kafka REST Proxy provides a RESTful interface to a Kafka cluster for producing and consuming messages,
-      managing topics, partitions, consumer groups, and viewing cluster state without native Kafka clients.
-    humanURL: https://docs.confluent.io/platform/current/kafka-rest/
-    baseURL: http://localhost:8082
-    tags:
-      - Consumer Groups
-      - Proxy
-      - REST
-      - Topics
-    properties:
-      - type: Documentation
-        url: https://docs.confluent.io/platform/current/kafka-rest/api.html
-      - type: OpenAPI
-        url: openapi/kafka-rest-proxy.yml
-      - type: Overlay
-        url: overlays/apache-kafka-kafka-rest-proxy-overlay.yaml
-  - aid: apache-kafka:kafka-connect-api
-    name: Kafka Connect REST API
-    description: >-
-      Kafka Connect REST API for managing connectors, their configurations, tasks, and offsets for integrating Kafka
-      with external data systems including databases, object stores, and search indexes.
-    humanURL: https://kafka.apache.org/documentation/#connect_rest
-    baseURL: http://localhost:8083
-    tags:
-      - Connect
-      - Connectors
-      - Integration
-    properties:
-      - type: Documentation
-        url: https://kafka.apache.org/documentation/#connect_rest
-      - type: OpenAPI
-        url: openapi/kafka-connect.yml
-      - type: Overlay
-        url: overlays/apache-kafka-kafka-connect-overlay.yaml
-  - aid: apache-kafka:kafka-messaging-api
-    name: Apache Kafka Messaging API
-    description: >-
-      The core Kafka messaging protocol for producing and consuming records to/from topics using the native Kafka binary
-      protocol, supporting exactly-once semantics, compaction, and partitioned log storage.
-    humanURL: https://kafka.apache.org/documentation/#producerapi
-    tags:
-      - Messaging
-      - Pub-Sub
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://kafka.apache.org/documentation/
-      - type: AsyncAPI
-        url: asyncapi/kafka-messaging.yml
+- aid: apache-kafka:kafka-messaging-api
+  name: Apache Kafka Messaging API
+  description: >-
+    The core Kafka messaging protocol for producing and consuming records to/from topics using the native
+    Kafka binary protocol, supporting exactly-once semantics, compaction, and partitioned log storage.
+  humanURL: https://kafka.apache.org/documentation/#producerapi
+  tags:
+  - Messaging
+  - Pub-Sub
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/
+  - type: AsyncAPI
+    url: asyncapi/kafka-messaging.yml
+- aid: apache-kafka:apache-kafka-acl-api
+  name: Apache Kafka ACL API
+  description: The ACL API from Apache Kafka — 1 operation(s) for acl.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - ACL
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-acl-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-broker-api
+  name: Apache Kafka Broker API
+  description: The Broker API from Apache Kafka — 1 operation(s) for broker.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Broker
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-broker-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-cluster-api
+  name: Apache Kafka Cluster API
+  description: The Cluster API from Apache Kafka — 3 operation(s) for cluster.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-connectors-api
+  name: Apache Kafka Connectors API
+  description: The Connectors API from Apache Kafka — 8 operation(s) for connectors.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Connectors
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-connectors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-consumer-group-api
+  name: Apache Kafka Consumer Group API
+  description: The Consumer Group API from Apache Kafka — 2 operation(s) for consumer group.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Consumer Group
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-consumer-group-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-offsets-api
+  name: Apache Kafka Offsets API
+  description: The Offsets API from Apache Kafka — 1 operation(s) for offsets.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Offsets
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-offsets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-partition-api
+  name: Apache Kafka Partition API
+  description: The Partition API from Apache Kafka — 1 operation(s) for partition.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Partition
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-partition-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-plugins-api
+  name: Apache Kafka Plugins API
+  description: The Plugins API from Apache Kafka — 2 operation(s) for plugins.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Plugins
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-plugins-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-records-api
+  name: Apache Kafka Records API
+  description: The Records API from Apache Kafka — 1 operation(s) for records.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Records
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-records-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-tasks-api
+  name: Apache Kafka Tasks API
+  description: The Tasks API from Apache Kafka — 3 operation(s) for tasks.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
+- aid: apache-kafka:apache-kafka-topic-api
+  name: Apache Kafka Topic API
+  description: The Topic API from Apache Kafka — 2 operation(s) for topic.
+  humanURL: https://docs.confluent.io/platform/current/kafka-rest/
+  baseURL: http://localhost:8082
+  tags:
+  - Topic
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-kafka-topic-api-openapi.yml
+  - type: Documentation
+    url: https://docs.confluent.io/platform/current/kafka-rest/api.html
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#connect_rest
 common:
   - type: AgenticAccess
     url: agentic-access/apache-kafka-agentic-access.yml
