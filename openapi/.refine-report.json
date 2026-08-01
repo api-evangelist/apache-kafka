@@ -1,0 +1,34 @@
+{
+  "provider": "apache-kafka",
+  "sources": [
+    "apache-kafka-acl-api-openapi.yml",
+    "apache-kafka-broker-api-openapi.yml",
+    "apache-kafka-cluster-api-openapi.yml",
+    "apache-kafka-connectors-api-openapi.yml",
+    "apache-kafka-consumer-group-api-openapi.yml",
+    "apache-kafka-offsets-api-openapi.yml",
+    "apache-kafka-partition-api-openapi.yml",
+    "apache-kafka-plugins-api-openapi.yml",
+    "apache-kafka-records-api-openapi.yml",
+    "apache-kafka-tasks-api-openapi.yml",
+    "apache-kafka-topic-api-openapi.yml"
+  ],
+  "outputs": [
+    "apache-kafka-acl-api-openapi.yml",
+    "apache-kafka-broker-api-openapi.yml",
+    "apache-kafka-cluster-api-openapi.yml",
+    "apache-kafka-connectors-api-openapi.yml",
+    "apache-kafka-consumer-group-api-openapi.yml",
+    "apache-kafka-offsets-api-openapi.yml",
+    "apache-kafka-partition-api-openapi.yml",
+    "apache-kafka-plugins-api-openapi.yml",
+    "apache-kafka-records-api-openapi.yml",
+    "apache-kafka-tasks-api-openapi.yml",
+    "apache-kafka-topic-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
