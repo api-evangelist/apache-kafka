@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST ACL Partition API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Partitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/clusters/:cluster_id/topics/:topic_name/partitions",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-7679",
+                "type": "path"
+              },
+              {
+                "name": "topic_name",
+                "value": "example-name",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Partitions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST ACL Plugins API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plugins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Connector Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connector-plugins",
+            "params": [
+              {
+                "name": "connectorsOnly",
+                "value": "true",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Connector Plugins"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Validate Connector Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8083/connector-plugins/:plugin/config/validate",
+            "params": [
+              {
+                "name": "plugin",
+                "value": "example-value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Validate Connector Config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

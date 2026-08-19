@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST ACL Offsets API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offsets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka Get Connector Offsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/offsets",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Connector Offsets"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Alter Connector Offsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:8083/connectors/:connector/offsets",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Alter Connector Offsets"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Reset Connector Offsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8083/connectors/:connector/offsets",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Reset Connector Offsets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

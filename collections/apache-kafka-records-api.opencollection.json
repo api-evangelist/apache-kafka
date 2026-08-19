@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST ACL Records API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka Produce Records to a Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8083/topics/:topic_name/records",
+            "params": [
+              {
+                "name": "topic_name",
+                "value": "example-name",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Produce Records to a Topic"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

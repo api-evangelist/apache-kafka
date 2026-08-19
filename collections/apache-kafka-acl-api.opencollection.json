@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST ACL API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ACL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka Search ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/clusters/:cluster_id/acls",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-5726",
+                "type": "path"
+              },
+              {
+                "name": "resource_type",
+                "value": "UNKNOWN",
+                "type": "query"
+              },
+              {
+                "name": "pattern_type",
+                "value": "UNKNOWN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Apache kafka Search ACLs"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Create ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8083/clusters/:cluster_id/acls",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-7456",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apache kafka Create ACLs"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Delete ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8083/clusters/:cluster_id/acls",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-2190",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Delete ACLs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

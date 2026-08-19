@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST ACL Broker API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Broker",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Brokers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/clusters/:cluster_id/brokers",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "item-2365",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Brokers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

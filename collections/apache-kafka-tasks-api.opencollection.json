@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kafka Connect REST ACL Tasks API",
+    "version": "3.7.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache kafka List Connector Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/tasks",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka List Connector Tasks"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Get Task Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8083/connectors/:connector/tasks/:task/status",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              },
+              {
+                "name": "task",
+                "value": "56",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Get Task Status"
+        },
+        {
+          "info": {
+            "name": "Apache kafka Restart Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8083/connectors/:connector/tasks/:task/restart",
+            "params": [
+              {
+                "name": "connector",
+                "value": "example-value",
+                "type": "path"
+              },
+              {
+                "name": "task",
+                "value": "18",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Apache kafka Restart Task"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
