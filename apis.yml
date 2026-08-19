@@ -29,7 +29,7 @@ tags:
 created: '2025-06-05'
 modified: '2026-06-20'
 url: https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: apache-kafka:kafka-messaging-api
   name: Apache Kafka Messaging API
