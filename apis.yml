@@ -24,6 +24,12 @@ tags:
   - Distributed Systems
   - Event Streaming
   - Messaging
+  - Open-Source
+  - Pub-Sub
+tags_raw:
+  - Distributed Systems
+  - Event Streaming
+  - Messaging
   - Open Source
   - Pub-Sub
 created: '2025-06-05'
@@ -66,6 +72,8 @@ apis:
   humanURL: https://docs.confluent.io/platform/current/kafka-rest/
   baseURL: http://localhost:8082
   tags:
+  - Brokers
+  tags_raw:
   - Broker
   properties:
   - type: OpenAPI
@@ -178,6 +186,8 @@ apis:
   humanURL: https://docs.confluent.io/platform/current/kafka-rest/
   baseURL: http://localhost:8082
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
