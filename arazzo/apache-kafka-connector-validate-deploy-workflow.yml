@@ -14,8 +14,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: kafkaConnectApi
-  url: ../openapi/kafka-connect.yml
+- name: clusterApi
+  url: ../openapi/apache-kafka-cluster-api-openapi.yml
+  type: openapi
+- name: connectorsApi
+  url: ../openapi/apache-kafka-connectors-api-openapi.yml
+  type: openapi
+- name: pluginsApi
+  url: ../openapi/apache-kafka-plugins-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: validate-and-deploy-connector

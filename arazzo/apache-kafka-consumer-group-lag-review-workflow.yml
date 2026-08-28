@@ -14,8 +14,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kafkaRestProxyApi
-  url: ../openapi/kafka-rest-proxy.yml
+- name: clusterApi
+  url: ../openapi/apache-kafka-cluster-api-openapi.yml
+  type: openapi
+- name: consumerGroupApi
+  url: ../openapi/apache-kafka-consumer-group-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: review-consumer-group-lag

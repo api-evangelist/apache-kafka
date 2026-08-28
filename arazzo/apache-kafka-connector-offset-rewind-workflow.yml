@@ -13,8 +13,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kafkaConnectApi
-  url: ../openapi/kafka-connect.yml
+- name: connectorsApi
+  url: ../openapi/apache-kafka-connectors-api-openapi.yml
+  type: openapi
+- name: offsetsApi
+  url: ../openapi/apache-kafka-offsets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: rewind-connector-offsets

@@ -13,8 +13,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: kafkaRestProxyApi
-  url: ../openapi/kafka-rest-proxy.yml
+- name: clusterApi
+  url: ../openapi/apache-kafka-cluster-api-openapi.yml
+  type: openapi
+- name: recordsApi
+  url: ../openapi/apache-kafka-records-api-openapi.yml
+  type: openapi
+- name: topicApi
+  url: ../openapi/apache-kafka-topic-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-topic-and-produce

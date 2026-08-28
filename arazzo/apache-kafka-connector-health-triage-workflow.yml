@@ -12,8 +12,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kafkaConnectApi
-  url: ../openapi/kafka-connect.yml
+- name: connectorsApi
+  url: ../openapi/apache-kafka-connectors-api-openapi.yml
+  type: openapi
+- name: tasksApi
+  url: ../openapi/apache-kafka-tasks-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: triage-failed-connector
