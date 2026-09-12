@@ -225,6 +225,8 @@ apis:
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
 common:
+  - type: Website
+    url: https://www.apache.org/
   - type: Overlay
     url: overlays/apache-kafka-kafka-connect-overlay.yaml
   - type: SecurityPolicy
