@@ -1,34 +1,55 @@
 {
   "provider": "apache-kafka",
   "sources": [
-    "apache-kafka-acl-api-openapi.yml",
-    "apache-kafka-broker-api-openapi.yml",
-    "apache-kafka-cluster-api-openapi.yml",
-    "apache-kafka-connectors-api-openapi.yml",
-    "apache-kafka-consumer-group-api-openapi.yml",
-    "apache-kafka-offsets-api-openapi.yml",
-    "apache-kafka-partition-api-openapi.yml",
-    "apache-kafka-plugins-api-openapi.yml",
-    "apache-kafka-records-api-openapi.yml",
-    "apache-kafka-tasks-api-openapi.yml",
-    "apache-kafka-topic-api-openapi.yml"
+    "_original/kafka-connect.yml",
+    "_original/kafka-rest-proxy.yml"
   ],
   "outputs": [
-    "apache-kafka-acl-api-openapi.yml",
-    "apache-kafka-broker-api-openapi.yml",
     "apache-kafka-cluster-api-openapi.yml",
     "apache-kafka-connectors-api-openapi.yml",
-    "apache-kafka-consumer-group-api-openapi.yml",
     "apache-kafka-offsets-api-openapi.yml",
-    "apache-kafka-partition-api-openapi.yml",
     "apache-kafka-plugins-api-openapi.yml",
-    "apache-kafka-records-api-openapi.yml",
     "apache-kafka-tasks-api-openapi.yml",
+    "apache-kafka-acl-api-openapi.yml",
+    "apache-kafka-broker-api-openapi.yml",
+    "apache-kafka-consumer-group-api-openapi.yml",
+    "apache-kafka-partition-api-openapi.yml",
+    "apache-kafka-records-api-openapi.yml",
     "apache-kafka-topic-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kafka-connect.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kafka-connect.yml: declared missing tag: Cluster",
+    "kafka-connect.yml: declared missing tag: Connectors",
+    "kafka-connect.yml: declared missing tag: Offsets",
+    "kafka-connect.yml: declared missing tag: Plugins",
+    "kafka-connect.yml: declared missing tag: Tasks",
+    "kafka-rest-proxy.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kafka-rest-proxy.yml: declared missing tag: ACL",
+    "kafka-rest-proxy.yml: declared missing tag: Broker",
+    "kafka-rest-proxy.yml: declared missing tag: Cluster",
+    "kafka-rest-proxy.yml: declared missing tag: Consumer Group",
+    "kafka-rest-proxy.yml: declared missing tag: Partition",
+    "kafka-rest-proxy.yml: declared missing tag: Records",
+    "kafka-rest-proxy.yml: declared missing tag: Topic",
+    "tag 'Cluster' spans 2 source specs (kafka-connect.yml, kafka-rest-proxy.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "apache-kafka-acl-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-broker-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-cluster-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-connectors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-consumer-group-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-offsets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-partition-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-plugins-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-records-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-kafka-topic-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
