@@ -39,8 +39,9 @@ tags:
   - Distributed Systems
   - Event Streaming
   - Messaging
-  - Open-Source
+  - Open Source
   - Pub-Sub
+  - Real-Time
 tags_raw:
   - Apache Kafka
   - Distributed Systems
@@ -48,6 +49,8 @@ tags_raw:
   - Messaging
   - Open Source
   - Pub-Sub
+  - Open-Source
+  - Real-Time
 created: '2025-06-05'
 modified: '2026-06-20'
 url: https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/apis.yml

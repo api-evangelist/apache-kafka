@@ -353,18 +353,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateConnectorRequest:
-      type: object
-      required:
-      - name
-      - config
-      properties:
-        name:
-          type: string
-        config:
-          type: object
-          additionalProperties:
-            type: string
     ConnectorStatus:
       type: object
       properties:
@@ -389,22 +377,18 @@ components:
             $ref: '#/components/schemas/TaskStatus'
         type:
           type: string
-    TaskStatus:
+    CreateConnectorRequest:
       type: object
+      required:
+      - name
+      - config
       properties:
-        id:
-          type: integer
-        state:
+        name:
           type: string
-          enum:
-          - UNASSIGNED
-          - RUNNING
-          - PAUSED
-          - FAILED
-        worker_id:
-          type: string
-        trace:
-          type: string
+        config:
+          type: object
+          additionalProperties:
+            type: string
     ConnectorInfo:
       type: object
       properties:
@@ -428,3 +412,19 @@ components:
           enum:
           - source
           - sink
+    TaskStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+        state:
+          type: string
+          enum:
+          - UNASSIGNED
+          - RUNNING
+          - PAUSED
+          - FAILED
+        worker_id:
+          type: string
+        trace:
+          type: string

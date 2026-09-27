@@ -132,17 +132,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateAclRequest:
+    Acl:
       type: object
-      required:
-      - resource_type
-      - resource_name
-      - pattern_type
-      - principal
-      - host
-      - operation
-      - permission
       properties:
+        kind:
+          type: string
+        metadata:
+          type: object
+        cluster_id:
+          type: string
         resource_type:
           type: string
         resource_name:
@@ -157,15 +155,17 @@ components:
           type: string
         permission:
           type: string
-    Acl:
+    CreateAclRequest:
       type: object
+      required:
+      - resource_type
+      - resource_name
+      - pattern_type
+      - principal
+      - host
+      - operation
+      - permission
       properties:
-        kind:
-          type: string
-        metadata:
-          type: object
-        cluster_id:
-          type: string
         resource_type:
           type: string
         resource_name:

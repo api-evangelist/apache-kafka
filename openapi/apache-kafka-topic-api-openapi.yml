@@ -175,26 +175,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateTopicRequest:
-      type: object
-      required:
-      - topic_name
-      properties:
-        topic_name:
-          type: string
-        partitions_count:
-          type: integer
-        replication_factor:
-          type: integer
-        configs:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              value:
-                type: string
     Topic:
       type: object
       properties:
@@ -222,3 +202,23 @@ components:
           properties:
             related:
               type: string
+    CreateTopicRequest:
+      type: object
+      required:
+      - topic_name
+      properties:
+        topic_name:
+          type: string
+        partitions_count:
+          type: integer
+        replication_factor:
+          type: integer
+        configs:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
