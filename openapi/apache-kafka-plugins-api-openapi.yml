@@ -92,6 +92,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ConnectorPlugin:
+      type: object
+      properties:
+        class:
+          type: string
+        type:
+          type: string
+        version:
+          type: string
     ConfigValidationResult:
       type: object
       properties:
@@ -107,12 +116,3 @@ components:
           type: array
           items:
             type: object
-    ConnectorPlugin:
-      type: object
-      properties:
-        class:
-          type: string
-        type:
-          type: string
-        version:
-          type: string

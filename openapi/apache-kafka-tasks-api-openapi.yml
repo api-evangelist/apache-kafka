@@ -110,20 +110,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TaskInfo:
-      type: object
-      properties:
-        id:
-          type: object
-          properties:
-            connector:
-              type: string
-            task:
-              type: integer
-        config:
-          type: object
-          additionalProperties:
-            type: string
     TaskStatus:
       type: object
       properties:
@@ -140,3 +126,17 @@ components:
           type: string
         trace:
           type: string
+    TaskInfo:
+      type: object
+      properties:
+        id:
+          type: object
+          properties:
+            connector:
+              type: string
+            task:
+              type: integer
+        config:
+          type: object
+          additionalProperties:
+            type: string

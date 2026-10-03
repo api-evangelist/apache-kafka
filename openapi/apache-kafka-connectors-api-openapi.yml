@@ -377,18 +377,6 @@ components:
             $ref: '#/components/schemas/TaskStatus'
         type:
           type: string
-    CreateConnectorRequest:
-      type: object
-      required:
-      - name
-      - config
-      properties:
-        name:
-          type: string
-        config:
-          type: object
-          additionalProperties:
-            type: string
     ConnectorInfo:
       type: object
       properties:
@@ -428,3 +416,15 @@ components:
           type: string
         trace:
           type: string
+    CreateConnectorRequest:
+      type: object
+      required:
+      - name
+      - config
+      properties:
+        name:
+          type: string
+        config:
+          type: object
+          additionalProperties:
+            type: string
