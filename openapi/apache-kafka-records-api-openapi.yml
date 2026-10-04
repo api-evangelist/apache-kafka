@@ -66,22 +66,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ProduceResponse:
-      type: object
-      properties:
-        error_code:
-          type: integer
-        cluster_id:
-          type: string
-        topic_name:
-          type: string
-        partition_id:
-          type: integer
-        offset:
-          type: integer
-        timestamp:
-          type: string
-          format: date-time
     ProduceRequest:
       type: object
       properties:
@@ -120,3 +104,19 @@ components:
               - PROTOBUF
               - JSONSCHEMA
             data: {}
+    ProduceResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+        cluster_id:
+          type: string
+        topic_name:
+          type: string
+        partition_id:
+          type: integer
+        offset:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time

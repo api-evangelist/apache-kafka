@@ -353,53 +353,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ConnectorStatus:
-      type: object
-      properties:
-        name:
-          type: string
-        connector:
-          type: object
-          properties:
-            state:
-              type: string
-              enum:
-              - UNASSIGNED
-              - RUNNING
-              - PAUSED
-              - FAILED
-              - STOPPED
-            worker_id:
-              type: string
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskStatus'
-        type:
-          type: string
-    ConnectorInfo:
-      type: object
-      properties:
-        name:
-          type: string
-        config:
-          type: object
-          additionalProperties:
-            type: string
-        tasks:
-          type: array
-          items:
-            type: object
-            properties:
-              connector:
-                type: string
-              task:
-                type: integer
-        type:
-          type: string
-          enum:
-          - source
-          - sink
     TaskStatus:
       type: object
       properties:
@@ -428,3 +381,50 @@ components:
           type: object
           additionalProperties:
             type: string
+    ConnectorInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        config:
+          type: object
+          additionalProperties:
+            type: string
+        tasks:
+          type: array
+          items:
+            type: object
+            properties:
+              connector:
+                type: string
+              task:
+                type: integer
+        type:
+          type: string
+          enum:
+          - source
+          - sink
+    ConnectorStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        connector:
+          type: object
+          properties:
+            state:
+              type: string
+              enum:
+              - UNASSIGNED
+              - RUNNING
+              - PAUSED
+              - FAILED
+              - STOPPED
+            worker_id:
+              type: string
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskStatus'
+        type:
+          type: string
