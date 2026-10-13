@@ -1,0 +1,220 @@
+{
+  "@context": {
+    "@vocab": "https://apache.org/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "apache": "https://apache.org/schema#",
+    "Acl": "apache:Acl",
+    "kind": {
+      "@id": "apache:kind",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "apache:metadata"
+    },
+    "cluster_id": {
+      "@id": "apache:cluster_id",
+      "@type": "xsd:string"
+    },
+    "resource_type": {
+      "@id": "apache:resource_type",
+      "@type": "xsd:string"
+    },
+    "resource_name": {
+      "@id": "apache:resource_name",
+      "@type": "xsd:string"
+    },
+    "pattern_type": {
+      "@id": "apache:pattern_type",
+      "@type": "xsd:string"
+    },
+    "principal": {
+      "@id": "apache:principal",
+      "@type": "xsd:string"
+    },
+    "host": {
+      "@id": "apache:host",
+      "@type": "xsd:string"
+    },
+    "operation": {
+      "@id": "apache:operation",
+      "@type": "xsd:string"
+    },
+    "permission": {
+      "@id": "apache:permission",
+      "@type": "xsd:string"
+    },
+    "CreateAclRequest": "apache:CreateAclRequest",
+    "Broker": "apache:Broker",
+    "broker_id": {
+      "@id": "apache:broker_id",
+      "@type": "xsd:integer"
+    },
+    "port": {
+      "@id": "apache:port",
+      "@type": "xsd:integer"
+    },
+    "Cluster": "apache:Cluster",
+    "controller": {
+      "@id": "apache:controller"
+    },
+    "brokers": {
+      "@id": "apache:brokers"
+    },
+    "topics": {
+      "@id": "apache:topics"
+    },
+    "TaskStatus": "apache:TaskStatus",
+    "id": {
+      "@id": "apache:id",
+      "@type": "xsd:integer"
+    },
+    "state": {
+      "@id": "apache:state",
+      "@type": "xsd:string"
+    },
+    "worker_id": {
+      "@id": "apache:worker_id",
+      "@type": "xsd:string"
+    },
+    "trace": {
+      "@id": "apache:trace",
+      "@type": "xsd:string"
+    },
+    "CreateConnectorRequest": "apache:CreateConnectorRequest",
+    "name": {
+      "@id": "apache:name",
+      "@type": "xsd:string"
+    },
+    "config": {
+      "@id": "apache:config"
+    },
+    "ConnectorInfo": "apache:ConnectorInfo",
+    "tasks": {
+      "@id": "apache:tasks",
+      "@container": "@list"
+    },
+    "type": {
+      "@id": "apache:type",
+      "@type": "xsd:string"
+    },
+    "ConnectorStatus": "apache:ConnectorStatus",
+    "connector": {
+      "@id": "apache:connector"
+    },
+    "ConsumerGroup": "apache:ConsumerGroup",
+    "consumer_group_id": {
+      "@id": "apache:consumer_group_id",
+      "@type": "xsd:string"
+    },
+    "is_simple": {
+      "@id": "apache:is_simple",
+      "@type": "xsd:boolean"
+    },
+    "partition_assignor": {
+      "@id": "apache:partition_assignor",
+      "@type": "xsd:string"
+    },
+    "coordinator": {
+      "@id": "apache:coordinator"
+    },
+    "consumers": {
+      "@id": "apache:consumers"
+    },
+    "lag_summary": {
+      "@id": "apache:lag_summary"
+    },
+    "Partition": "apache:Partition",
+    "topic_name": {
+      "@id": "apache:topic_name",
+      "@type": "xsd:string"
+    },
+    "partition_id": {
+      "@id": "apache:partition_id",
+      "@type": "xsd:integer"
+    },
+    "leader": {
+      "@id": "apache:leader"
+    },
+    "replicas": {
+      "@id": "apache:replicas",
+      "@container": "@list"
+    },
+    "ConfigValidationResult": "apache:ConfigValidationResult",
+    "error_count": {
+      "@id": "apache:error_count",
+      "@type": "xsd:integer"
+    },
+    "groups": {
+      "@id": "apache:groups",
+      "@container": "@list"
+    },
+    "configs": {
+      "@id": "apache:configs",
+      "@container": "@list"
+    },
+    "ConnectorPlugin": "apache:ConnectorPlugin",
+    "class": {
+      "@id": "apache:class",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "apache:version",
+      "@type": "xsd:string"
+    },
+    "ProduceRequest": "apache:ProduceRequest",
+    "headers": {
+      "@id": "apache:headers",
+      "@container": "@list"
+    },
+    "key": {
+      "@id": "apache:key"
+    },
+    "value": {
+      "@id": "apache:value"
+    },
+    "ProduceResponse": "apache:ProduceResponse",
+    "error_code": {
+      "@id": "apache:error_code",
+      "@type": "xsd:integer"
+    },
+    "offset": {
+      "@id": "apache:offset",
+      "@type": "xsd:integer"
+    },
+    "timestamp": {
+      "@id": "apache:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "TaskInfo": "apache:TaskInfo",
+    "CreateTopicRequest": "apache:CreateTopicRequest",
+    "partitions_count": {
+      "@id": "apache:partitions_count",
+      "@type": "xsd:integer"
+    },
+    "replication_factor": {
+      "@id": "apache:replication_factor",
+      "@type": "xsd:integer"
+    },
+    "Topic": "apache:Topic",
+    "is_internal": {
+      "@id": "apache:is_internal",
+      "@type": "xsd:boolean"
+    },
+    "partitions": {
+      "@id": "apache:partitions"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Apache Kafka API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Apache Kafka's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-13) from openapi/apache-kafka-acl-api-openapi.yml, openapi/apache-kafka-broker-api-openapi.yml, openapi/apache-kafka-cluster-api-openapi.yml.",
+  "dcterms:created": "2026-10-13",
+  "dcterms:source": [
+    "openapi/apache-kafka-acl-api-openapi.yml",
+    "openapi/apache-kafka-broker-api-openapi.yml",
+    "openapi/apache-kafka-cluster-api-openapi.yml",
+    "openapi/apache-kafka-connectors-api-openapi.yml",
+    "openapi/apache-kafka-consumer-group-api-openapi.yml"
+  ]
+}

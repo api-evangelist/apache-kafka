@@ -1,0 +1,35 @@
+generated: '2026-10-13'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/apache-kafka-acl-api-openapi.yml
+- openapi/apache-kafka-broker-api-openapi.yml
+- openapi/apache-kafka-cluster-api-openapi.yml
+- openapi/apache-kafka-connectors-api-openapi.yml
+- openapi/apache-kafka-consumer-group-api-openapi.yml
+- openapi/apache-kafka-offsets-api-openapi.yml
+- openapi/apache-kafka-partition-api-openapi.yml
+- openapi/apache-kafka-plugins-api-openapi.yml
+- openapi/apache-kafka-records-api-openapi.yml
+- openapi/apache-kafka-tasks-api-openapi.yml
+- openapi/apache-kafka-topic-api-openapi.yml
+format: custom
+envelope:
+  media_type: null
+  schema: null
+coverage:
+  operations: 34
+  statuses_declared: 2
+problems:
+- status: 404
+  title: Not Found
+  description: Connector not found
+  operations: 2
+  media_types: []
+  schema: null
+- status: 409
+  title: Conflict
+  description: Connector already exists
+  operations: 1
+  media_types: []
+  schema: null

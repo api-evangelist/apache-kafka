@@ -1,0 +1,249 @@
+asyncapi: 2.6.0
+info:
+  title: Apache Kafka
+  version: '1.0.0'
+  description: >-
+    Generic AsyncAPI 2.6 reference template for Apache Kafka. Apache Kafka is
+    a distributed event streaming platform where producers publish records to
+    topics partitioned across a cluster of brokers, and consumers organized
+    into consumer groups subscribe to those topics. This template models the
+    Kafka wire protocol using the AsyncAPI kafka and kafka-secure bindings
+    and is intended to be customized for a specific cluster, topic set, and
+    message schemas. It is not tied to any single Kafka deployment.
+  contact:
+    name: Apache Kafka
+    url: https://kafka.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+defaultContentType: application/json
+servers:
+  kafka-secure:
+    url: '{broker}:9092'
+    protocol: kafka-secure
+    description: >-
+      Apache Kafka broker endpoint exposed over TLS with SASL/SCRAM
+      authentication. Replace {broker} with the hostname or bootstrap host
+      of a broker in the target cluster. Clients should be configured with
+      the full bootstrap.servers list rather than relying on a single host.
+    protocolVersion: '3.0'
+    variables:
+      broker:
+        description: >-
+          Hostname of a Kafka broker (advertised listener) or bootstrap
+          host. In practice, clients pass a comma-separated bootstrap.servers
+          list and the cluster returns the full broker set in metadata.
+        default: kafka.example.com
+    security:
+      - saslScram: []
+  kafka-secure-mtls:
+    url: '{broker}:9093'
+    protocol: kafka-secure
+    description: >-
+      Apache Kafka broker endpoint exposed over TLS with mutual TLS (mTLS)
+      client certificate authentication. Use this variant when the cluster
+      is configured with the SSL security protocol and ssl.client.auth set
+      to required.
+    protocolVersion: '3.0'
+    variables:
+      broker:
+        description: Hostname of a Kafka broker advertised listener.
+        default: kafka.example.com
+    security:
+      - mtls: []
+channels:
+  '{topic}':
+    description: >-
+      Generic Kafka topic template. A Kafka topic is an append-only,
+      partitioned, replicated log of records. Producers append records to
+      partitions and consumers read records in offset order within each
+      partition. Replace {topic} with the concrete topic name.
+    parameters:
+      topic:
+        description: >-
+          The Kafka topic name. Topic names are case-sensitive and may
+          contain ASCII alphanumerics, '.', '_' and '-'. Maximum length is
+          249 characters.
+        schema:
+          type: string
+          maxLength: 249
+          pattern: '^[a-zA-Z0-9._-]+$'
+    bindings:
+      apache-kafka:
+        topic: '{topic}'
+        partitions: 3
+        replicas: 3
+        topicConfiguration:
+          cleanup.policy:
+            - delete
+          retention.ms: 604800000
+          retention.bytes: -1
+          delete.retention.ms: 86400000
+          max.message.bytes: 1048588
+        bindingVersion: '0.5.0'
+    publish:
+      operationId: produceToTopic
+      summary: Produce a record to a Kafka topic
+      description: >-
+        Publish a record to the topic. The producer client determines the
+        target partition either by an explicit partition number, by hashing
+        the record key, or by the configured partitioner. Records within
+        a single partition are strictly ordered.
+      bindings:
+        apache-kafka:
+          clientId:
+            type: string
+            description: >-
+              The client.id producer configuration sent with every request
+              to the broker. Used by the broker for logging, metrics, and
+              quota enforcement.
+          bindingVersion: '0.5.0'
+      message:
+        $ref: '#/components/messages/KafkaRecord'
+    subscribe:
+      operationId: consumeFromTopic
+      summary: Consume records from a Kafka topic
+      description: >-
+        Subscribe to the topic as part of a consumer group. The group
+        coordinator assigns partitions to the consumers in the group and
+        tracks committed offsets per (group, topic, partition). Each
+        partition is consumed by at most one member of a given consumer
+        group at a time.
+      bindings:
+        apache-kafka:
+          groupId:
+            type: string
+            description: >-
+              The group.id consumer configuration. All consumers sharing a
+              group.id form a single logical subscriber; partitions of the
+              topic are divided among the members of the group.
+          clientId:
+            type: string
+            description: >-
+              The client.id consumer configuration sent with every request
+              to the broker. Used for logging, metrics, and quota
+              enforcement.
+          bindingVersion: '0.5.0'
+      message:
+        $ref: '#/components/messages/KafkaRecord'
+components:
+  messages:
+    KafkaRecord:
+      name: KafkaRecord
+      title: Kafka Record
+      summary: >-
+        A single Kafka record (message) carried on a topic partition.
+      description: >-
+        A Kafka record is an immutable key/value pair with a timestamp and
+        optional headers. Keys are typically used by producers to drive
+        partition assignment via hash-based partitioning. Payloads can be
+        any binary format; common encodings include Avro, Protobuf, and
+        JSON Schema managed via Confluent Schema Registry, in which case
+        the first byte of the payload is a magic byte and bytes 1-4 are
+        the big-endian schema id (see Confluent wire format).
+      contentType: application/json
+      headers:
+        type: object
+        description: >-
+          Kafka record headers. Each header is a key (UTF-8 string) and
+          a value (byte array). Headers are commonly used for tracing
+          context, content type, and idempotency keys.
+        additionalProperties:
+          type: string
+      payload:
+        $ref: '#/components/schemas/RecordPayload'
+      bindings:
+        apache-kafka:
+          key:
+            type: string
+            description: >-
+              The Kafka record key. When set, the default partitioner
+              hashes the key bytes to select a partition, giving all
+              records with the same key the same partition and therefore
+              a stable per-key order.
+          schemaIdLocation: payload
+          schemaIdPayloadEncoding: confluent
+          schemaLookupStrategy: TopicIdStrategy
+          bindingVersion: '0.5.0'
+      examples:
+        - name: avroRecord
+          summary: >-
+            A record encoded with Avro and registered in Confluent Schema
+            Registry, using the default TopicNameStrategy.
+          payload:
+            id: 42
+            event: example.created
+            occurredAt: '2026-05-30T12:00:00Z'
+  schemas:
+    RecordPayload:
+      type: object
+      description: >-
+        Generic record payload. Replace this schema with the concrete
+        Avro, Protobuf, or JSON Schema definition for your topic.
+      properties:
+        id:
+          type: string
+          description: Domain identifier for the event.
+        event:
+          type: string
+          description: Event type name.
+        occurredAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp the event occurred.
+        data:
+          type: object
+          additionalProperties: true
+          description: Event-specific payload.
+  messageTraits:
+    AvroTrait:
+      schemaFormat: application/vnd.apache.avro;version=1.9.0
+      contentType: application/octet-stream
+      bindings:
+        apache-kafka:
+          schemaIdLocation: payload
+          schemaIdPayloadEncoding: confluent
+          schemaLookupStrategy: TopicIdStrategy
+          bindingVersion: '0.5.0'
+    ProtobufTrait:
+      schemaFormat: application/vnd.google.protobuf;version=3
+      contentType: application/octet-stream
+      bindings:
+        apache-kafka:
+          schemaIdLocation: payload
+          schemaIdPayloadEncoding: confluent
+          schemaLookupStrategy: TopicIdStrategy
+          bindingVersion: '0.5.0'
+    JsonSchemaTrait:
+      schemaFormat: application/schema+json;version=draft-07
+      contentType: application/json
+      bindings:
+        apache-kafka:
+          schemaIdLocation: payload
+          schemaIdPayloadEncoding: confluent
+          schemaLookupStrategy: TopicIdStrategy
+          bindingVersion: '0.5.0'
+  securitySchemes:
+    saslScram:
+      type: scramSha512
+      description: >-
+        SASL/SCRAM-SHA-512 authentication over a TLS-encrypted connection
+        (security.protocol=SASL_SSL, sasl.mechanism=SCRAM-SHA-512). Use
+        SCRAM-SHA-256 in environments that require it.
+    saslPlain:
+      type: plain
+      description: >-
+        SASL/PLAIN authentication over TLS (security.protocol=SASL_SSL,
+        sasl.mechanism=PLAIN). Only use over TLS; PLAIN sends credentials
+        in cleartext.
+    mtls:
+      type: X509
+      description: >-
+        Mutual TLS client certificate authentication
+        (security.protocol=SSL, ssl.client.auth=required). The broker
+        validates the client certificate against its truststore.
+
+tags:
+  - name: kafka
+  - name: event-streaming
+  - name: pub-sub

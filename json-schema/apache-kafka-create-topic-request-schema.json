@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/main/json-schema/apache-kafka-create-topic-request-schema.json",
+  "title": "CreateTopicRequest",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/apache-kafka-topic-api-openapi.yml#/components/schemas/CreateTopicRequest",
+  "type": "object",
+  "required": [
+    "topic_name"
+  ],
+  "properties": {
+    "topic_name": {
+      "type": "string"
+    },
+    "partitions_count": {
+      "type": "integer"
+    },
+    "replication_factor": {
+      "type": "integer"
+    },
+    "configs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

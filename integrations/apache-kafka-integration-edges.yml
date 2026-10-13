@@ -1,0 +1,27 @@
+generated: '2026-10-13'
+method: searched
+source:
+- https://n8n.io/integrations/kafka/
+checked:
+- https://composio.dev/toolkits/kafka
+- https://monid.ai/tools/kafka
+- https://n8n.io/integrations/kafka/
+- https://zapier.com/apps/apache-kafka/integrations
+- https://zapier.com/apps/kafka/integrations
+edges:
+- partner_name: datadog
+  partner: datadog
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: processor-connection
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/datadog/blob/main/openapi/datadog-lists-api-openapi.yml
+  contract_reference:
+    repo: datadog
+    spec_file: datadog-lists-api-openapi.yml
+    value: kafka
+    property: schemas.ObservabilityPipelineKafkaSourceType
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+  x-moved-from: kafka (consolidated into apache-kafka 2026-10-13, approved by Kin Lane)

@@ -1,0 +1,138 @@
+generated: '2026-10-13'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/apache-kafka-acl-api-openapi.yml
+- openapi/apache-kafka-broker-api-openapi.yml
+- openapi/apache-kafka-cluster-api-openapi.yml
+- openapi/apache-kafka-connectors-api-openapi.yml
+- openapi/apache-kafka-consumer-group-api-openapi.yml
+vocabulary:
+  name: Apache Kafka Domain Vocabulary
+  description: 'Terms declared by Apache Kafka''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-13'
+  terms:
+  - term: Acl
+    definition: 'Object declared by the contract with fields: kind, metadata, cluster_id, resource_type, resource_name, pattern_type, principal,
+      host, operation, permission.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-acl-api-openapi.yml#/components/schemas/Acl
+  - term: CreateAclRequest
+    definition: 'Object declared by the contract with fields: resource_type, resource_name, pattern_type, principal, host, operation, permission.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-acl-api-openapi.yml#/components/schemas/CreateAclRequest
+  - term: Broker
+    definition: 'Object declared by the contract with fields: kind, metadata, cluster_id, broker_id, host, port.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-broker-api-openapi.yml#/components/schemas/Broker
+  - term: Cluster
+    definition: 'Object declared by the contract with fields: kind, metadata, cluster_id, controller, brokers, topics.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-cluster-api-openapi.yml#/components/schemas/Cluster
+  - term: TaskStatus
+    definition: 'Object declared by the contract with fields: id, state, worker_id, trace.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-connectors-api-openapi.yml#/components/schemas/TaskStatus
+  - term: CreateConnectorRequest
+    definition: 'Object declared by the contract with fields: name, config.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-connectors-api-openapi.yml#/components/schemas/CreateConnectorRequest
+  - term: ConnectorInfo
+    definition: 'Object declared by the contract with fields: name, config, tasks, type.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-connectors-api-openapi.yml#/components/schemas/ConnectorInfo
+  - term: ConnectorStatus
+    definition: 'Object declared by the contract with fields: name, connector, tasks, type.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-connectors-api-openapi.yml#/components/schemas/ConnectorStatus
+  - term: ConsumerGroup
+    definition: 'Object declared by the contract with fields: kind, metadata, cluster_id, consumer_group_id, is_simple, partition_assignor, state,
+      coordinator, consumers, lag_summary.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-consumer-group-api-openapi.yml#/components/schemas/ConsumerGroup
+  - term: Partition
+    definition: 'Object declared by the contract with fields: kind, metadata, cluster_id, topic_name, partition_id, leader, replicas.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-partition-api-openapi.yml#/components/schemas/Partition
+  - term: ConfigValidationResult
+    definition: 'Object declared by the contract with fields: name, error_count, groups, configs.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-plugins-api-openapi.yml#/components/schemas/ConfigValidationResult
+  - term: ConnectorPlugin
+    definition: 'Object declared by the contract with fields: class, type, version.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-plugins-api-openapi.yml#/components/schemas/ConnectorPlugin
+  - term: ProduceRequest
+    definition: 'Object declared by the contract with fields: partition_id, headers, key, value.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-records-api-openapi.yml#/components/schemas/ProduceRequest
+  - term: ProduceResponse
+    definition: 'Object declared by the contract with fields: error_code, cluster_id, topic_name, partition_id, offset, timestamp.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-records-api-openapi.yml#/components/schemas/ProduceResponse
+  - term: TaskInfo
+    definition: 'Object declared by the contract with fields: id, config.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-tasks-api-openapi.yml#/components/schemas/TaskInfo
+  - term: CreateTopicRequest
+    definition: 'Object declared by the contract with fields: topic_name, partitions_count, replication_factor, configs.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-topic-api-openapi.yml#/components/schemas/CreateTopicRequest
+  - term: Topic
+    definition: 'Object declared by the contract with fields: kind, metadata, cluster_id, topic_name, is_internal, replication_factor, partitions_count,
+      partitions, configs.'
+    tags:
+    - Object
+    source: openapi/apache-kafka-topic-api-openapi.yml#/components/schemas/Topic
+  - term: ACL
+    definition: 'Resource group in the contract; its operation GET /clusters/{cluster_id}/acls: Apache kafka Search ACLs'
+    tags:
+    - Resource Group
+    source: openapi/apache-kafka-acl-api-openapi.yml
+  - term: Connectors
+    definition: 'Resource group in the contract; its operation GET /connectors: Apache kafka List Connectors'
+    tags:
+    - Resource Group
+    source: openapi/apache-kafka-connectors-api-openapi.yml
+  - term: Consumer Group
+    definition: 'Resource group in the contract; its operation GET /clusters/{cluster_id}/consumer-groups: Apache kafka List Consumer Groups'
+    tags:
+    - Resource Group
+    source: openapi/apache-kafka-consumer-group-api-openapi.yml
+  - term: Offsets
+    definition: 'Resource group in the contract; its operation GET /connectors/{connector}/offsets: Apache kafka Get Connector Offsets'
+    tags:
+    - Resource Group
+    source: openapi/apache-kafka-offsets-api-openapi.yml
+  - term: Plugins
+    definition: 'Resource group in the contract; its operation GET /connector-plugins: Apache kafka List Connector Plugins'
+    tags:
+    - Resource Group
+    source: openapi/apache-kafka-plugins-api-openapi.yml
+  - term: Records
+    definition: 'Resource group in the contract; its operation POST /topics/{topic_name}/records: Apache kafka Produce Records to a Topic'
+    tags:
+    - Resource Group
+    source: openapi/apache-kafka-records-api-openapi.yml
+  - term: Tasks
+    definition: 'Resource group in the contract; its operation GET /connectors/{connector}/tasks: Apache kafka List Connector Tasks'
+    tags:
+    - Resource Group
+    source: openapi/apache-kafka-tasks-api-openapi.yml

@@ -1,10 +1,13 @@
 aid: apache-kafka
+
 name: Apache Kafka
-description: >-
-  Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for
-  high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. It provides
-  a REST Proxy API, Kafka Connect REST API, and AsyncAPI for event streaming.
+
+description: Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines,
+  streaming analytics, data integration, and mission-critical applications. It provides a REST Proxy API, Kafka Connect REST API, and AsyncAPI
+  for event streaming.
+
 type: Index
+
 deliveryModel:
   model: open-core
   license: Apache-2.0
@@ -19,6 +22,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: freemium
   onboarding: unknown
@@ -31,36 +35,228 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
+
 position: Consuming
+
 access: 3rd-Party
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apache-kafka.png
+
 tags:
-  - Apache Kafka
-  - Distributed Systems
-  - Event Streaming
-  - Messaging
-  - Open Source
-  - Pub-Sub
-  - Real-Time
+- Apache Kafka
+- Distributed Systems
+- Event Streaming
+- Messaging
+- Open Source
+- Pub-Sub
+- Real-Time
+
 tags_raw:
-  - Apache Kafka
-  - Distributed Systems
-  - Event Streaming
-  - Messaging
-  - Open Source
-  - Pub-Sub
-  - Open-Source
-  - Real-Time
+- Apache Kafka
+- Distributed Systems
+- Event Streaming
+- Messaging
+- Open Source
+- Pub-Sub
+- Open-Source
+- Real-Time
+
 created: '2025-06-05'
+
 modified: '2026-06-20'
+
 url: https://raw.githubusercontent.com/api-evangelist/apache-kafka/refs/heads/main/apis.yml
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+
+common:
+- type: Spectral
+  url: rules/apache-kafka-spectral-rules.yml
+- type: Spectral
+  url: rules/apache-kafka-rules.yml
+- type: Spectral
+  url: rules/apache-kafka-jsonschema-spectral-rules.yml
+- type: Spectral
+  url: rules/apache-kafka-asyncapi-spectral-rules.yml
+- type: JSONLD
+  url: json-ld/apache-kafka-kafka-rest-proxy-context.jsonld
+- type: JSONLD
+  url: json-ld/apache-kafka-kafka-connect-task-context.jsonld
+- type: JSONLD
+  url: json-ld/apache-kafka-kafka-connect-create-context.jsonld
+- type: JSONLD
+  url: json-ld/apache-kafka-kafka-connect-connector-context.jsonld
+- type: JSONLD
+  url: json-ld/apache-kafka-kafka-connect-config-context.jsonld
+- type: JSONLD
+  url: json-ld/apache-kafka-context.jsonld
+- type: Vocabulary
+  url: vocabulary/apache-kafka-vocabulary.yml
+- type: Deprecation
+  url: lifecycle/apache-kafka-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/apache-kafka-problem-types.yml
+- type: IntegrationEdges
+  url: integrations/apache-kafka-integration-edges.yml
+- type: SDKs
+  url: packages/apache-kafka-packages.yml
+- type: Plans
+  url: plans/apache-kafka-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/apache-kafka-rate-limits.yml
+- type: FinOps
+  url: finops/apache-kafka-finops.yml
+- type: Website
+  url: https://kafka.apache.org/
+- type: Overlay
+  url: overlays/apache-kafka-kafka-connect-overlay.yaml
+- type: SecurityPolicy
+  url: https://github.com/apache/kafka/blob/trunk/SECURITY.md
+- type: CodeOfConduct
+  url: https://github.com/apache/.github/blob/main/.github/CODE_OF_CONDUCT.md
+- type: ContributionGuide
+  url: https://github.com/apache/kafka/blob/trunk/CONTRIBUTING.md
+- type: License
+  name: Apache-2.0
+  url: https://github.com/apache/kafka/blob/trunk/LICENSE
+- type: AgenticAccess
+  url: agentic-access/apache-kafka-agentic-access.yml
+- type: Packages
+  url: packages/apache-kafka-packages.yml
+- type: CLI
+  url: cli/apache-kafka-cli.yml
+- type: MCPServer
+  url: mcp/apache-kafka-mcp.yml
+- type: LLMsTxt
+  url: llms/apache-kafka-llms.txt
+- type: WellKnown
+  url: well-known/apache-kafka-well-known.yml
+- type: SecurityTxt
+  url: well-known/apache-kafka-security.txt
+- type: ErrorCatalog
+  url: errors/apache-kafka-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/apache-kafka-lifecycle.yml
+- type: ChangeLog
+  url: changelog/apache-kafka-changelog.yml
+- type: Conventions
+  url: conventions/apache-kafka-conventions.yml
+- type: DataModel
+  url: data-model/apache-kafka-data-model.yml
+- type: Conformance
+  url: conformance/apache-kafka-conformance.yml
+- type: VulnerabilityDisclosure
+  url: security/apache-kafka-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/apache-kafka-domain-security.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/apachekafka
+- type: GitHubOrganization
+  url: https://github.com/apache
+- type: GitHubRepository
+  url: https://github.com/apache/kafka
+- type: Documentation
+  url: https://kafka.apache.org/documentation/
+- type: GettingStarted
+  url: https://kafka.apache.org/quickstart
+- type: TermsOfService
+  url: https://www.apache.org/licenses/LICENSE-2.0
+- type: Versioning
+  url: https://kafka.apache.org/downloads
+- type: SpectralRules
+  url: rules/apache-kafka-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/apache-kafka-vocabulary.yaml
+- type: Arazzo
+  url: arazzo/apache-kafka-connector-validate-deploy-workflow.yml
+  name: Apache Kafka Validate and Deploy a Connector
+- type: Arazzo
+  url: arazzo/apache-kafka-connector-health-triage-workflow.yml
+  name: Apache Kafka Triage a Failed Connector
+- type: Arazzo
+  url: arazzo/apache-kafka-connector-config-update-workflow.yml
+  name: Apache Kafka Update a Connector Configuration
+- type: Arazzo
+  url: arazzo/apache-kafka-connector-maintenance-pause-resume-workflow.yml
+  name: Apache Kafka Pause and Resume a Connector for Maintenance
+- type: Arazzo
+  url: arazzo/apache-kafka-connector-offset-rewind-workflow.yml
+  name: Apache Kafka Rewind Connector Offsets
+- type: Arazzo
+  url: arazzo/apache-kafka-connector-offset-reset-workflow.yml
+  name: Apache Kafka Reset Connector Offsets
+- type: Arazzo
+  url: arazzo/apache-kafka-connector-decommission-workflow.yml
+  name: Apache Kafka Decommission a Connector
+- type: Arazzo
+  url: arazzo/apache-kafka-topic-provision-produce-workflow.yml
+  name: Apache Kafka Provision a Topic and Produce a Record
+- type: Arazzo
+  url: arazzo/apache-kafka-topic-capacity-review-workflow.yml
+  name: Apache Kafka Review Cluster and Topic Capacity
+- type: Arazzo
+  url: arazzo/apache-kafka-consumer-group-lag-review-workflow.yml
+  name: Apache Kafka Review Consumer Group Lag
+- type: Arazzo
+  url: arazzo/apache-kafka-topic-acl-grant-workflow.yml
+  name: Apache Kafka Grant a Principal Access to a Topic
+- type: Arazzo
+  url: arazzo/apache-kafka-topic-decommission-workflow.yml
+  name: Apache Kafka Decommission a Topic
+- type: Features
+  data:
+  - name: High Throughput
+    description: Handle millions of messages per second with low latency at massive scale.
+  - name: Exactly-Once Semantics
+    description: Guarantee exactly-once message delivery with idempotent producers and transactional APIs.
+  - name: Distributed Replication
+    description: Automatic replication across brokers for fault tolerance and high availability.
+  - name: Stream Processing
+    description: Real-time stream processing via Kafka Streams library and KSQL.
+  - name: Connector Ecosystem
+    description: 200+ pre-built Kafka Connect connectors for databases, clouds, and SaaS.
+  - name: Log Compaction
+    description: Retain the latest value for each key with topic log compaction.
+  - name: Consumer Groups
+    description: Horizontally scalable consumers with automatic partition rebalancing.
+- type: UseCases
+  data:
+  - name: Event-Driven Architecture
+    description: Build event-driven microservices with reliable message delivery.
+  - name: Data Pipeline
+    description: Move data between systems at scale with exactly-once delivery guarantees.
+  - name: Real-Time Analytics
+    description: Process and analyze event streams in real time with Kafka Streams.
+  - name: Log Aggregation
+    description: Centralize application and infrastructure logs for analysis and alerting.
+  - name: CDC (Change Data Capture)
+    description: Capture database changes and stream them to data warehouses and caches.
+- type: Integrations
+  data:
+  - name: Apache Spark
+    description: Spark Structured Streaming integration for batch and streaming analytics.
+  - name: Apache Flink
+    description: Native Flink Kafka connector for low-latency stream processing.
+  - name: Debezium
+    description: CDC platform using Kafka Connect to capture database change events.
+  - name: Elasticsearch
+    description: Kafka Connect Elasticsearch sink for indexing event data.
+  - name: Amazon S3
+    description: Kafka Connect S3 sink for archiving event streams to object storage.
+  - name: Apache Hadoop
+    description: HDFS sink connector for streaming data into Hadoop data lake.
+- url: https://www.confluent.io/rss.xml
+  type: Blog
+
 apis:
 - aid: apache-kafka:kafka-messaging-api
   name: Apache Kafka Messaging API
-  description: >-
-    The core Kafka messaging protocol for producing and consuming records to/from topics using the native
-    Kafka binary protocol, supporting exactly-once semantics, compaction, and partitioned log storage.
+  description: The core Kafka messaging protocol for producing and consuming records to/from topics using the native Kafka binary protocol, supporting
+    exactly-once semantics, compaction, and partitioned log storage.
   humanURL: https://kafka.apache.org/documentation/#producerapi
   tags:
   - Messaging
@@ -85,6 +281,10 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-create-acl-request-schema.json
+  - type: JSONSchema
+    url: json-schema/apache-kafka-acl-schema.json
 - aid: apache-kafka:apache-kafka-broker-api
   name: Apache Kafka Broker API
   description: The Broker API from Apache Kafka — 1 operation(s) for broker.
@@ -101,6 +301,8 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-broker-schema.json
 - aid: apache-kafka:apache-kafka-cluster-api
   name: Apache Kafka Cluster API
   description: The Cluster API from Apache Kafka — 3 operation(s) for cluster.
@@ -115,6 +317,8 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-cluster-schema.json
 - aid: apache-kafka:apache-kafka-connectors-api
   name: Apache Kafka Connectors API
   description: The Connectors API from Apache Kafka — 8 operation(s) for connectors.
@@ -129,6 +333,12 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-connector-status-schema.json
+  - type: JSONSchema
+    url: json-schema/apache-kafka-connector-info-schema.json
+  - type: JSONSchema
+    url: json-schema/apache-kafka-create-connector-request-schema.json
 - aid: apache-kafka:apache-kafka-consumer-group-api
   name: Apache Kafka Consumer Group API
   description: The Consumer Group API from Apache Kafka — 2 operation(s) for consumer group.
@@ -143,6 +353,8 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-consumer-group-schema.json
 - aid: apache-kafka:apache-kafka-offsets-api
   name: Apache Kafka Offsets API
   description: The Offsets API from Apache Kafka — 1 operation(s) for offsets.
@@ -171,6 +383,8 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-partition-schema.json
 - aid: apache-kafka:apache-kafka-plugins-api
   name: Apache Kafka Plugins API
   description: The Plugins API from Apache Kafka — 2 operation(s) for plugins.
@@ -185,6 +399,10 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-config-validation-result-schema.json
+  - type: JSONSchema
+    url: json-schema/apache-kafka-connector-plugin-schema.json
 - aid: apache-kafka:apache-kafka-records-api
   name: Apache Kafka Records API
   description: The Records API from Apache Kafka — 1 operation(s) for records.
@@ -199,6 +417,10 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-produce-request-schema.json
+  - type: JSONSchema
+    url: json-schema/apache-kafka-produce-response-schema.json
 - aid: apache-kafka:apache-kafka-tasks-api
   name: Apache Kafka Tasks API
   description: The Tasks API from Apache Kafka — 3 operation(s) for tasks.
@@ -215,6 +437,10 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
+  - type: JSONSchema
+    url: json-schema/apache-kafka-task-info-schema.json
+  - type: JSONSchema
+    url: json-schema/apache-kafka-task-status-schema.json
 - aid: apache-kafka:apache-kafka-topic-api
   name: Apache Kafka Topic API
   description: The Topic API from Apache Kafka — 2 operation(s) for topic.
@@ -229,154 +455,57 @@ apis:
     url: https://docs.confluent.io/platform/current/kafka-rest/api.html
   - type: Documentation
     url: https://kafka.apache.org/documentation/#connect_rest
-common:
-  - type: Plans
-    url: plans/apache-kafka-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/apache-kafka-rate-limits.yml
-  - type: FinOps
-    url: finops/apache-kafka-finops.yml
-  - type: Website
-    url: https://www.apache.org/
-  - type: Overlay
-    url: overlays/apache-kafka-kafka-connect-overlay.yaml
-  - type: SecurityPolicy
-    url: https://github.com/apache/kafka/blob/trunk/SECURITY.md
-  - type: CodeOfConduct
-    url: https://github.com/apache/.github/blob/main/.github/CODE_OF_CONDUCT.md
-  - type: ContributionGuide
-    url: https://github.com/apache/kafka/blob/trunk/CONTRIBUTING.md
-  - type: License
-    name: Apache-2.0
-    url: https://github.com/apache/kafka/blob/trunk/LICENSE
-  - type: AgenticAccess
-    url: agentic-access/apache-kafka-agentic-access.yml
-  - type: Packages
-    url: packages/apache-kafka-packages.yml
-  - type: CLI
-    url: cli/apache-kafka-cli.yml
-  - type: MCPServer
-    url: mcp/apache-kafka-mcp.yml
-  - type: LLMsTxt
-    url: llms/apache-kafka-llms.txt
-  - type: WellKnown
-    url: well-known/apache-kafka-well-known.yml
-  - type: SecurityTxt
-    url: well-known/apache-kafka-security.txt
-  - type: ErrorCatalog
-    url: errors/apache-kafka-error-codes.yml
-  - type: Lifecycle
-    url: lifecycle/apache-kafka-lifecycle.yml
-  - type: ChangeLog
-    url: changelog/apache-kafka-changelog.yml
-  - type: Conventions
-    url: conventions/apache-kafka-conventions.yml
-  - type: DataModel
-    url: data-model/apache-kafka-data-model.yml
-  - type: Conformance
-    url: conformance/apache-kafka-conformance.yml
-  - type: VulnerabilityDisclosure
-    url: security/apache-kafka-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/apache-kafka-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/apachekafka
-  - type: GitHubOrganization
-    url: https://github.com/apache
-  - type: GitHubRepository
-    url: https://github.com/apache/kafka
+  - type: JSONSchema
+    url: json-schema/apache-kafka-topic-schema.json
+  - type: JSONSchema
+    url: json-schema/apache-kafka-create-topic-request-schema.json
+- aid: apache-kafka:apache-kafka-producer-api
+  name: Apache Kafka Producer API
+  description: API for publishing streams of records to Kafka topics.
+  humanURL: https://kafka.apache.org/documentation/#producerapi
+  tags:
+  - Messaging
+  - Producer
+  - Streaming
+  properties:
   - type: Documentation
-    url: https://kafka.apache.org/documentation/
-  - type: GettingStarted
-    url: https://kafka.apache.org/quickstart
-  - type: TermsOfService
-    url: https://www.apache.org/licenses/LICENSE-2.0
-  - type: Versioning
-    url: https://kafka.apache.org/downloads
-  - type: SpectralRules
-    url: rules/apache-kafka-spectral-rules.yml
-  - type: Vocabulary
-    url: vocabulary/apache-kafka-vocabulary.yaml
-  - type: Arazzo
-    url: arazzo/apache-kafka-connector-validate-deploy-workflow.yml
-    name: Apache Kafka Validate and Deploy a Connector
-  - type: Arazzo
-    url: arazzo/apache-kafka-connector-health-triage-workflow.yml
-    name: Apache Kafka Triage a Failed Connector
-  - type: Arazzo
-    url: arazzo/apache-kafka-connector-config-update-workflow.yml
-    name: Apache Kafka Update a Connector Configuration
-  - type: Arazzo
-    url: arazzo/apache-kafka-connector-maintenance-pause-resume-workflow.yml
-    name: Apache Kafka Pause and Resume a Connector for Maintenance
-  - type: Arazzo
-    url: arazzo/apache-kafka-connector-offset-rewind-workflow.yml
-    name: Apache Kafka Rewind Connector Offsets
-  - type: Arazzo
-    url: arazzo/apache-kafka-connector-offset-reset-workflow.yml
-    name: Apache Kafka Reset Connector Offsets
-  - type: Arazzo
-    url: arazzo/apache-kafka-connector-decommission-workflow.yml
-    name: Apache Kafka Decommission a Connector
-  - type: Arazzo
-    url: arazzo/apache-kafka-topic-provision-produce-workflow.yml
-    name: Apache Kafka Provision a Topic and Produce a Record
-  - type: Arazzo
-    url: arazzo/apache-kafka-topic-capacity-review-workflow.yml
-    name: Apache Kafka Review Cluster and Topic Capacity
-  - type: Arazzo
-    url: arazzo/apache-kafka-consumer-group-lag-review-workflow.yml
-    name: Apache Kafka Review Consumer Group Lag
-  - type: Arazzo
-    url: arazzo/apache-kafka-topic-acl-grant-workflow.yml
-    name: Apache Kafka Grant a Principal Access to a Topic
-  - type: Arazzo
-    url: arazzo/apache-kafka-topic-decommission-workflow.yml
-    name: Apache Kafka Decommission a Topic
-  - type: Features
-    data:
-      - name: High Throughput
-        description: Handle millions of messages per second with low latency at massive scale.
-      - name: Exactly-Once Semantics
-        description: Guarantee exactly-once message delivery with idempotent producers and transactional APIs.
-      - name: Distributed Replication
-        description: Automatic replication across brokers for fault tolerance and high availability.
-      - name: Stream Processing
-        description: Real-time stream processing via Kafka Streams library and KSQL.
-      - name: Connector Ecosystem
-        description: 200+ pre-built Kafka Connect connectors for databases, clouds, and SaaS.
-      - name: Log Compaction
-        description: Retain the latest value for each key with topic log compaction.
-      - name: Consumer Groups
-        description: Horizontally scalable consumers with automatic partition rebalancing.
-  - type: UseCases
-    data:
-      - name: Event-Driven Architecture
-        description: Build event-driven microservices with reliable message delivery.
-      - name: Data Pipeline
-        description: Move data between systems at scale with exactly-once delivery guarantees.
-      - name: Real-Time Analytics
-        description: Process and analyze event streams in real time with Kafka Streams.
-      - name: Log Aggregation
-        description: Centralize application and infrastructure logs for analysis and alerting.
-      - name: CDC (Change Data Capture)
-        description: Capture database changes and stream them to data warehouses and caches.
-  - type: Integrations
-    data:
-      - name: Apache Spark
-        description: Spark Structured Streaming integration for batch and streaming analytics.
-      - name: Apache Flink
-        description: Native Flink Kafka connector for low-latency stream processing.
-      - name: Debezium
-        description: CDC platform using Kafka Connect to capture database change events.
-      - name: Elasticsearch
-        description: Kafka Connect Elasticsearch sink for indexing event data.
-      - name: Amazon S3
-        description: Kafka Connect S3 sink for archiving event streams to object storage.
-      - name: Apache Hadoop
-        description: HDFS sink connector for streaming data into Hadoop data lake.
-  - url: https://www.confluent.io/rss.xml
-    type: Blog
-maintainers:
-  - FN: Kin Lane
-    email: info@apievangelist.com
+    url: https://kafka.apache.org/documentation/#producerapi
+  - type: AsyncAPI
+    url: asyncapi/apache-kafka-asyncapi.yml
+  x-moved-from: kafka:producer-api (consolidated into apache-kafka 2026-10-13, approved by Kin Lane)
+- aid: apache-kafka:apache-kafka-consumer-api
+  name: Apache Kafka Consumer API
+  description: API for subscribing to topics and processing streams of records.
+  humanURL: https://kafka.apache.org/documentation/#consumerapi
+  tags:
+  - Consumer
+  - Messaging
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#consumerapi
+  - type: AsyncAPI
+    url: asyncapi/apache-kafka-asyncapi.yml
+  x-moved-from: kafka:consumer-api (consolidated into apache-kafka 2026-10-13, approved by Kin Lane)
+- aid: apache-kafka:apache-kafka-streams-api
+  name: Apache Kafka Streams API
+  description: API for building stream processing applications and microservices on top of Kafka.
+  humanURL: https://kafka.apache.org/documentation/streams/
+  tags:
+  - Processing
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/streams/
+  x-moved-from: kafka:streams-api (consolidated into apache-kafka 2026-10-13, approved by Kin Lane)
+- aid: apache-kafka:apache-kafka-admin-api
+  name: Apache Kafka Admin API
+  description: API for managing and inspecting topics, brokers, configurations, and ACLs.
+  humanURL: https://kafka.apache.org/documentation/#adminapi
+  tags:
+  - Administration
+  - Management
+  properties:
+  - type: Documentation
+    url: https://kafka.apache.org/documentation/#adminapi
+  x-moved-from: kafka:admin-api (consolidated into apache-kafka 2026-10-13, approved by Kin Lane)

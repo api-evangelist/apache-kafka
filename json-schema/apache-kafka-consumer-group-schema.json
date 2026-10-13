@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-kafka/main/json-schema/apache-kafka-consumer-group-schema.json",
+  "title": "ConsumerGroup",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/apache-kafka-consumer-group-api-openapi.yml#/components/schemas/ConsumerGroup",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "consumer_group_id": {
+      "type": "string"
+    },
+    "is_simple": {
+      "type": "boolean"
+    },
+    "partition_assignor": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "PREPARING_REBALANCE",
+        "COMPLETING_REBALANCE",
+        "STABLE",
+        "DEAD",
+        "EMPTY"
+      ]
+    },
+    "coordinator": {
+      "type": "object"
+    },
+    "consumers": {
+      "type": "object"
+    },
+    "lag_summary": {
+      "type": "object"
+    }
+  }
+}
