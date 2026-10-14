@@ -4,8 +4,10 @@ source:
 - https://n8n.io/integrations/kafka/
 checked:
 - https://composio.dev/toolkits/kafka
+- https://docs.mparticle.com/integrations/kafka/event/
 - https://monid.ai/tools/kafka
 - https://n8n.io/integrations/kafka/
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-kafka
 - https://zapier.com/apps/apache-kafka/integrations
 - https://zapier.com/apps/kafka/integrations
 edges:
@@ -25,3 +27,50 @@ edges:
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
   x-moved-from: kafka (consolidated into apache-kafka 2026-10-13, approved by Kin Lane)
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-kafka
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - actions-kafka
+      status: PUBLIC_BETA
+      partner_owned: false
+      connection_modes:
+      - cloud:server
+      - cloud:web
+      accepted_methods:
+      - Alias
+      - Group
+      - Identify
+      - Page
+      - Track
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/kafka/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - kafka
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
