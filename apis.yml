@@ -48,6 +48,14 @@ tags:
 - Event Streaming
 - Messaging
 - Open Source
+- Pub/Sub
+- Real-Time
+tags_raw:
+- Apache Kafka
+- Distributed Systems
+- Event Streaming
+- Messaging
+- Open Source
 - Pub-Sub
 - Real-Time
 
@@ -260,6 +268,10 @@ apis:
   humanURL: https://kafka.apache.org/documentation/#producerapi
   tags:
   - Messaging
+  - Pub/Sub
+  - Streaming
+  tags_raw:
+  - Messaging
   - Pub-Sub
   - Streaming
   properties:
@@ -291,9 +303,10 @@ apis:
   humanURL: https://docs.confluent.io/platform/current/kafka-rest/
   baseURL: http://localhost:8082
   tags:
-  - Brokers
+  - Brokerage
   tags_raw:
   - Broker
+  - Brokers
   properties:
   - type: OpenAPI
     url: openapi/apache-kafka-broker-api-openapi.yml
