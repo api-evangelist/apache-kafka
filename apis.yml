@@ -82,6 +82,8 @@ maintainers:
   email: info@apievangelist.com
 
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/apache-kafka/overview
 - type: Spectral
   url: rules/apache-kafka-spectral-rules.yml
 - type: Spectral
