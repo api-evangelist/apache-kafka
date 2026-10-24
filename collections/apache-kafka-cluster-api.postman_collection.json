@@ -1,251 +1,263 @@
 {
+  "info": {
+    "_postman_id": "89624806-471c-493e-8f7a-bf5ad7e3ffa9",
+    "name": "Apache Kafka Cluster API",
+    "description": "Operations tagged Cluster across 2 of this provider's published API definitions: kafka-connect.yml, kafka-rest-proxy.yml. Each path carries the servers of the definition it was published in.\n\nContact Support:\n Name: Apache Kafka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:28:31.000Z",
+    "updatedAt": "2026-10-21T20:28:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-89624806-471c-493e-8f7a-bf5ad7e3ffa9"
+  },
   "item": [
     {
-      "id": "d548129d-5307-4738-b43c-dccd46da0f37",
-      "name": "Cluster",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "/",
       "item": [
         {
-          "id": "24f4dbf7-14ba-4b6e-8c5c-14b07af5f55b",
           "name": "Apache kafka Get Connect Worker Info",
+          "id": "0fcd8c56-d94d-41e0-8648-b9e957c4b9fd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Apache kafka Get Connect Worker Info",
-            "description": {},
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 ""
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+              ]
+            }
           },
           "response": [
             {
-              "id": "fec801b3-9a51-47b3-88ac-1093fea2496f",
+              "id": "390cbd9d-f319-4437-a05a-44a1424e25a9",
               "name": "Connect worker information",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"version\": \"example-value\",\n  \"commit\": \"example-value\",\n  \"kafka_cluster_id\": \"item-9558\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"version\": \"<string>\",\n  \"commit\": \"<string>\",\n  \"kafka_cluster_id\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:28:32.000Z",
+              "updatedAt": "2026-10-21T20:28:32.000Z",
+              "uid": "35240-390cbd9d-f319-4437-a05a-44a1424e25a9"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
+          "createdAt": "2026-10-21T20:28:32.000Z",
+          "updatedAt": "2026-10-21T20:28:32.000Z",
+          "uid": "35240-0fcd8c56-d94d-41e0-8648-b9e957c4b9fd"
+        }
+      ],
+      "id": "1a0251c5-d8c4-46ce-89a5-36fde5dfeb0a",
+      "createdAt": "2026-10-21T20:28:32.000Z",
+      "updatedAt": "2026-10-21T20:28:32.000Z",
+      "uid": "35240-1a0251c5-d8c4-46ce-89a5-36fde5dfeb0a"
+    },
+    {
+      "name": "clusters",
+      "item": [
         {
-          "id": "e3c0e54e-4e4d-4801-a0f1-b142bdb8286c",
-          "name": "Apache kafka List Clusters",
-          "request": {
-            "name": "Apache kafka List Clusters",
-            "description": {},
-            "url": {
-              "path": [
-                "clusters"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{cluster_id}",
+          "item": [
             {
-              "id": "36038de9-4b9c-4180-91a7-a42ed7200ade",
-              "name": "List of Kafka clusters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Apache kafka Get Cluster",
+              "id": "b6d2225e-7fc6-4954-8450-9712b41673da",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"example-value\",\n  \"metadata\": {},\n  \"data\": []\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c24f4570-a727-4319-ada4-e444884cb875",
-          "name": "Apache kafka Get Cluster",
-          "request": {
-            "name": "Apache kafka Get Cluster",
-            "description": {},
-            "url": {
-              "path": [
-                "clusters",
-                ":cluster_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "cluster_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "eff88682-bf68-4c0b-a44f-c93b5a098a50",
-              "name": "Cluster details",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/clusters/:cluster_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "clusters",
                     ":cluster_id"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "987554cc-04b0-4f7a-b1ae-777de8462bc9",
                       "key": "cluster_id",
+                      "value": "<string>",
                       "description": "(Required) "
                     }
                   ]
-                },
+                }
+              },
+              "response": [
+                {
+                  "id": "013ef443-c1e4-4e1d-b543-98087538b019",
+                  "name": "Cluster details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:cluster_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":cluster_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "cluster_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"self\": \"<string>\",\n    \"resource_name\": \"<string>\"\n  },\n  \"cluster_id\": \"<string>\",\n  \"controller\": {\n    \"related\": \"<string>\"\n  },\n  \"brokers\": {\n    \"related\": \"<string>\"\n  },\n  \"topics\": {\n    \"related\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:28:32.000Z",
+                  "updatedAt": "2026-10-21T20:28:32.000Z",
+                  "uid": "35240-013ef443-c1e4-4e1d-b543-98087538b019"
+                }
+              ],
+              "createdAt": "2026-10-21T20:28:32.000Z",
+              "updatedAt": "2026-10-21T20:28:32.000Z",
+              "uid": "35240-b6d2225e-7fc6-4954-8450-9712b41673da"
+            }
+          ],
+          "id": "8551b634-8eaa-4641-9d9f-a51fcf3aafd3",
+          "createdAt": "2026-10-21T20:28:32.000Z",
+          "updatedAt": "2026-10-21T20:28:32.000Z",
+          "uid": "35240-8551b634-8eaa-4641-9d9f-a51fcf3aafd3"
+        },
+        {
+          "name": "Apache kafka List Clusters",
+          "id": "c3ad07f5-3b9c-4756-a62f-5cdc183d6ef1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clusters",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clusters"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e6a19477-9ccf-44a6-972b-f0015f54b2f8",
+              "name": "List of Kafka clusters",
+              "originalRequest": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"kind\": \"example-value\",\n  \"metadata\": {},\n  \"cluster_id\": \"item-9562\",\n  \"controller\": {},\n  \"brokers\": {},\n  \"topics\": {}\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"kind\": \"<string>\",\n  \"metadata\": {},\n  \"data\": [\n    {\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"self\": \"<string>\",\n        \"resource_name\": \"<string>\"\n      },\n      \"cluster_id\": \"<string>\",\n      \"controller\": {\n        \"related\": \"<string>\"\n      },\n      \"brokers\": {\n        \"related\": \"<string>\"\n      },\n      \"topics\": {\n        \"related\": \"<string>\"\n      }\n    },\n    {\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"self\": \"<string>\",\n        \"resource_name\": \"<string>\"\n      },\n      \"cluster_id\": \"<string>\",\n      \"controller\": {\n        \"related\": \"<string>\"\n      },\n      \"brokers\": {\n        \"related\": \"<string>\"\n      },\n      \"topics\": {\n        \"related\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:28:32.000Z",
+              "updatedAt": "2026-10-21T20:28:32.000Z",
+              "uid": "35240-e6a19477-9ccf-44a6-972b-f0015f54b2f8"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:28:32.000Z",
+          "updatedAt": "2026-10-21T20:28:32.000Z",
+          "uid": "35240-c3ad07f5-3b9c-4756-a62f-5cdc183d6ef1"
         }
       ],
-      "event": []
+      "id": "2a97bc29-3258-4cde-b3d8-071aa4d1487f",
+      "createdAt": "2026-10-21T20:28:32.000Z",
+      "updatedAt": "2026-10-21T20:28:32.000Z",
+      "uid": "35240-2a97bc29-3258-4cde-b3d8-071aa4d1487f"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:8083",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:8083"
     }
-  ],
-  "info": {
-    "_postman_id": "7046b02a-2d60-41d5-b9c9-b7b0430a2a12",
-    "name": "Kafka Connect REST ACL Cluster API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

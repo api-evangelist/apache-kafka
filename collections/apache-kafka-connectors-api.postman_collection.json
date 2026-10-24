@@ -1,107 +1,1061 @@
 {
+  "info": {
+    "_postman_id": "a537440e-dcf7-45e0-ad9f-a19ab2499bfb",
+    "name": "Kafka Connect REST Connectors API",
+    "description": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:28:37.000Z",
+    "updatedAt": "2026-10-21T20:28:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a537440e-dcf7-45e0-ad9f-a19ab2499bfb"
+  },
   "item": [
     {
-      "id": "73fe75e8-438a-40f3-b957-2f9ca14dc143",
-      "name": "Connectors",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "connectors",
       "item": [
         {
-          "id": "e5465325-4789-425b-93cd-1ae8de9e621b",
-          "name": "Apache kafka List Connectors",
-          "request": {
-            "name": "Apache kafka List Connectors",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{connector}",
+          "item": [
+            {
+              "name": "config",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "expand",
-                  "value": "<string>"
+                  "name": "Apache kafka Get Connector Config",
+                  "id": "eb50d79b-6701-4f6f-bcde-02aaa479ed89",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/config",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "config"
+                      ],
+                      "variable": [
+                        {
+                          "id": "60273752-d932-4bea-ab39-55a631fb1f44",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ecd86e4b-2ed4-44a0-80f3-c98f8313c322",
+                      "name": "Connector configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/config",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "config"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"exercitation_3_0\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-ecd86e4b-2ed4-44a0-80f3-c98f8313c322"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-eb50d79b-6701-4f6f-bcde-02aaa479ed89"
+                },
+                {
+                  "name": "Apache kafka Create or Update Connector Config",
+                  "id": "2c868389-e8b3-41ac-8934-1dee9ebb597e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"exercitation_3_0\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/config",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "config"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cf6c1620-30a1-4e50-be13-28dd6e1c7a74",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "78d4a492-fd77-4a77-a186-4ffc2262426e",
+                      "name": "Connector config updated",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"exercitation_3_0\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/config",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "config"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"cupidatat_c\": \"<string>\"\n  },\n  \"tasks\": [\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    },\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    }\n  ],\n  \"type\": \"source\"\n}",
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-78d4a492-fd77-4a77-a186-4ffc2262426e"
+                    },
+                    {
+                      "id": "1163cac8-33aa-419b-bf1b-bbcccc4aba11",
+                      "name": "Connector created",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"exercitation_3_0\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/config",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "config"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"cupidatat_c\": \"<string>\"\n  },\n  \"tasks\": [\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    },\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    }\n  ],\n  \"type\": \"source\"\n}",
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-1163cac8-33aa-419b-bf1b-bbcccc4aba11"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-2c868389-e8b3-41ac-8934-1dee9ebb597e"
                 }
               ],
-              "variable": []
+              "id": "fb22f823-3f03-43f8-8a93-2cc04e9d517d",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-fb22f823-3f03-43f8-8a93-2cc04e9d517d"
             },
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "Apache kafka Get Connector Status",
+                  "id": "1ab3e795-bc28-415f-8ef2-6396ab834b32",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "status"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4d65fd03-95b8-486a-991d-4fc6d94b6337",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "2b15985c-065c-478e-ae2c-eeafe6777798",
+                      "name": "Connector status",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"connector\": {\n    \"state\": \"FAILED\",\n    \"worker_id\": \"<string>\"\n  },\n  \"tasks\": [\n    {\n      \"id\": \"<integer>\",\n      \"state\": \"UNASSIGNED\",\n      \"worker_id\": \"<string>\",\n      \"trace\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"state\": \"PAUSED\",\n      \"worker_id\": \"<string>\",\n      \"trace\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-2b15985c-065c-478e-ae2c-eeafe6777798"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-1ab3e795-bc28-415f-8ef2-6396ab834b32"
+                }
+              ],
+              "id": "215e8905-8936-4bf7-9764-cdb9dc863287",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-215e8905-8936-4bf7-9764-cdb9dc863287"
+            },
+            {
+              "name": "restart",
+              "item": [
+                {
+                  "name": "Apache kafka Restart Connector",
+                  "id": "7f18654d-353c-45d5-af5a-48129701f23f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/restart?includeTasks=false&onlyFailed=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "restart"
+                      ],
+                      "query": [
+                        {
+                          "key": "includeTasks",
+                          "value": "false"
+                        },
+                        {
+                          "key": "onlyFailed",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "1e1dfd77-cbc1-4f54-b1fb-796c4322df1e",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e46781d9-4ef5-40c0-8f5e-041652f30e8d",
+                      "name": "Connector restarted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/restart?includeTasks=false&onlyFailed=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "restart"
+                          ],
+                          "query": [
+                            {
+                              "key": "includeTasks",
+                              "value": "false"
+                            },
+                            {
+                              "key": "onlyFailed",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-e46781d9-4ef5-40c0-8f5e-041652f30e8d"
+                    },
+                    {
+                      "id": "2b39afb4-86c4-469e-8e07-6e21943527e9",
+                      "name": "Connector restarted (no body)",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/restart?includeTasks=false&onlyFailed=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "restart"
+                          ],
+                          "query": [
+                            {
+                              "key": "includeTasks",
+                              "value": "false"
+                            },
+                            {
+                              "key": "onlyFailed",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-2b39afb4-86c4-469e-8e07-6e21943527e9"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-7f18654d-353c-45d5-af5a-48129701f23f"
+                }
+              ],
+              "id": "d9868efe-ee2e-4a9d-ae98-f7a37adc5b4b",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-d9868efe-ee2e-4a9d-ae98-f7a37adc5b4b"
+            },
+            {
+              "name": "pause",
+              "item": [
+                {
+                  "name": "Apache kafka Pause Connector",
+                  "id": "c05ed804-9c41-40d8-ab75-faa5a7cc63cf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/pause",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "pause"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1447db24-76b6-4820-b355-b575baba6cc3",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "7de7a86b-45c5-4741-97fd-e00ced3ea630",
+                      "name": "Connector paused",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/pause",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "pause"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-7de7a86b-45c5-4741-97fd-e00ced3ea630"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-c05ed804-9c41-40d8-ab75-faa5a7cc63cf"
+                }
+              ],
+              "id": "811403a8-bba2-4044-ae86-16a18c311d47",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-811403a8-bba2-4044-ae86-16a18c311d47"
+            },
+            {
+              "name": "resume",
+              "item": [
+                {
+                  "name": "Apache kafka Resume Connector",
+                  "id": "5c568247-816d-4d2d-80f5-3b142e013781",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/resume",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "resume"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7c465b6c-9fc9-4103-8c8d-1f312356cfb6",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "cca96b93-596a-4c42-98b2-06a15011aef6",
+                      "name": "Connector resumed",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/resume",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "resume"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-cca96b93-596a-4c42-98b2-06a15011aef6"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-5c568247-816d-4d2d-80f5-3b142e013781"
+                }
+              ],
+              "id": "2042b7dc-dba9-4c34-94b6-79bc1c76f18a",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-2042b7dc-dba9-4c34-94b6-79bc1c76f18a"
+            },
+            {
+              "name": "stop",
+              "item": [
+                {
+                  "name": "Apache kafka Stop Connector",
+                  "id": "365d61aa-1342-4034-9b5f-351e7d92e2c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/stop",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "stop"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c352c42f-99a2-4997-bd35-a5fb44c88824",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ef5aa17a-5325-44f8-995f-215a305a3279",
+                      "name": "Connector stopped",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:38.000Z",
+                      "updatedAt": "2026-10-21T20:28:38.000Z",
+                      "uid": "35240-ef5aa17a-5325-44f8-995f-215a305a3279"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-365d61aa-1342-4034-9b5f-351e7d92e2c5"
+                }
+              ],
+              "id": "af8b25d4-1f85-4998-ae79-1ed24fc3dae0",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-af8b25d4-1f85-4998-ae79-1ed24fc3dae0"
+            },
+            {
+              "name": "Apache kafka Get Connector Info",
+              "id": "721f40a1-107a-4d5b-b0f5-2fda90ccce48",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connectors/:connector",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors",
+                    ":connector"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a51dbba3-c4b4-4c82-ac54-eff39fbc8e46",
+                      "key": "connector",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e89da505-af1f-4670-a6c7-53b26f73e0d9",
+                  "name": "Connector information",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connector"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"cupidatat_c\": \"<string>\"\n  },\n  \"tasks\": [\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    },\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    }\n  ],\n  \"type\": \"source\"\n}",
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-e89da505-af1f-4670-a6c7-53b26f73e0d9"
+                },
+                {
+                  "id": "69cf9cd4-ed4e-413d-bdbd-ce7b4063df20",
+                  "name": "Connector not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connector"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-69cf9cd4-ed4e-413d-bdbd-ce7b4063df20"
+                }
+              ],
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-721f40a1-107a-4d5b-b0f5-2fda90ccce48"
+            },
+            {
+              "name": "Apache kafka Delete Connector",
+              "id": "3f03a70e-bc54-462b-a40f-5b8db94a590c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/connectors/:connector",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors",
+                    ":connector"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f5a47d9b-8aa1-42e0-84ba-b000d765d8aa",
+                      "key": "connector",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "fea6610a-34a7-4682-a726-e8d9af54174a",
+                  "name": "Connector deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connector"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-fea6610a-34a7-4682-a726-e8d9af54174a"
+                },
+                {
+                  "id": "75bc1bca-b44f-4136-8da4-26d1e941f3a5",
+                  "name": "Connector not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connector"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:28:38.000Z",
+                  "updatedAt": "2026-10-21T20:28:38.000Z",
+                  "uid": "35240-75bc1bca-b44f-4136-8da4-26d1e941f3a5"
+                }
+              ],
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-3f03a70e-bc54-462b-a40f-5b8db94a590c"
+            }
+          ],
+          "id": "9412379c-c80b-4cda-8f09-0cc826b60e56",
+          "createdAt": "2026-10-21T20:28:38.000Z",
+          "updatedAt": "2026-10-21T20:28:38.000Z",
+          "uid": "35240-9412379c-c80b-4cda-8f09-0cc826b60e56"
+        },
+        {
+          "name": "Apache kafka List Connectors",
+          "id": "9a79f0b0-4435-4eab-9660-10df2df13eaf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/connectors?expand=info",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "connectors"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "info"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "e384683e-9d23-4fbc-85db-a6206fc8ae8b",
+              "id": "31a834cd-bcf1-42fa-aa99-1b416fc602ae",
               "name": "List of active connectors",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "connectors"
-                  ],
+                  "raw": "{{baseUrl}}/connectors?expand=info",
                   "host": [
                     "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
                   ],
                   "query": [
                     {
                       "key": "expand",
-                      "value": "status"
+                      "value": "info"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-31a834cd-bcf1-42fa-aa99-1b416fc602ae"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:28:38.000Z",
+          "updatedAt": "2026-10-21T20:28:38.000Z",
+          "uid": "35240-9a79f0b0-4435-4eab-9660-10df2df13eaf"
         },
         {
-          "id": "8d87b57c-d16e-411a-ae9f-69c1504f9f8a",
           "name": "Apache kafka Create Connector",
+          "id": "adef9506-98c6-4c9b-b786-ff85d0bb49b0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Apache kafka Create Connector",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -112,1061 +1066,136 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"pariatur3\": \"<string>\"\n  }\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/connectors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "connectors"
+              ]
             }
           },
           "response": [
             {
-              "id": "b4cb8cdd-4651-48f5-ba9f-07ea86a00605",
+              "id": "a6deca0c-c262-4d46-832f-3a2c2597ae8d",
               "name": "Connector created",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"example-name\",\n  \"config\": {}\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"pariatur3\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/connectors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"name\": \"example-name\",\n  \"config\": {},\n  \"tasks\": [],\n  \"type\": \"source\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"cupidatat_c\": \"<string>\"\n  },\n  \"tasks\": [\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    },\n    {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    }\n  ],\n  \"type\": \"source\"\n}",
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-a6deca0c-c262-4d46-832f-3a2c2597ae8d"
             },
             {
-              "id": "74416c0e-af51-442b-9d61-bddacc07d4d4",
+              "id": "fb856850-4a04-4f38-b6fe-68cd2185efd4",
               "name": "Connector already exists",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"example-name\",\n  \"config\": {}\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"pariatur3\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/connectors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:28:38.000Z",
+              "updatedAt": "2026-10-21T20:28:38.000Z",
+              "uid": "35240-fb856850-4a04-4f38-b6fe-68cd2185efd4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "fe3d52d4-1ea4-412b-b848-dfb4087ba03a",
-          "name": "Apache kafka Get Connector Info",
-          "request": {
-            "name": "Apache kafka Get Connector Info",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "18650341-ecd4-4de8-8d36-6f7aa57d3b45",
-              "name": "Connector information",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"example-name\",\n  \"config\": {},\n  \"tasks\": [],\n  \"type\": \"source\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "00e7b160-aeb5-4df7-9d5c-7ced106a8496",
-              "name": "Connector not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c6560ebd-9adb-46b7-a29a-2a821b9413e2",
-          "name": "Apache kafka Delete Connector",
-          "request": {
-            "name": "Apache kafka Delete Connector",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "5dea7137-47bf-4a5f-90f8-44e7f694cad2",
-              "name": "Connector deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "57f58125-d85e-4e01-ad2b-53305351b63b",
-              "name": "Connector not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4dd36d28-d2af-4305-adea-7dbcae710b33",
-          "name": "Apache kafka Get Connector Config",
-          "request": {
-            "name": "Apache kafka Get Connector Config",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "config"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "6bde7be8-ed13-4a31-a05d-1f42baa2858d",
-              "name": "Connector configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "config"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "846c414a-7eab-40b1-ac9c-9e6ccaf8e9e8",
-          "name": "Apache kafka Create or Update Connector Config",
-          "request": {
-            "name": "Apache kafka Create or Update Connector Config",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "config"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"key_0\": \"<string>\",\n  \"key_1\": \"<string>\",\n  \"key_2\": \"<string>\",\n  \"key_3\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "7a437578-2082-42f6-86c5-123cf6cc7cd2",
-              "name": "Connector config updated",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "config"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"example-name\",\n  \"config\": {},\n  \"tasks\": [],\n  \"type\": \"source\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4823036e-508c-4e71-9314-2113eb2a9543",
-              "name": "Connector created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "config"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"example-name\",\n  \"config\": {},\n  \"tasks\": [],\n  \"type\": \"source\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5e9e40bd-f6f0-4633-a841-0a472f9a563f",
-          "name": "Apache kafka Get Connector Status",
-          "request": {
-            "name": "Apache kafka Get Connector Status",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "status"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "9d3105e5-e503-47d3-a919-9fa1380df0fc",
-              "name": "Connector status",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "status"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"example-name\",\n  \"connector\": {},\n  \"tasks\": [],\n  \"type\": \"example-value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4e2b6c5f-b2b2-498f-859b-001745ba7007",
-          "name": "Apache kafka Restart Connector",
-          "request": {
-            "name": "Apache kafka Restart Connector",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "restart"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "includeTasks",
-                  "value": "false"
-                },
-                {
-                  "disabled": false,
-                  "key": "onlyFailed",
-                  "value": "false"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "e23413af-6a8c-4762-9ec1-de7446a89b58",
-              "name": "Connector restarted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "restart"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "includeTasks",
-                      "value": "true"
-                    },
-                    {
-                      "key": "onlyFailed",
-                      "value": "true"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d184d496-5fb6-4415-a247-437772dfe0dc",
-              "name": "Connector restarted (no body)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "restart"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "includeTasks",
-                      "value": "true"
-                    },
-                    {
-                      "key": "onlyFailed",
-                      "value": "true"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "POST",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "44d6f74d-8fc8-4f7d-b9e6-51766e9d6c1d",
-          "name": "Apache kafka Pause Connector",
-          "request": {
-            "name": "Apache kafka Pause Connector",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "pause"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "PUT",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "644574bf-ed12-4b55-81d2-cb0817ed51e2",
-              "name": "Connector paused",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "pause"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "Accepted",
-              "code": 202,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "fce61ab4-f97b-4f1c-8090-4d52ee4f3cd6",
-          "name": "Apache kafka Resume Connector",
-          "request": {
-            "name": "Apache kafka Resume Connector",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "resume"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "PUT",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a3c07dae-e628-445b-a6b2-4793fd46e3f7",
-              "name": "Connector resumed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "resume"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "Accepted",
-              "code": 202,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "aed30c7b-f8bb-4d01-9425-79d3a4bfbe0f",
-          "name": "Apache kafka Stop Connector",
-          "request": {
-            "name": "Apache kafka Stop Connector",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "stop"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "PUT",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "17d1eb3b-9fd5-43f9-81fd-5226a52fb9c2",
-              "name": "Connector stopped",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "stop"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "PUT",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:28:38.000Z",
+          "updatedAt": "2026-10-21T20:28:38.000Z",
+          "uid": "35240-adef9506-98c6-4c9b-b786-ff85d0bb49b0"
         }
       ],
-      "event": []
+      "id": "ae1079d6-cc07-484f-9dd5-e5e5f7fb045a",
+      "createdAt": "2026-10-21T20:28:38.000Z",
+      "updatedAt": "2026-10-21T20:28:38.000Z",
+      "uid": "35240-ae1079d6-cc07-484f-9dd5-e5e5f7fb045a"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:8083",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:8083"
     }
-  ],
-  "info": {
-    "_postman_id": "e191eba3-276a-417e-a023-eafadf668d10",
-    "name": "Kafka Connect REST ACL Connectors API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

@@ -1,10 +1,13 @@
 {
   "provider": "apache-kafka",
   "sources": [
+    "_original/apache-kafka-openapi.json",
     "_original/kafka-connect.yml",
     "_original/kafka-rest-proxy.yml"
   ],
   "outputs": [
+    "apache-kafka-queues-api-openapi.yml",
+    "apache-kafka-status-api-openapi.yml",
     "apache-kafka-cluster-api-openapi.yml",
     "apache-kafka-connectors-api-openapi.yml",
     "apache-kafka-offsets-api-openapi.yml",
@@ -21,7 +24,8 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apache-kafka-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "kafka-connect.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "kafka-connect.yml: declared missing tag: Cluster",
     "kafka-connect.yml: declared missing tag: Connectors",
@@ -37,7 +41,7 @@
     "kafka-rest-proxy.yml: declared missing tag: Records",
     "kafka-rest-proxy.yml: declared missing tag: Topic",
     "tag 'Cluster' spans 2 source specs (kafka-connect.yml, kafka-rest-proxy.yml): per-path servers applied",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+2 apis, 18 total)"
   ],
   "skipped": [
     "apache-kafka-acl-api-openapi.yml: previously refined output, superseded by openapi/_original/",

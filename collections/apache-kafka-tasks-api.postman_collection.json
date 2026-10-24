@@ -1,317 +1,337 @@
 {
+  "info": {
+    "_postman_id": "04756ece-5d52-405a-8420-90f55958640e",
+    "name": "Kafka Connect REST Tasks API",
+    "description": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:30:44.000Z",
+    "updatedAt": "2026-10-21T20:30:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-04756ece-5d52-405a-8420-90f55958640e"
+  },
   "item": [
     {
-      "id": "8cc71cd9-eaeb-4170-a6c8-e8f3fc778ec3",
-      "name": "Tasks",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "connectors",
       "item": [
         {
-          "id": "af5f3cee-3bea-49fb-bcb1-0dbe0592cc77",
-          "name": "Apache kafka List Connector Tasks",
-          "request": {
-            "name": "Apache kafka List Connector Tasks",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "tasks"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{connector}",
+          "item": [
             {
-              "id": "22098a5f-1d7e-4ec2-af1e-32e9588050a7",
-              "name": "List of tasks",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "tasks"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "tasks",
+              "item": [
+                {
+                  "name": "{task}",
+                  "item": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a1216e51-9870-4a5f-81d1-07c9272cb057",
-          "name": "Apache kafka Get Task Status",
-          "request": {
-            "name": "Apache kafka Get Task Status",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "tasks",
-                ":task",
-                "status"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "task",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ee44014f-ea6b-456b-b25f-b95dccf77a86",
-              "name": "Task status",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "tasks",
-                    ":task",
-                    "status"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
+                      "name": "status",
+                      "item": [
+                        {
+                          "name": "Apache kafka Get Task Status",
+                          "id": "525d485c-d0d3-4746-a42e-d546cb6b2ac9",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/connectors/:connector/tasks/:task/status",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "connectors",
+                                ":connector",
+                                "tasks",
+                                ":task",
+                                "status"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ffe74627-52a2-470f-b6da-171e9bad908e",
+                                  "key": "connector",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "4b4a4c97-6730-4602-8155-e37d27314468",
+                                  "key": "task",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6f234e4e-dbaa-4009-852a-9957f0a4555f",
+                              "name": "Task status",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/connectors/:connector/tasks/:task/status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "connectors",
+                                    ":connector",
+                                    "tasks",
+                                    ":task",
+                                    "status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "connector"
+                                    },
+                                    {
+                                      "key": "task"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"state\": \"PAUSED\",\n  \"worker_id\": \"<string>\",\n  \"trace\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:30:44.000Z",
+                              "updatedAt": "2026-10-21T20:30:44.000Z",
+                              "uid": "35240-6f234e4e-dbaa-4009-852a-9957f0a4555f"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:30:44.000Z",
+                          "updatedAt": "2026-10-21T20:30:44.000Z",
+                          "uid": "35240-525d485c-d0d3-4746-a42e-d546cb6b2ac9"
+                        }
+                      ],
+                      "id": "de7fefbf-8a4d-41e4-94db-e7d6591b6a29",
+                      "createdAt": "2026-10-21T20:30:44.000Z",
+                      "updatedAt": "2026-10-21T20:30:44.000Z",
+                      "uid": "35240-de7fefbf-8a4d-41e4-94db-e7d6591b6a29"
                     },
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "task",
-                      "description": "(Required) "
+                      "name": "restart",
+                      "item": [
+                        {
+                          "name": "Apache kafka Restart Task",
+                          "id": "05dc1767-0ecb-4e65-ab3d-6b6acd926507",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/connectors/:connector/tasks/:task/restart",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "connectors",
+                                ":connector",
+                                "tasks",
+                                ":task",
+                                "restart"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6aeeb2dc-cac7-438c-8448-ee6d0d506f29",
+                                  "key": "connector",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9208411f-f489-4f02-9967-ffb0d63564f4",
+                                  "key": "task",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "530387cc-f36b-4967-8347-9a049eae22d0",
+                              "name": "Task restarted",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/connectors/:connector/tasks/:task/restart",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "connectors",
+                                    ":connector",
+                                    "tasks",
+                                    ":task",
+                                    "restart"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "connector"
+                                    },
+                                    {
+                                      "key": "task"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:30:44.000Z",
+                              "updatedAt": "2026-10-21T20:30:44.000Z",
+                              "uid": "35240-530387cc-f36b-4967-8347-9a049eae22d0"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:30:44.000Z",
+                          "updatedAt": "2026-10-21T20:30:44.000Z",
+                          "uid": "35240-05dc1767-0ecb-4e65-ab3d-6b6acd926507"
+                        }
+                      ],
+                      "id": "d0db20f9-0dc6-4b96-b713-33a65907f9b6",
+                      "createdAt": "2026-10-21T20:30:44.000Z",
+                      "updatedAt": "2026-10-21T20:30:44.000Z",
+                      "uid": "35240-d0db20f9-0dc6-4b96-b713-33a65907f9b6"
                     }
-                  ]
+                  ],
+                  "id": "497e7dd3-55dc-4dda-ab6c-09fa2254286a",
+                  "createdAt": "2026-10-21T20:30:44.000Z",
+                  "updatedAt": "2026-10-21T20:30:44.000Z",
+                  "uid": "35240-497e7dd3-55dc-4dda-ab6c-09fa2254286a"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Apache kafka List Connector Tasks",
+                  "id": "8b0d9330-4d53-4955-a8b7-3ddec19d6f83",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/tasks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "tasks"
+                      ],
+                      "variable": [
+                        {
+                          "id": "efaacf9d-3faf-4f04-afce-a8418b253e90",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "9c330d87-8f09-4003-8a6b-ff1c27e38e62",
+                      "name": "List of tasks",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/tasks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "tasks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    },\n    \"config\": {\n      \"et_80_\": \"<string>\"\n    }\n  },\n  {\n    \"id\": {\n      \"connector\": \"<string>\",\n      \"task\": \"<integer>\"\n    },\n    \"config\": {\n      \"sunt_2\": \"<string>\",\n      \"sunt4_3\": \"<string>\"\n    }\n  }\n]",
+                      "createdAt": "2026-10-21T20:30:44.000Z",
+                      "updatedAt": "2026-10-21T20:30:44.000Z",
+                      "uid": "35240-9c330d87-8f09-4003-8a6b-ff1c27e38e62"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:30:44.000Z",
+                  "updatedAt": "2026-10-21T20:30:44.000Z",
+                  "uid": "35240-8b0d9330-4d53-4955-a8b7-3ddec19d6f83"
                 }
               ],
-              "body": "{\n  \"id\": 69,\n  \"state\": \"UNASSIGNED\",\n  \"worker_id\": \"item-6436\",\n  \"trace\": \"example-value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "125607ad-d638-46ed-aa23-24ef51555c2e",
+              "createdAt": "2026-10-21T20:30:44.000Z",
+              "updatedAt": "2026-10-21T20:30:44.000Z",
+              "uid": "35240-125607ad-d638-46ed-aa23-24ef51555c2e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6561d88f-2857-4e6d-a0db-ee4b03fbfaa4",
-          "name": "Apache kafka Restart Task",
-          "request": {
-            "name": "Apache kafka Restart Task",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "tasks",
-                ":task",
-                "restart"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "task",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a605f0a8-9a8e-4ae4-850a-232017740ee8",
-              "name": "Task restarted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "tasks",
-                    ":task",
-                    "restart"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "task",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "POST",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d1d7c4a9-1c92-46f9-bd87-0997c1feba76",
+          "createdAt": "2026-10-21T20:30:44.000Z",
+          "updatedAt": "2026-10-21T20:30:44.000Z",
+          "uid": "35240-d1d7c4a9-1c92-46f9-bd87-0997c1feba76"
         }
       ],
-      "event": []
+      "id": "1a5d56b5-2612-4e3a-9a3b-dbeb8acd5f46",
+      "createdAt": "2026-10-21T20:30:44.000Z",
+      "updatedAt": "2026-10-21T20:30:44.000Z",
+      "uid": "35240-1a5d56b5-2612-4e3a-9a3b-dbeb8acd5f46"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:8083",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:8083"
     }
-  ],
-  "info": {
-    "_postman_id": "c1dc29b7-fb9e-4091-9046-b7d041aaf314",
-    "name": "Kafka Connect REST ACL Tasks API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

@@ -1,220 +1,249 @@
 {
+  "info": {
+    "_postman_id": "397e6c96-5c63-4127-bca4-3b96d25231ae",
+    "name": "Kafka Connect REST Plugins API",
+    "description": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:29:01.000Z",
+    "updatedAt": "2026-10-21T20:29:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-397e6c96-5c63-4127-bca4-3b96d25231ae"
+  },
   "item": [
     {
-      "id": "e3d60b8f-8ff8-4adf-af85-9a4c35e13af3",
-      "name": "Plugins",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "connector-plugins",
       "item": [
         {
-          "id": "3b9288e4-7f80-4006-88d3-1171f29f635b",
-          "name": "Apache kafka List Connector Plugins",
-          "request": {
-            "name": "Apache kafka List Connector Plugins",
-            "description": {},
-            "url": {
-              "path": [
-                "connector-plugins"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{plugin}",
+          "item": [
+            {
+              "name": "config",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "connectorsOnly",
-                  "value": "true"
+                  "name": "validate",
+                  "item": [
+                    {
+                      "name": "Apache kafka Validate Connector Config",
+                      "id": "49db8283-9b09-48f6-92cb-869a460e8b3d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"deseruntaff\": \"<string>\",\n  \"officia_7a\": \"<string>\",\n  \"sint_c4\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/connector-plugins/:plugin/config/validate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connector-plugins",
+                            ":plugin",
+                            "config",
+                            "validate"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3d4c445c-9c46-4f39-aeb0-834a59047f8e",
+                              "key": "plugin",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "9191529d-e5ac-4fa2-87c5-1b1f93eb54cc",
+                          "name": "Validation result",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"deseruntaff\": \"<string>\",\n  \"officia_7a\": \"<string>\",\n  \"sint_c4\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/connector-plugins/:plugin/config/validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "connector-plugins",
+                                ":plugin",
+                                "config",
+                                "validate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "plugin"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"error_count\": \"<integer>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-10-21T20:29:02.000Z",
+                          "updatedAt": "2026-10-21T20:29:02.000Z",
+                          "uid": "35240-9191529d-e5ac-4fa2-87c5-1b1f93eb54cc"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:29:02.000Z",
+                      "updatedAt": "2026-10-21T20:29:02.000Z",
+                      "uid": "35240-49db8283-9b09-48f6-92cb-869a460e8b3d"
+                    }
+                  ],
+                  "id": "27461061-a7bd-4d3e-896b-2fab643d0ef7",
+                  "createdAt": "2026-10-21T20:29:02.000Z",
+                  "updatedAt": "2026-10-21T20:29:02.000Z",
+                  "uid": "35240-27461061-a7bd-4d3e-896b-2fab643d0ef7"
                 }
               ],
-              "variable": []
-            },
+              "id": "b0a6e532-328c-4418-ba21-dc1d27d3c8d5",
+              "createdAt": "2026-10-21T20:29:02.000Z",
+              "updatedAt": "2026-10-21T20:29:02.000Z",
+              "uid": "35240-b0a6e532-328c-4418-ba21-dc1d27d3c8d5"
+            }
+          ],
+          "id": "dc91e4fa-128b-48d1-8b2f-fa033ef9e281",
+          "createdAt": "2026-10-21T20:29:02.000Z",
+          "updatedAt": "2026-10-21T20:29:02.000Z",
+          "uid": "35240-dc91e4fa-128b-48d1-8b2f-fa033ef9e281"
+        },
+        {
+          "name": "Apache kafka List Connector Plugins",
+          "id": "7b62f1c9-dd24-4c98-b254-583b506cc39b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/connector-plugins?connectorsOnly=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "connector-plugins"
+              ],
+              "query": [
+                {
+                  "key": "connectorsOnly",
+                  "value": "true"
+                }
+              ]
+            }
           },
           "response": [
             {
-              "id": "be0a994e-1a6d-41a0-8355-b628f680ed27",
+              "id": "edebdb18-cc9c-405c-8386-c1208f2d3c85",
               "name": "List of connector plugins",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "connector-plugins"
-                  ],
+                  "raw": "{{baseUrl}}/connector-plugins?connectorsOnly=true",
                   "host": [
                     "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connector-plugins"
                   ],
                   "query": [
                     {
                       "key": "connectorsOnly",
                       "value": "true"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "44346c84-4c28-4505-b91d-5fb415798dd8",
-          "name": "Apache kafka Validate Connector Config",
-          "request": {
-            "name": "Apache kafka Validate Connector Config",
-            "description": {},
-            "url": {
-              "path": [
-                "connector-plugins",
-                ":plugin",
-                "config",
-                "validate"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "plugin",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"key_0\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "29122ea1-9c03-4da8-a3c5-ed28afcf87e5",
-              "name": "Validation result",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connector-plugins",
-                    ":plugin",
-                    "config",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "plugin",
-                      "description": "(Required) "
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"name\": \"example-name\",\n  \"error_count\": 89,\n  \"groups\": [],\n  \"configs\": []\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"class\": \"<string>\",\n    \"type\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  {\n    \"class\": \"<string>\",\n    \"type\": \"<string>\",\n    \"version\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-10-21T20:29:02.000Z",
+              "updatedAt": "2026-10-21T20:29:02.000Z",
+              "uid": "35240-edebdb18-cc9c-405c-8386-c1208f2d3c85"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:29:02.000Z",
+          "updatedAt": "2026-10-21T20:29:02.000Z",
+          "uid": "35240-7b62f1c9-dd24-4c98-b254-583b506cc39b"
         }
       ],
-      "event": []
+      "id": "442b1e32-7caa-483b-911d-a489a23e9a3d",
+      "createdAt": "2026-10-21T20:29:02.000Z",
+      "updatedAt": "2026-10-21T20:29:02.000Z",
+      "uid": "35240-442b1e32-7caa-483b-911d-a489a23e9a3d"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:8083",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:8083"
     }
-  ],
-  "info": {
-    "_postman_id": "d88bc520-bf7d-4d16-bdb4-c6c33bc31b2b",
-    "name": "Kafka Connect REST ACL Plugins API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

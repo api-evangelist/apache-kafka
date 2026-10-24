@@ -1,292 +1,299 @@
 {
+  "info": {
+    "_postman_id": "6d7251f5-4698-457e-b221-d86c7884b22a",
+    "name": "Kafka Connect REST Offsets API",
+    "description": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:28:50.000Z",
+    "updatedAt": "2026-10-21T20:28:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6d7251f5-4698-457e-b221-d86c7884b22a"
+  },
   "item": [
     {
-      "id": "eedd6393-795d-4e53-83ec-bc87e9df7ede",
-      "name": "Offsets",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "connectors",
       "item": [
         {
-          "id": "63c69947-1007-4749-8da6-6e2632ce25b0",
-          "name": "Apache kafka Get Connector Offsets",
-          "request": {
-            "name": "Apache kafka Get Connector Offsets",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "offsets"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{connector}",
+          "item": [
             {
-              "id": "4ff06e52-fc6b-4612-b9f7-9ee39a300029",
-              "name": "Connector offsets",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "offsets"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "offsets",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Apache kafka Get Connector Offsets",
+                  "id": "d587667d-5901-4daa-8beb-8bb18fd056a0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/offsets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "offsets"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ae4858b0-14fd-4f63-aded-9055b8e698c4",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "2cf54de1-38e3-417a-91d9-cb4570f23f78",
+                      "name": "Connector offsets",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/offsets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "offsets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-21T20:28:50.000Z",
+                      "updatedAt": "2026-10-21T20:28:50.000Z",
+                      "uid": "35240-2cf54de1-38e3-417a-91d9-cb4570f23f78"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:50.000Z",
+                  "updatedAt": "2026-10-21T20:28:50.000Z",
+                  "uid": "35240-d587667d-5901-4daa-8beb-8bb18fd056a0"
+                },
+                {
+                  "name": "Apache kafka Alter Connector Offsets",
+                  "id": "1ce2a3c0-461a-415a-ab3e-d6a478c716ab",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/offsets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "offsets"
+                      ],
+                      "variable": [
+                        {
+                          "id": "183de983-0a43-480e-8f0a-58daa2b21c61",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "38bd69a3-d078-4052-b70e-ec75a6875f5f",
+                      "name": "Offsets altered",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/offsets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "offsets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:50.000Z",
+                      "updatedAt": "2026-10-21T20:28:50.000Z",
+                      "uid": "35240-38bd69a3-d078-4052-b70e-ec75a6875f5f"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:50.000Z",
+                  "updatedAt": "2026-10-21T20:28:50.000Z",
+                  "uid": "35240-1ce2a3c0-461a-415a-ab3e-d6a478c716ab"
+                },
+                {
+                  "name": "Apache kafka Reset Connector Offsets",
+                  "id": "9c9d826c-40b0-4a04-af6c-0602a75d4901",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connector/offsets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connector",
+                        "offsets"
+                      ],
+                      "variable": [
+                        {
+                          "id": "08a2295d-7950-4fdb-ad96-8f1b944325d9",
+                          "key": "connector",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f9e0226e-e084-4472-b7ae-6e15388ab281",
+                      "name": "Offsets reset",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connector/offsets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connector",
+                            "offsets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connector"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:50.000Z",
+                      "updatedAt": "2026-10-21T20:28:50.000Z",
+                      "uid": "35240-f9e0226e-e084-4472-b7ae-6e15388ab281"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:50.000Z",
+                  "updatedAt": "2026-10-21T20:28:50.000Z",
+                  "uid": "35240-9c9d826c-40b0-4a04-af6c-0602a75d4901"
                 }
               ],
-              "body": "{\n  \"offsets\": []\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "9c050464-6175-4261-a42a-f7934602c561",
+              "createdAt": "2026-10-21T20:28:50.000Z",
+              "updatedAt": "2026-10-21T20:28:50.000Z",
+              "uid": "35240-9c050464-6175-4261-a42a-f7934602c561"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6fea52ae-cd7f-46b7-812a-47492ae082a9",
-          "name": "Apache kafka Alter Connector Offsets",
-          "request": {
-            "name": "Apache kafka Alter Connector Offsets",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "offsets"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"offsets\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "4fd74673-592b-4c22-889f-aaad5f60c208",
-              "name": "Offsets altered",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "offsets"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"offsets\": []\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "86bcd73b-196b-497e-a0b5-e6462029b553",
-          "name": "Apache kafka Reset Connector Offsets",
-          "request": {
-            "name": "Apache kafka Reset Connector Offsets",
-            "description": {},
-            "url": {
-              "path": [
-                "connectors",
-                ":connector",
-                "offsets"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connector",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "620f5f66-8467-4caf-b44d-f4b1125203ca",
-              "name": "Offsets reset",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "connectors",
-                    ":connector",
-                    "offsets"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connector",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "f2d40a9d-a22b-4359-a17d-ba7c4ca74094",
+          "createdAt": "2026-10-21T20:28:50.000Z",
+          "updatedAt": "2026-10-21T20:28:50.000Z",
+          "uid": "35240-f2d40a9d-a22b-4359-a17d-ba7c4ca74094"
         }
       ],
-      "event": []
+      "id": "86fb0a48-efcb-40c2-a4ce-07d54dd3ed95",
+      "createdAt": "2026-10-21T20:28:50.000Z",
+      "updatedAt": "2026-10-21T20:28:50.000Z",
+      "uid": "35240-86fb0a48-efcb-40c2-a4ce-07d54dd3ed95"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:8083",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:8083"
     }
-  ],
-  "info": {
-    "_postman_id": "40697c9f-5697-4f85-a760-f4d314238f87",
-    "name": "Kafka Connect REST ACL Offsets API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

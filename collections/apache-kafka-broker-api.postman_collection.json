@@ -1,119 +1,131 @@
 {
+  "info": {
+    "_postman_id": "9ebfc58c-8246-424e-8c7d-2522eb5bada0",
+    "name": "Confluent Kafka REST Proxy Broker API",
+    "description": "The Kafka REST Proxy provides a RESTful interface to an Apache Kafka cluster, making it easy to produce and consume messages, view the state of the cluster, and perform administrative actions without using the native Kafka protocol or clients.\n\nContact Support:\n Name: Apache Kafka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:28:19.000Z",
+    "updatedAt": "2026-10-21T20:28:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9ebfc58c-8246-424e-8c7d-2522eb5bada0"
+  },
   "item": [
     {
-      "id": "3a4fc79f-2759-42cc-8a3c-2a57e3dc72c3",
-      "name": "Broker",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "clusters",
       "item": [
         {
-          "id": "98f4df30-f28b-45c8-bfcf-c74d25381edb",
-          "name": "Apache kafka List Brokers",
-          "request": {
-            "name": "Apache kafka List Brokers",
-            "description": {},
-            "url": {
-              "path": [
-                "clusters",
-                ":cluster_id",
-                "brokers"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "cluster_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{cluster_id}",
+          "item": [
             {
-              "id": "7dd49d23-4179-4c08-a0e5-c78a3658ec0d",
-              "name": "List of brokers",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":cluster_id",
-                    "brokers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cluster_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "brokers",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Apache kafka List Brokers",
+                  "id": "78cca8e3-9a1a-4692-8f9c-bfff79384e2a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:cluster_id/brokers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":cluster_id",
+                        "brokers"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f50493f0-f6f1-4fc7-bea3-0010f4d5cec6",
+                          "key": "cluster_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a7cd63bd-5bba-47e9-ab32-e6f631d34f2e",
+                      "name": "List of brokers",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:cluster_id/brokers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":cluster_id",
+                            "brokers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "cluster_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"kind\": \"<string>\",\n  \"data\": [\n    {\n      \"kind\": \"<string>\",\n      \"metadata\": {},\n      \"cluster_id\": \"<string>\",\n      \"broker_id\": \"<integer>\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\"\n    },\n    {\n      \"kind\": \"<string>\",\n      \"metadata\": {},\n      \"cluster_id\": \"<string>\",\n      \"broker_id\": \"<integer>\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:28:20.000Z",
+                      "updatedAt": "2026-10-21T20:28:20.000Z",
+                      "uid": "35240-a7cd63bd-5bba-47e9-ab32-e6f631d34f2e"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:20.000Z",
+                  "updatedAt": "2026-10-21T20:28:20.000Z",
+                  "uid": "35240-78cca8e3-9a1a-4692-8f9c-bfff79384e2a"
                 }
               ],
-              "body": "{\n  \"kind\": \"example-value\",\n  \"data\": []\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "ca736d55-02b8-4552-8f91-47a62720b58e",
+              "createdAt": "2026-10-21T20:28:20.000Z",
+              "updatedAt": "2026-10-21T20:28:20.000Z",
+              "uid": "35240-ca736d55-02b8-4552-8f91-47a62720b58e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "b93a121b-f0eb-4f1b-9caf-4e89750303c0",
+          "createdAt": "2026-10-21T20:28:20.000Z",
+          "updatedAt": "2026-10-21T20:28:20.000Z",
+          "uid": "35240-b93a121b-f0eb-4f1b-9caf-4e89750303c0"
         }
       ],
-      "event": []
+      "id": "db1b2eab-17a8-4dd4-bdbc-97f92bd4d16a",
+      "createdAt": "2026-10-21T20:28:20.000Z",
+      "updatedAt": "2026-10-21T20:28:20.000Z",
+      "uid": "35240-db1b2eab-17a8-4dd4-bdbc-97f92bd4d16a"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:8083",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:8082"
     }
-  ],
-  "info": {
-    "_postman_id": "71c5c1e0-65a6-458e-a8e5-e0442ab0108f",
-    "name": "Kafka Connect REST ACL Broker API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

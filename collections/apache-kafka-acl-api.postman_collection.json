@@ -1,312 +1,319 @@
 {
+  "info": {
+    "_postman_id": "19a03bb4-64e8-42b1-b0f5-175c72f6f5ba",
+    "name": "Confluent Kafka REST Proxy ACL API",
+    "description": "The Kafka REST Proxy provides a RESTful interface to an Apache Kafka cluster, making it easy to produce and consume messages, view the state of the cluster, and perform administrative actions without using the native Kafka protocol or clients.\n\nContact Support:\n Name: Apache Kafka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:28:13.000Z",
+    "updatedAt": "2026-10-21T20:28:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-19a03bb4-64e8-42b1-b0f5-175c72f6f5ba"
+  },
   "item": [
     {
-      "id": "c3c5e207-abd8-4b9c-8d64-465b86f5bfe2",
-      "name": "ACL",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "clusters",
       "item": [
         {
-          "id": "64925ac5-2056-4bf3-b3ed-6fc5c97838e5",
-          "name": "Apache kafka Search ACLs",
-          "request": {
-            "name": "Apache kafka Search ACLs",
-            "description": {},
-            "url": {
-              "path": [
-                "clusters",
-                ":cluster_id",
-                "acls"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{cluster_id}",
+          "item": [
+            {
+              "name": "acls",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "resource_type",
-                  "value": "<string>"
+                  "name": "Apache kafka Search ACLs",
+                  "id": "de8e972e-14ee-433d-ac8d-67496a8b05ae",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:cluster_id/acls?resource_type=DELEGATION_TOKEN&pattern_type=LITERAL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":cluster_id",
+                        "acls"
+                      ],
+                      "query": [
+                        {
+                          "key": "resource_type",
+                          "value": "DELEGATION_TOKEN"
+                        },
+                        {
+                          "key": "pattern_type",
+                          "value": "LITERAL"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "bc359a85-53c5-4494-9307-e1d8a9da3cae",
+                          "key": "cluster_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "dc0bdc2b-9e38-4c54-9139-9db080cd5e37",
+                      "name": "List of ACLs",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:cluster_id/acls?resource_type=DELEGATION_TOKEN&pattern_type=LITERAL",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":cluster_id",
+                            "acls"
+                          ],
+                          "query": [
+                            {
+                              "key": "resource_type",
+                              "value": "DELEGATION_TOKEN"
+                            },
+                            {
+                              "key": "pattern_type",
+                              "value": "LITERAL"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "cluster_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"kind\": \"<string>\",\n  \"data\": [\n    {\n      \"kind\": \"<string>\",\n      \"metadata\": {},\n      \"cluster_id\": \"<string>\",\n      \"resource_type\": \"<string>\",\n      \"resource_name\": \"<string>\",\n      \"pattern_type\": \"<string>\",\n      \"principal\": \"<string>\",\n      \"host\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"permission\": \"<string>\"\n    },\n    {\n      \"kind\": \"<string>\",\n      \"metadata\": {},\n      \"cluster_id\": \"<string>\",\n      \"resource_type\": \"<string>\",\n      \"resource_name\": \"<string>\",\n      \"pattern_type\": \"<string>\",\n      \"principal\": \"<string>\",\n      \"host\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"permission\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:28:13.000Z",
+                      "updatedAt": "2026-10-21T20:28:13.000Z",
+                      "uid": "35240-dc0bdc2b-9e38-4c54-9139-9db080cd5e37"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:13.000Z",
+                  "updatedAt": "2026-10-21T20:28:13.000Z",
+                  "uid": "35240-de8e972e-14ee-433d-ac8d-67496a8b05ae"
                 },
                 {
-                  "disabled": false,
-                  "key": "pattern_type",
-                  "value": "<string>"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "cluster_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "414d23c8-51cc-45e0-906e-7cf54d325a0c",
-              "name": "List of ACLs",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":cluster_id",
-                    "acls"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "resource_type",
-                      "value": "UNKNOWN"
+                  "name": "Apache kafka Create ACLs",
+                  "id": "2fd17dac-721e-4e6b-8a17-fb141ee9a241",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"pattern_type\": \"<string>\",\n  \"principal\": \"<string>\",\n  \"host\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"permission\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:cluster_id/acls",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":cluster_id",
+                        "acls"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fa8534a3-6d59-4393-9e26-39aff081b078",
+                          "key": "cluster_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
                     {
-                      "key": "pattern_type",
-                      "value": "UNKNOWN"
+                      "id": "0328abdc-4b73-485f-81a2-6d39e8248e90",
+                      "name": "ACL created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"pattern_type\": \"<string>\",\n  \"principal\": \"<string>\",\n  \"host\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"permission\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:cluster_id/acls",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":cluster_id",
+                            "acls"
+                          ],
+                          "variable": [
+                            {
+                              "key": "cluster_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:13.000Z",
+                      "updatedAt": "2026-10-21T20:28:13.000Z",
+                      "uid": "35240-0328abdc-4b73-485f-81a2-6d39e8248e90"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cluster_id",
-                      "description": "(Required) "
-                    }
-                  ]
+                  "createdAt": "2026-10-21T20:28:13.000Z",
+                  "updatedAt": "2026-10-21T20:28:13.000Z",
+                  "uid": "35240-2fd17dac-721e-4e6b-8a17-fb141ee9a241"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Apache kafka Delete ACLs",
+                  "id": "5366b423-0892-4c6a-96bb-561a0a34ee3b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:cluster_id/acls",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":cluster_id",
+                        "acls"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4e284e8d-ec55-4dd4-8e0b-abf5f2d5f691",
+                          "key": "cluster_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "97082307-f525-49f3-bbc1-06c114adb6ca",
+                      "name": "ACLs deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:cluster_id/acls",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":cluster_id",
+                            "acls"
+                          ],
+                          "variable": [
+                            {
+                              "key": "cluster_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:28:13.000Z",
+                      "updatedAt": "2026-10-21T20:28:13.000Z",
+                      "uid": "35240-97082307-f525-49f3-bbc1-06c114adb6ca"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:28:13.000Z",
+                  "updatedAt": "2026-10-21T20:28:13.000Z",
+                  "uid": "35240-5366b423-0892-4c6a-96bb-561a0a34ee3b"
                 }
               ],
-              "body": "{\n  \"kind\": \"example-value\",\n  \"data\": []\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "652797f6-e537-4dbb-840b-024f492ca13c",
+              "createdAt": "2026-10-21T20:28:13.000Z",
+              "updatedAt": "2026-10-21T20:28:13.000Z",
+              "uid": "35240-652797f6-e537-4dbb-840b-024f492ca13c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "db31c920-ede8-4be3-8cb9-f087662b2834",
-          "name": "Apache kafka Create ACLs",
-          "request": {
-            "name": "Apache kafka Create ACLs",
-            "description": {},
-            "url": {
-              "path": [
-                "clusters",
-                ":cluster_id",
-                "acls"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "cluster_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"pattern_type\": \"<string>\",\n  \"principal\": \"<string>\",\n  \"host\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"permission\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f6f4afda-67ae-4e39-a2eb-d9c63ac89985",
-              "name": "ACL created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":cluster_id",
-                    "acls"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cluster_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"resource_type\": \"example-value\",\n  \"resource_name\": \"example-name\",\n  \"pattern_type\": \"example-value\",\n  \"principal\": \"example-value\",\n  \"host\": \"example-value\",\n  \"operation\": \"example-value\",\n  \"permission\": \"example-value\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "cf355456-f98b-46d8-8580-aaaf96994276",
-          "name": "Apache kafka Delete ACLs",
-          "request": {
-            "name": "Apache kafka Delete ACLs",
-            "description": {},
-            "url": {
-              "path": [
-                "clusters",
-                ":cluster_id",
-                "acls"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "cluster_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "1aa1f5a0-ae86-4306-990d-ac96e49dc737",
-              "name": "ACLs deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":cluster_id",
-                    "acls"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cluster_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ac0ad2d4-f497-498c-94d0-fbf8426c8c3a",
+          "createdAt": "2026-10-21T20:28:13.000Z",
+          "updatedAt": "2026-10-21T20:28:13.000Z",
+          "uid": "35240-ac0ad2d4-f497-498c-94d0-fbf8426c8c3a"
         }
       ],
-      "event": []
+      "id": "0b4aa11c-826f-42ae-b7eb-3e25e9f389da",
+      "createdAt": "2026-10-21T20:28:13.000Z",
+      "updatedAt": "2026-10-21T20:28:13.000Z",
+      "uid": "35240-0b4aa11c-826f-42ae-b7eb-3e25e9f389da"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:8083",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:8082"
     }
-  ],
-  "info": {
-    "_postman_id": "e2f95124-781f-4732-b7d4-d4f102bfdbcb",
-    "name": "Kafka Connect REST ACL API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Kafka Connect REST API provides endpoints for managing connectors, their configurations, tasks, and offsets. Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems.\n\nContact Support:\n Name: Apache Kafka",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
