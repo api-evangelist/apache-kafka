@@ -206,6 +206,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/apache-kafka-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -523,6 +526,9 @@ artifacts:
   packages/apache-kafka-packages.yml:
     method: searched
     evidence: declared in the artifact
+  patterns/apache-kafka-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/apache-kafka-plans-pricing.yml:
     method: generated
     evidence: declared in the artifact
@@ -550,6 +556,9 @@ artifacts:
   sla/apache-kafka-sla.yml:
     method: generated
     evidence: declared in the artifact
+  vendors/apache-kafka-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
   vocabulary/apache-kafka-vocabulary.yaml:
     method: unknown
     evidence: no authorship recorded
